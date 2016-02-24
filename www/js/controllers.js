@@ -406,6 +406,7 @@ function retriever() {
 
   };
 
+    $scope.$apply()
 
 
 });
