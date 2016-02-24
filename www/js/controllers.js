@@ -351,14 +351,14 @@ console.log("succesful team list retrieve")    // Do something with the returned
 })
 
 
-.controller('TeamDetailCtrl', function($scope, $state, $stateParams) {
+.controller('TeamDetailCtrl', function($scope, $state, $stateParams, $ionicPlatform) {
    /* 
 $scope.$on('$ionicView.afterEnter', function() {
 $scope.loadData();
 console.log('AFTER ENTER FIRED');
 });
 */
-$ionicPlatform.ready(function() {
+
 
 
   console.log("TEAM DETAIL CONTROLLER")
@@ -425,8 +425,7 @@ function retriever() {
 
 
 
-    //end ready shit
-  });
+
 
 
 
