@@ -347,7 +347,7 @@ console.log("succesful team list retrieve")    // Do something with the returned
 })
 
 
-.controller('TeamDetailCtrl', function($scope, $stateParams) {
+.controller('TeamDetailCtrl', function($scope, $state, $stateParams) {
   console.log("TEAM DETAIL CONTROLLER")
   console.log("LA STORRRRRRY");
   $scope.team = $stateParams.teamId;
@@ -406,7 +406,6 @@ function retriever() {
 
   };
 
-    $scope.$apply()
-
+$state.go($state.current, {}, {reload: true});
 
 });
