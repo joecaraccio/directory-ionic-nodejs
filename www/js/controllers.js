@@ -352,6 +352,11 @@ console.log("succesful team list retrieve")    // Do something with the returned
 
 
 .controller('TeamDetailCtrl', function($scope, $state, $stateParams) {
+    
+$scope.$on('$ionicView.afterEnter', function() {
+$scope.loadData();
+console.log('AFTER ENTER FIRED');
+});  
   console.log("TEAM DETAIL CONTROLLER")
   console.log("LA STORRRRRRY");
   $scope.team = $stateParams.teamId;
