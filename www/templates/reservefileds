@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col">
+  <img src="Portcullis.png" alt="Portcullis" style="width:70px;height:70px;">
+
+     <label class="item item-input item-floating-label">
+    <span class="input-label">Portcullis</span>
+    <input type="number" placeholder="Portcullis" ng-model="data.sportcullis">
+  </label>
+
+
+  </div>
+ <div class="col">
+  <img src="ChevaldeFrise.png" alt="ChevaldeFrise" style="width:70px;height:70px;">
+
+     <label class="item item-input item-floating-label">
+    <span class="input-label">Cheval</span>
+    <input type="number" placeholder="Chevel" ng-model="data.scheval">
+  </label>
+
+
+  </div>
+ <div class="col">
+  <img src="moat.png" alt="Moat" style="width:70px;height:70px;">
+
+     <label class="item item-input item-floating-label">
+    <span class="input-label">Moat</span>
+    <input type="number" placeholder="Low Goal" ng-model="data.smoat">
+  </label>
+
+
+  </div>
+  
+</div>
+<div class="row">
+  <div class="col">
+  <img src="ramparts.png" alt="Ramparts" style="width:70px;height:70px;">
+
+     <label class="item item-input item-floating-label">
+    <span class="input-label">Ramparts</span>
+    <input type="number" placeholder="Ramparts" ng-model="data.sramparts">
+  </label>
+
+
+  </div>
+ <div class="col">
+  <img src="drawbridge.png" alt="Mountain View" style="width:70px;height:70px;">
+
+     <label class="item item-input item-floating-label">
+    <span class="input-label">Drawbridge</span>
+    <input type="number" placeholder="Drawbridge" ng-model="data.sdrawbridge">
+  </label>
+
+
+  </div>
+ <div class="col">
+  <img src="sallyport.png" alt="Mountain View" style="width:70px;height:70px;">
+
+     <label class="item item-input item-floating-label">
+    <span class="input-label">Sally Port</span>
+    <input type="number" placeholder="Sally Port" ng-model="data.ssallyport">
+  </label>
+
+
+  </div>
+  
+</div>
+<div class="row">
+  <div class="col">
+  <img src="rockwall.png" alt="Mountain View" style="width:70px;height:70px;">
+
+     <label class="item item-input item-floating-label">
+    <span class="input-label">Rock Wall</span>
+    <input type="number" placeholder="Rock Wall" ng-model="data.srockwall">
+  </label>
+
+
+  </div>
+ <div class="col">
+  <img src="roughterrain.png" alt="Mountain View" style="width:70px;height:70px;">
+
+     <label class="item item-input item-floating-label">
+    <span class="input-label">Rough Terrain</span>
+    <input type="number" placeholder="Rough Terrain" ng-model="data.srough">
+  </label>
+
+
+  </div>
+ <div class="col">
+  <img src="lowbar.png" alt="Mountain View" style="width:70px;height:70px;">
+
+     <label class="item item-input item-floating-label">
+    <span class="input-label">Low Bar</span>
+    <input type="number" placeholder="Low Bar" ng-model="data.slowbar">
+  </label>
+
+
+  </div>
+  
+</div>
