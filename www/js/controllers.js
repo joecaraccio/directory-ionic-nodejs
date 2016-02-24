@@ -8,7 +8,7 @@ function retriever() {
 
  var GameScore = Parse.Object.extend("GameScore");
     var query = new Parse.Query(GameScore);
-    query.ascending("createdAt");
+    query.descending("createdAt");
 
     query.find({
       success: function(results) {
@@ -50,7 +50,11 @@ function retriever() {
 })
 
 //controller shows off each team # in a list
-.controller('TeamList', function($scope) {  
+.controller('TeamList', function($scope) {
+$scope.$on('$ionicView.afterEnter', function() {
+$scope.loadData();
+console.log('AFTER ENTER FIRED');
+});  
   console.log("team controller is on");
        var teamNumberList = [];
 
