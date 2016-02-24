@@ -397,7 +397,7 @@ function retriever() {
       }
     });
 };
-
+/*
  $scope.doRefresh = function() {
     console.log("Pulling to refresh");
     retriever();
@@ -405,7 +405,7 @@ function retriever() {
     $scope.$apply()
 
   };
-
+*/
 //$state.go($state.current, {}, {reload: true});
 
 });
