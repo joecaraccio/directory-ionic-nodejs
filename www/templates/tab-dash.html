@@ -1,0 +1,178 @@
+<ion-view title="138 Scouter">
+
+
+  <ion-content class="padding">
+<ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="doRefresh()">
+  </ion-refresher>
+<div align="center">
+<p> Recent Matches, Pull to Refresh </p>
+
+
+
+</div>
+<div class="card" ng-repeat="item in list"> <!-- Start Card -->
+  <div class="item item-divider">
+    <div class="row">
+      <div class="col col-10">
+        <div ng-show="{{item.Red}}">
+          
+        <img  src="red.png" alt="Mountain View" style="width:10px;height:10px;"> 
+      </div>
+              <div ng-show="{{item.Blue}}">
+
+         <img  src="blue.png" alt="Mountain View" style="width:10px;height:10px;"> 
+       </div>
+  </div>
+   <div class="col">
+      <p> <i> Team #: </i> </p> {{item.Team}}
+  </div>
+ <div class="col">
+  <p> <i> Match #: </i> </p> {{item.Match}}
+    </div>
+
+  </div>
+  </div>
+  <div class="item item-text-wrap">
+  <!-- Content Area -->
+   <div class="row">
+      <div class="col">
+    Low Goal: {{item.Low}}
+  </div>
+   <div class="col">
+    High Goal: {{item.High}}
+  </div>
+  </div>
+
+<div class="row">
+  Defenses Faced:
+</div>
+
+<div class="row">
+
+<div class="col" ng-show="{{item.fieldCheva}}">
+  <div style="    border: 1px solid black;">
+  <figure>
+
+  <img src="ChevaldeFrise.png" alt="ChevaldeFrise" style="width:30px;height:30px;">
+   <div align="center">
+   <figcaption>{{item.valCheva}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+<div class="col" ng-show="{{item.fieldMoat}}">
+  <div style="    border: 1px solid black;">
+  <figure>
+  <img src="moat.png" alt="Moat" style="width:30px;height:30x;">
+    <div align="center">
+   <figcaption>{{item.valMoat}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+<div class="col" ng-show="{{item.fieldramparts}}">
+  <div style="    border: 1px solid black;">
+  <figure>
+  <img src="ramparts.png" alt="Ramparts" style="width:30px;height:30px;">
+   <div align="center">
+   <figcaption>{{item.valramparts}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+<div class="col" ng-show="{{item.fielddrawbridge}}">
+  <div style="    border: 1px solid black;">
+  <figure>
+  <img src="drawbridge.png" alt="Drawbridge" style="width:30px;height:30px;">
+   <div align="center">
+   <figcaption>{{item.valdrawbridge}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+<div class="col" ng-show="{{item.fieldSallyPort}}">
+   <div style="    border: 1px solid black;">
+  <figure>
+  <img src="sallyport.png" alt="SallyPort" style="width:30px;height:30px;">
+   <div align="center">
+   <figcaption>{{item.valSallyPort}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+<div class="col" ng-show="{{item.fieldRockwall}}">
+    <div style="    border: 1px solid black;">
+  <figure>
+  <img src="rockwall.png" alt="ChevaldeFrise" style="width:30px;height:30px;">
+   <div align="center">
+   <figcaption>{{item.valRockwall}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+<div class="col" ng-show="{{item.fieldRoughterrain}}">
+   <div style="    border: 1px solid black;">
+  <figure>
+  <img src="roughterrain.png" alt="ChevaldeFrise" style="width:30px;height:30px;">
+    <div align="center">
+   <figcaption>{{item.valRoughterrain}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+ 
+<div class="col">
+    <div style="    border: 1px solid black;">
+  <figure>
+  <img src="lowbar.png" alt="ChevaldeFrise" style="width:30px;height:30px;">
+   <div align="center">
+   <figcaption>{{item.valLowBar}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+<div class="col" ng-show="{{item.fieldPortcullis}}">
+  <div style="    border: 1px solid black;">
+  <figure>
+  <img src="Portcullis.png" alt="ChevaldeFrise" style="width:30px;height:30px;">
+   <div align="center">
+   <figcaption>{{item.valPortcullis}}</figcaption>
+ </div>
+</figure>
+</div>
+</div>
+
+
+ 
+
+</div>
+<div ng-show="{{item.ScaledTower}}">
+  <div class="row">
+<div align="center">
+  <p> Succesfully Scaled Tower </p>
+</div>
+</div>
+</div>
+
+
+
+
+  </div>
+</div>
+<!-- End Card -->
+
+
+
+
+
+  </ion-content>
+</ion-view>
