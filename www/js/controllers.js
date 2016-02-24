@@ -119,7 +119,7 @@ function listRetriever() {
 
 
    $scope.teams = dupe;
-            $scope.$apply();
+            //$scope.$apply();
         
  }
    listRetriever();
@@ -406,6 +406,6 @@ function retriever() {
 
   };
 
-$state.go($state.current, {}, {reload: true});
+//$state.go($state.current, {}, {reload: true});
 
 });
