@@ -65,6 +65,42 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
         }
       }
     })
+   .state('tab.matches', {
+      url: '/matches',
+      views: {
+        'tab-matches': {
+          templateUrl: 'templates/tab-matches.html',
+          controller: 'MatchList'
+        }
+      }
+    })
+   .state('tab.match-detail', {
+      url: '/matches/:matchID',
+      views: {
+        'tab-matches': {
+          templateUrl: 'templates/match-detail.html',
+          controller: 'MatchDetailCtrl'
+        }
+      }
+    })
+    .state('tab.stats', {
+      url: '/stats',
+      views: {
+        'tab-stats': {
+          templateUrl: 'templates/tab-options.html',
+          controller: 'StatControl'
+        }
+      }
+    })
+    .state('tab.stats-towerrank', {
+      url: '/stats/towerrank',
+      views: {
+        'tab-stats': {
+          templateUrl: 'templates/tab-options.html',
+          controller: 'towerrankcontrol'
+        }
+      }
+    })
    .state('tab.teams-detail', {
       url: '/teams/:teamId',
       views: {

@@ -1,7 +1,8 @@
 <ion-view title="138 Scouter">
 
 
-  <ion-content class="padding">
+
+  <ion-content class="padding" ng-if="doneLoading===true">
   <!--
 <ion-refresher
     pulling-text="Pull to refresh..."
@@ -14,18 +15,21 @@
 
 </div>
 -->
+
+
 <div class="card" ng-repeat="item in list"> <!-- Start Card -->
   <div class="item item-divider">
     <div class="row">
       <div class="col col-10">
-        <div ng-show="{{item.Red}}">
-          
-        <img  src="red.png" alt="Mountain View" style="width:10px;height:10px;"> 
+        <!--
+        <div ng-show="{{item.Red}}">  
+      <img  src="red.png" alt="Mountain View" style="width:10px;height:10px;" 
       </div>
-              <div ng-show="{{item.Blue}}">
-
+        <div ng-show="{{item.Blue}}">
          <img  src="blue.png" alt="Mountain View" style="width:10px;height:10px;"> 
        </div>
+     -->
+
   </div>
    <div class="col">
       <p> <i> Team #: </i> </p> {{item.Team}}
@@ -53,101 +57,106 @@
 
 <div class="row">
 
-<div class="col" ng-show="{{item.fieldCheva}}">
+  <div class="col" ng-show="{{item.valCheva}}">
   <div style="    border: 1px solid black;">
   <figure>
 
   <img src="ChevaldeFrise.png" alt="ChevaldeFrise" style="width:30px;height:30px;">
    <div align="center">
-   <figcaption>{{item.valCheva}}</figcaption>
+
+   <figcaption>{{item.fieldCheva}}</figcaption>
  </div>
 </figure>
 </div>
  </div>
 
-<div class="col" ng-show="{{item.fieldMoat}}">
+
+
+
+
+<div class="col" ng-show="{{item.valmoat}}">
   <div style="    border: 1px solid black;">
   <figure>
   <img src="moat.png" alt="Moat" style="width:30px;height:30x;">
     <div align="center">
-   <figcaption>{{item.valMoat}}</figcaption>
+   <figcaption>{{item.fieldMoat}}</figcaption>
  </div>
 </figure>
 </div>
  </div>
 
-<div class="col" ng-show="{{item.fieldramparts}}">
+<div class="col" ng-show="{{item.valramparts}}">
   <div style="    border: 1px solid black;">
   <figure>
   <img src="ramparts.png" alt="Ramparts" style="width:30px;height:30px;">
    <div align="center">
-   <figcaption>{{item.valramparts}}</figcaption>
+   <figcaption>{{item.fieldramparts}}</figcaption>
  </div>
 </figure>
 </div>
  </div>
 
-<div class="col" ng-show="{{item.fielddrawbridge}}">
+<div class="col" ng-show="{{item.valdrawbridge}}">
   <div style="    border: 1px solid black;">
   <figure>
   <img src="drawbridge.png" alt="Drawbridge" style="width:30px;height:30px;">
    <div align="center">
-   <figcaption>{{item.valdrawbridge}}</figcaption>
+   <figcaption>{{item.fielddrawbridge}}</figcaption>
  </div>
 </figure>
 </div>
  </div>
 
-<div class="col" ng-show="{{item.fieldSallyPort}}">
+<div class="col" ng-show="{{item.valSallyPort}}">
    <div style="    border: 1px solid black;">
   <figure>
   <img src="sallyport.png" alt="SallyPort" style="width:30px;height:30px;">
    <div align="center">
-   <figcaption>{{item.valSallyPort}}</figcaption>
+   <figcaption>{{item.fieldSallyPort}}</figcaption>
  </div>
 </figure>
 </div>
  </div>
 
-<div class="col" ng-show="{{item.fieldRockwall}}">
+<div class="col" ng-show="{{item.valRockwall}}">
     <div style="    border: 1px solid black;">
   <figure>
   <img src="rockwall.png" alt="ChevaldeFrise" style="width:30px;height:30px;">
    <div align="center">
-   <figcaption>{{item.valRockwall}}</figcaption>
+   <figcaption>{{item.fieldRockwall}}</figcaption>
  </div>
 </figure>
 </div>
  </div>
 
-<div class="col" ng-show="{{item.fieldRoughterrain}}">
+<div class="col" ng-show="{{item.valRoughterrain}}">
    <div style="    border: 1px solid black;">
   <figure>
   <img src="roughterrain.png" alt="ChevaldeFrise" style="width:30px;height:30px;">
     <div align="center">
-   <figcaption>{{item.valRoughterrain}}</figcaption>
+   <figcaption>{{item.fieldRoughterrain}}</figcaption>
  </div>
 </figure>
 </div>
  </div>
  
-<div class="col">
+<div class="col" ng-show="{{item.valLowBar}}">
     <div style="    border: 1px solid black;">
   <figure>
   <img src="lowbar.png" alt="ChevaldeFrise" style="width:30px;height:30px;">
    <div align="center">
-   <figcaption>{{item.valLowBar}}</figcaption>
+   <figcaption>{{item.fieldLowBar}}</figcaption>
  </div>
 </figure>
 </div>
  </div>
 
-<div class="col" ng-show="{{item.fieldPortcullis}}">
+<div class="col" ng-show="{{item.valPortcullis}}">
   <div style="    border: 1px solid black;">
   <figure>
   <img src="Portcullis.png" alt="ChevaldeFrise" style="width:30px;height:30px;">
    <div align="center">
-   <figcaption>{{item.valPortcullis}}</figcaption>
+   <figcaption>{{item.fieldPortcullis}}</figcaption>
  </div>
 </figure>
 </div>
