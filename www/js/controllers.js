@@ -48,7 +48,21 @@ function retriever() {
 })
 
 //controller shows off each team # in a list
-.controller('TeamList', function($scope) {
+.controller('TeamList', function($scope, $ionicLoading) {
+   $scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
+
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
+ $ionicLoading.show({
+         template: 'Loading...'
+      });
+  $scope.controller = false;
+
 $scope.$on('$ionicView.afterEnter', function() {
 $scope.loadData();
 console.log('AFTER ENTER FIRED');
@@ -110,6 +124,8 @@ function listRetriever() {
         console.log("Should be sorted");
         dupe.sort(sortNumber);
         console.log( dupe );
+          $scope.controller = true;
+      $ionicLoading.hide();
 
 
       },
@@ -137,7 +153,21 @@ function listRetriever() {
 })
 
 //controller shows off each team # in a list
-.controller('MatchList', function($scope) {
+.controller('MatchList', function($scope, $ionicLoading) {
+
+  $scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
+
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
+ $ionicLoading.show({
+         template: 'Loading...'
+      });
+
 $scope.$on('$ionicView.afterEnter', function() {
 $scope.loadData();
 console.log('AFTER ENTER FIRED');
@@ -200,6 +230,7 @@ function listRetriever() {
         dupe.sort(sortNumber);
         console.log( dupe );
 
+      $ionicLoading.hide();
 
       },
       error: function(error) {
@@ -230,7 +261,6 @@ function listRetriever() {
 //controls data entry view
 .controller('EnterCtrl', function($scope) {
   console.log("enterctrl is on")
-
   var val = 1;
 $scope.data = {};
 //$scope.data.teamnumber = 1;
@@ -449,6 +479,41 @@ console.log("tower controller on");
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
+
+.controller('ScoreRank', function($scope, $ionicLoading) {
+console.log("Score Ranking is on");
+
+$scope.show = function() {
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+  };
+  $scope.hide = function(){
+    $ionicLoading.hide();
+  };
+
+
+
+   $ionicLoading.show({
+      template: 'Loading Data...'
+    });
+
+ //  var myVar = setInterval(myTimer, 1000);
+var val = 0;
+function myTimer() {
+  val = val + 1;
+console.log("Timer Function thing");
+console.log( val );
+if( val == 15 )
+{
+      $ionicLoading.hide();
+
+}
+}
+
+})
+
+
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true
@@ -457,7 +522,7 @@ console.log("tower controller on");
 
 
 
-.controller('MatchDetailCtrl', function($scope, $state, $stateParams, $ionicPlatform) {
+.controller('MatchDetailCtrl', function($scope, $ionicLoading, $state, $stateParams, $ionicPlatform) {
    /* 
 $scope.$on('$ionicView.afterEnter', function() {
 $scope.loadData();
@@ -465,7 +530,15 @@ console.log('AFTER ENTER FIRED');
 });
 */
 
+  $scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
 
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
 
   console.log("match detailCONTROLLER")
   console.log("LA STORRRRRRY");
@@ -477,6 +550,9 @@ console.log('AFTER ENTER FIRED');
   //matches played
   //high goal per match
   //low goal per match
+  $ionicLoading.show({
+         template: 'Loading...'
+      });
   
 retriever();
 function retriever() {
@@ -509,7 +585,8 @@ function retriever() {
             var object = { ScaledTower: results[i].get("ScaledTower"), valLowBar: results[i].get("lowbar") != null, valPortcullis: results[i].get("fieldPortcullis") != null ,valRoughterrain: results[i].get("fieldRoughterrain") != null,valRockwall: results[i].get("fieldRockwall") != null, valSallyPort: results[i].get("fieldSallyPort") != null, valramparts: results[i].get("fieldramparts") != null, valCheva: results[i].get("fieldMoat")!= null, valCheva: results[i].get("fieldCheva")!= null,valPortcullis: results[i].get("fieldPortcullis")!= null, Team: results[i].get("Team"),  Match: results[i].get("Match"), Low: results[i].get("LowGoal"), High: results[i].get("HighGoal"),  fieldPortcullis: results[i].get("fieldPortcullis"), fieldCheva: results[i].get("fieldCheva"),fieldMoat: results[i].get("fieldMoat"),fieldLowBar: results[i].get("lowbar"), fieldramparts: results[i].get("fieldramparts"), valmoat: results[i].get("fieldMoat") != null, valdrawbridge: results[i].get("fielddrawbridge") != null, fielddrawbridge: results[i].get("fielddrawbridge"),fieldSallyPort: results[i].get("fieldSallyPort"),fieldRockwall: results[i].get("fieldRockwall"),fieldRoughterrain: results[i].get("fieldRoughterrain"),};
             $scope.list.push( object );
         }
-       
+             $ionicLoading.hide();
+
        
       },
       error: function(error) {
@@ -546,7 +623,19 @@ console.log('AFTER ENTER FIRED');
 });
 */
 
+  $scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
 
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
+ $ionicLoading.show({
+         template: 'Loading...'
+      });
+  $scope.controller = false;
 
   console.log("TEAM DETAIL CONTROLLER")
   console.log("LA STORRRRRRY");
@@ -590,7 +679,8 @@ function retriever() {
             var object = { ScaledTower: results[i].get("ScaledTower"), valLowBar: results[i].get("lowbar") != null, valPortcullis: results[i].get("fieldPortcullis") != null ,valRoughterrain: results[i].get("fieldRoughterrain") != null,valRockwall: results[i].get("fieldRockwall") != null, valSallyPort: results[i].get("fieldSallyPort") != null, valramparts: results[i].get("fieldramparts") != null, valCheva: results[i].get("fieldMoat")!= null, valCheva: results[i].get("fieldCheva")!= null,valPortcullis: results[i].get("fieldPortcullis")!= null, Team: results[i].get("Team"),  Match: results[i].get("Match"), Low: results[i].get("LowGoal"), High: results[i].get("HighGoal"),  fieldPortcullis: results[i].get("fieldPortcullis"), fieldCheva: results[i].get("fieldCheva"),fieldMoat: results[i].get("fieldMoat"),fieldLowBar: results[i].get("lowbar"), fieldramparts: results[i].get("fieldramparts"), valmoat: results[i].get("fieldMoat") != null, valdrawbridge: results[i].get("fielddrawbridge") != null, fielddrawbridge: results[i].get("fielddrawbridge"),fieldSallyPort: results[i].get("fieldSallyPort"),fieldRockwall: results[i].get("fieldRockwall"),fieldRoughterrain: results[i].get("fieldRoughterrain"),};
             $scope.list.push( object );
         }
-       
+             $ionicLoading.hide();
+
        
       },
       error: function(error) {

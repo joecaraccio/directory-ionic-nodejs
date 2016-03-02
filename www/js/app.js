@@ -100,6 +100,15 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
         }
       }
     })
+    .state('tab.stats-scoringranking', {
+      url: '/stats/shooting',
+      views: {
+        'tab-stats': {
+          templateUrl: 'templates/ranking-scoring.html',
+          controller: 'ScoreRank'
+        }
+      }
+    })
     .state('tab.stats-towerrank', {
       url: '/stats/towerrank',
       views: {
