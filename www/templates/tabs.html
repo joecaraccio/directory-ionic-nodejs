@@ -5,11 +5,17 @@ navigation history that also transitions its views in and out.
 -->
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
-  <!-- Dashboard Tab -->
+
+  <ion-tab title="Entry" icon-off="ion-plus-circled" icon-on="ion-plus-circled" href="#/tab/enter">
+    <ion-nav-view name="tab-enter"></ion-nav-view>
+  </ion-tab>
+
+
+  <!-- Dashboard Tab 
   <ion-tab title="Recent" icon-off="ion-arrow-graph-up-right" icon-on="ion-arrow-graph-up-right" href="#/tab/dash">
     <ion-nav-view name="tab-dash"></ion-nav-view>
   </ion-tab>
-
+  -->
 <!-- match list -->
 <ion-tab title="Match#" icon-off="ion-document-text" icon-on="ion-document-text" href="#/tab/matches">
     <ion-nav-view name="tab-matches"></ion-nav-view>
@@ -26,10 +32,6 @@ navigation history that also transitions its views in and out.
   </ion-tab>
 
 
-
-  <ion-tab title="Entry" icon-off="ion-plus-circled" icon-on="ion-plus-circled" href="#/tab/enter">
-    <ion-nav-view name="tab-enter"></ion-nav-view>
-  </ion-tab>
 
 
 </ion-tabs>

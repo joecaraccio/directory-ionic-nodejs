@@ -36,7 +36,15 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
   })
 
   // Each tab has its own nav history stack:
-
+  .state('tab.enter', {
+      url: '/enter',
+      views: {
+        'tab-enter': {
+          templateUrl: 'templates/tab-enter.html',
+          controller: 'EnterCtrl'
+        }
+      }
+    })
   .state('tab.dash', {
     url: '/dash',
     views: {
@@ -110,15 +118,7 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
         }
       }
     })
-  .state('tab.enter', {
-      url: '/enter',
-      views: {
-        'tab-enter': {
-          templateUrl: 'templates/tab-enter.html',
-          controller: 'EnterCtrl'
-        }
-      }
-    })
+
     .state('tab.chat-detail', {
       url: '/chats/:chatId',
       views: {
@@ -140,7 +140,7 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/enter');
 
 })
 
