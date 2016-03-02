@@ -8,18 +8,27 @@
       <ion-nav-back-button>
       </ion-nav-back-button>
     </ion-nav-bar>
-<ion-view view-title="{{team}}">
-<ion-refresher
-    pulling-text="Pull to refresh..."
-    on-refresh="doRefresh()">
-  </ion-refresher>
-<div align="center">
-        <p> If Page is Blank tap on Top Bar </p>
-   </div>
   <ion-content class="padding">
-   <!-- stat card --> 
+   <!-- stat card -->
+   <div align="center">
+
+   </div>
+
+    <ion-list>
+      <ion-item class="item-remove-animate " ng-repeat="team in teams" type="item-text-wrap" >
+        
+       <p> <b>Team: {{team.Team}} </b> </p>
+       <p> Average # of High Goals: {{team.AverageHighGoal}} </p>
+      <p> Average # of Low Goals: {{team.AverageLowGoal}} </p>
+      <p> <i> Average Goal Score: <b> {{team.AverageGoalScore}} </b></i> </p>
+
+        
+
+      
+      </ion-item>
+    </ion-list>
    
 
- <p> view </p>
+
   </ion-content>
 </ion-view>

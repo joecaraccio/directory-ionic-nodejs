@@ -449,6 +449,10 @@ console.log("succesful team list retrieve")    // Do something with the returned
 })
 
 
+.controller('MatchupControl', function($scope) {
+ console.log("Stat Controller is on");
+})
+
 .controller('StatControl', function($scope) {
  console.log("Stat Controller is on");
 })
@@ -481,34 +485,129 @@ console.log("tower controller on");
 
 
 .controller('ScoreRank', function($scope, $ionicLoading) {
-console.log("Score Ranking is on");
+$scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
 
-$scope.show = function() {
-    $ionicLoading.show({
-      template: 'Loading...'
-    });
-  };
-  $scope.hide = function(){
-    $ionicLoading.hide();
-  };
-
-
-
-   $ionicLoading.show({
-      template: 'Loading Data...'
-    });
-
- //  var myVar = setInterval(myTimer, 1000);
-var val = 0;
-function myTimer() {
-  val = val + 1;
-console.log("Timer Function thing");
-console.log( val );
-if( val == 15 )
-{
+   $scope.hideLoading = function(){
       $ionicLoading.hide();
+   };
+   /*
+ $ionicLoading.show({
+         template: 'Loading...'
+      });
+*/
+$ionicLoading.show({
+         template: 'Loading...'
+      });
 
+
+  console.log("team controller is on");
+       var teamNumberList = [];
+
+
+    
+var dupe = [];
+function listRetriever() { 
+  var dupe = [];
+
+       var teamNumberList = [];
+  var GameScore = Parse.Object.extend("GameScore");
+var query = new Parse.Query(GameScore);
+query.find({
+  success: function(results) {
+    console.log( results.length );
+    // Do something with the returned Parse.Object values
+    for (var i = 0; i < results.length; i++) {
+      var object = { AverageGoalScore: 0, AverageHighGoal: 0, AverageLowGoal: 0, HighGoal: results[i].get("HighGoal"), LowGoal: results[i].get("LowGoal") , MatchCount: 1, Team: results[i].get("Team")};
+      teamNumberList.push( object );
+    }
+
+
+    if( dupe.length <= 0 )
+    {
+      dupe.push( teamNumberList[0] );
+    }
+
+    for( var j = 1; j < teamNumberList.length; j++ )
+    {
+       console.log( teamNumberList[j] );
+
+       var adder = true;
+
+       for( var q = 0; q < dupe.length; q++ )
+       {
+
+          if( teamNumberList[j].Team == dupe[q].Team )
+          {
+            
+            dupe[q].MatchCount = dupe[q].MatchCount + 1;
+            dupe[q].HighGoal = dupe[q].HighGoal + teamNumberList[j].HighGoal;
+           dupe[q].LowGoal = dupe[q].LowGoal + teamNumberList[j].LowGoal;
+
+            adder = false;
+
+          }
+       }
+
+       if( adder == true )
+       {
+        dupe.push( teamNumberList[j]);
+       }
+
+    }
+    //lets calculate average low goals and high goals per game
+    //high goal = 5;
+    //low goal 2
+    for( var m = 0; m < dupe.length; m++ )
+    {
+      var highgoals = dupe[m].HighGoal;
+      var lowgoals =  dupe[m].LowGoal;
+      var count = dupe[m].MatchCount;
+      //mouney_round is just a round function defined below
+      dupe[m].AverageHighGoal = money_round(highgoals/count);
+      dupe[m].AverageLowGoal = money_round(lowgoals/count);
+      var avgscore = ( money_round(highgoals/count) * 5 ) + ( money_round(lowgoals/count) * 2 );
+
+      dupe[m].AverageGoalScore = avgscore;
+
+    }
+
+    //calculte aver goal score 
+    //sort
+         function sortNumber(a,b) {
+    return   b.AverageGoalScore - a.AverageGoalScore;
 }
+        console.log("HEY")
+        console.log("Should be sorted");
+        dupe.sort(sortNumber);
+
+    $scope.teams = dupe;
+    //done, finish loading
+    $ionicLoading.hide();
+
+
+
+
+  },
+  error: function(error) {
+    alert("Error: " + error.code + " " + error.message);
+  }
+});
+
+
+
+
+//end list retriever function   
+ }
+   listRetriever();
+   console.log("Retrieve List");
+   console.log( teamNumberList );
+
+function money_round(num) {
+    return Math.ceil(num * 100) / 100;
 }
 
 })
