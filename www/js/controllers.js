@@ -521,7 +521,7 @@ query.find({
     console.log( results.length );
     // Do something with the returned Parse.Object values
     for (var i = 0; i < results.length; i++) {
-      var object = { AverageGoalScore: 0, AverageHighGoal: 0, AverageLowGoal: 0, HighGoal: results[i].get("HighGoal"), LowGoal: results[i].get("LowGoal") , MatchCount: 1, Team: results[i].get("Team")};
+      var object = { Index: 0, AverageGoalScore: 0, AverageHighGoal: 0, AverageLowGoal: 0, HighGoal: results[i].get("HighGoal"), LowGoal: results[i].get("LowGoal") , MatchCount: 1, Team: results[i].get("Team")};
       teamNumberList.push( object );
     }
 
@@ -583,6 +583,12 @@ query.find({
         console.log("HEY")
         console.log("Should be sorted");
         dupe.sort(sortNumber);
+        var index = 1;
+        for( var g = 0; g < dupe.length; g++ )
+        {
+          dupe[g].Index = index;
+          index = index + 1;
+        }
 
     $scope.teams = dupe;
     //done, finish loading
