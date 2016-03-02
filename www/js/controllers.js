@@ -615,7 +615,7 @@ function retriever() {
 
 })
 
-.controller('TeamDetailCtrl', function($scope, $state, $stateParams, $ionicPlatform) {
+.controller('TeamDetailCtrl', function($scope, $state, $ionicLoading, $stateParams, $ionicPlatform) {
    /* 
 $scope.$on('$ionicView.afterEnter', function() {
 $scope.loadData();

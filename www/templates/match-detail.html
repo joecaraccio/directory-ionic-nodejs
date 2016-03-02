@@ -13,15 +13,11 @@
     pulling-text="Pull to refresh..."
     on-refresh="doRefresh()">
   </ion-refresher>
-<div align="center">
-<p> Recent Matches, Pull to Refresh </p>
-
-
-
-</div>
   <ion-content class="padding">
    <!-- stat card --> 
-   
+      <div align="center">
+<h3> Match {{team}} </h3>
+</div>
 
     <div class="card" ng-repeat="item in list"> <!-- Start Card -->
   <div class="item item-divider">
