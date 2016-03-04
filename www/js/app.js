@@ -109,6 +109,15 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
         }
       }
     })
+    .state('tab.stats-matchanly', {
+      url: '/stats/matchpredict',
+      views: {
+        'tab-stats': {
+          templateUrl: 'templates/ranking-predictor.html',
+          controller: 'MatchAnalys'
+        }
+      }
+    })
     .state('tab.stats-towerrank', {
       url: '/stats/towerrank',
       views: {

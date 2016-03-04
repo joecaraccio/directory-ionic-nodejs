@@ -1,0 +1,71 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+ <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+  <ion-content class="padding">
+   <!-- stat card -->
+   <div align="center">
+
+   </div>
+
+    <p> Match Predictor </p>
+
+    <div class="card">
+  <div class="item item-text-wrap">
+   
+
+
+<div class="row">
+
+  <div class="col">
+      <label class="item item-input item-floating-label">
+    <span class="input-label">Team 1</span>
+    <input type="number" placeholder="Team #"  ng-model="data.teamnumber1">
+  </label>
+  </div>
+
+   <div class="col">
+      <label class="item item-input item-floating-label">
+    <span class="input-label">Team 2</span>
+    <input type="number" placeholder="Team #"  ng-model="data.teamnumber2">
+  </label>
+  </div>
+
+    <div class="col">
+      <label class="item item-input item-floating-label">
+    <span class="input-label">Team 3</span>
+    <input type="number" placeholder="Team #"  ng-model="data.teamnumber3">
+  </label>
+  </div>
+
+
+  
+
+</div>
+<div class="row">
+  <div class="col">
+    <div align="center">
+      <button class="button button-assertive">
+  Show
+</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+  </div>
+</div>
+
+   
+
+
+  </ion-content>
+</ion-view>

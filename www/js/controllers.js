@@ -618,6 +618,17 @@ function money_round(num) {
 
 })
 
+//input 3 bots, show the defenses that they are most likely to be ineffective
+.controller('MatchAnalys', function($scope) {
+
+  //Show most dangerous shooter( team who has scored the most points)
+  //tower climbers
+  //most effective defenses
+  
+
+
+})
+
 
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {
