@@ -380,6 +380,8 @@ var falseStopper = true;
       gameScore.set("fieldRockwall",$scope.data.rockwall );
       gameScore.set("fieldRoughterrain",$scope.data.roughterrain );
       gameScore.set("lowbar",$scope.data.lowbar );
+      gameScore.set("fieldLowBar",$scope.data.lowbar );
+
 
 
       //now how many times they were succesful
@@ -1071,11 +1073,11 @@ query.find({
           index = index + 1;
         }
 
-        
+
 
         for( var t1 = 0; t1 < dupe.length; t1++ )
         {
-          
+
         }
 
     $scope.teams = dupe;
