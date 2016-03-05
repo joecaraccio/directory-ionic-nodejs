@@ -11,25 +11,19 @@
   <ion-content class="padding">
    <!-- stat card -->
    <div align="center">
+    <p> Overal Score Rankings </p>
+    <p> DefenseBreached + Goals + ScaledTower + Auto </p>
 
    </div>
-<div align="center">
-   <p> Ranks team based on: </p>
-   <p> Amount of Climbs / Matches Played </p>
-</div>
-    <ion-list>
+    
+   <ion-list>
       <ion-item class="item-remove-animate " ng-repeat="team in list" type="item-text-wrap" >
+        <p>  {{team.Index}}. <b> Team {{team.Team}} </b> </p>
+        <p> AVG OveralScore per Match: <i> {{team.matchAVG}} </i> </p>
         
-       <p> {{team.Index}}.  <b>Team: {{team.Team}} </b> </p>
-       <p> Climb Ratio: {{team.climbs}} climbs / {{team.total}} matches</p>
-       <p> <i> {{team.val}}</i> </p>
-     
-        
-
       
       </ion-item>
     </ion-list>
-   
 
 
   </ion-content>

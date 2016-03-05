@@ -24,13 +24,13 @@
   <div class="col">
       <label class="item item-input item-floating-label">
     <span class="input-label">Team #</span>
-    <input type="number" placeholder="Team #"  list="{{data.teamlist}}" ng-model="data.teamnumber">
+    <input type="number" min="0" placeholder="Team #"  list="{{data.teamlist}}" ng-model="data.teamnumber">
   </label>
   </div>
   <div class="col">
       <label class="item item-input item-floating-label">
     <span class="input-label">Match #</span>
-    <input type="number" placeholder="Match #"  ng-model="data.matchnumber">
+    <input type="number" min="0" placeholder="Match #"  ng-model="data.matchnumber">
   </label>
   </div>
   
@@ -38,10 +38,11 @@
 
   
 <h5> Autonomous </h5>
-<ion-checkbox ng-model="data.scale">Reach Defense</ion-checkbox>
-<ion-checkbox ng-model="data.scale">Cross Defense</ion-checkbox>
-<ion-checkbox ng-model="data.scale">Low Goal</ion-checkbox>
-<ion-checkbox ng-model="data.scale">High Goal</ion-checkbox>
+<h6> Check all that Apply </h6>
+<ion-checkbox ng-model="data.reachd">Reach Defense</ion-checkbox>
+<ion-checkbox ng-model="data.cdefense">Cross Defense</ion-checkbox>
+<ion-checkbox ng-model="data.lowgoala">Low Goal</ion-checkbox>
+<ion-checkbox ng-model="data.highgaola">High Goal</ion-checkbox>
 
 
 
@@ -62,13 +63,13 @@
   <div class="col">
       <label class="item item-input item-floating-label">
     <span class="input-label">Low Goal</span>
-    <input type="number" placeholder="Low Goal" ng-model="data.lowgoal">
+    <input type="number"  min="0" placeholder="Low Goal" ng-model="data.lowgoal">
   </label>
   </div>
   <div class="col">
       <label class="item item-input item-floating-label">
     <span class="input-label">High Goal</span>
-    <input type="number" placeholder="High Goal" ng-model="data.highgoal">
+    <input type="number"  min="0" placeholder="High Goal" ng-model="data.highgoal">
   </label>
   </div>
   
@@ -78,7 +79,7 @@
 <ion-checkbox ng-model="data.scale">Scaled the Tower?</ion-checkbox>
 
   <h4>Defenses Information</h4>
-        <p> How many times did Robot Cross?</p>
+        <p> Cross UNDamaged Defenses?</p>
 
 <ul class="list">
 
@@ -91,7 +92,7 @@
       <div class="col-80">
                 <label class="item item-input item-floating-label">
     <span class="input-label">Portcullis</span>
-    <input type="number" placeholder="Portcullis" ng-model="data.portcullis">
+    <input type="number" min="0" max="2" placeholder="Portcullis" ng-model="data.portcullis">
       </div>
      
 
@@ -107,7 +108,7 @@
       <div class="col-80">
                 <label class="item item-input item-floating-label">
     <span class="input-label">Cheval de Frise</span>
-    <input type="number" placeholder="Cheval de Frise" ng-model="data.cheval">
+    <input type="number" min="0" max="2" placeholder="Cheval de Frise" ng-model="data.cheval">
       </div>
      
 
@@ -123,7 +124,7 @@
       <div class="col-80">
                 <label class="item item-input item-floating-label">
     <span class="input-label">Moat</span>
-    <input type="number" placeholder="Moat" ng-model="data.moat">
+    <input type="number" min="0" max="2" placeholder="Moat" ng-model="data.moat">
       </div>
      
 
@@ -139,7 +140,7 @@
       <div class="col-80">
                 <label class="item item-input item-floating-label">
     <span class="input-label">Ramparts</span>
-    <input type="number" placeholder="Ramparts" ng-model="data.rampart">
+    <input type="number" min="0" max="2" placeholder="Ramparts" ng-model="data.rampart">
       </div>
      
 
@@ -155,7 +156,7 @@
       <div class="col-80">
                 <label class="item item-input item-floating-label">
     <span class="input-label">Drawbridge</span>
-    <input type="number" placeholder="Drawbridge" ng-model="data.drawbridge">
+    <input type="number" min="0" max="2" placeholder="Drawbridge" ng-model="data.drawbridge">
       </div>
      
 
@@ -171,7 +172,7 @@
       <div class="col-80">
                 <label class="item item-input item-floating-label">
     <span class="input-label">Sally Port</span>
-    <input type="number" placeholder="Sally Port" ng-model="data.sport">
+    <input type="number" min="0" max="2" placeholder="Sally Port" ng-model="data.sport">
       </div>
      
 
@@ -188,7 +189,7 @@
       <div class="col-80">
                 <label class="item item-input item-floating-label">
     <span class="input-label">Rock Wall</span>
-    <input type="number" placeholder="Rock Wall" ng-model="data.rockwall">
+    <input type="number" min="0" max="2" placeholder="Rock Wall" ng-model="data.rockwall">
       </div>
      
 
@@ -205,7 +206,7 @@
       <div class="col-80">
                 <label class="item item-input item-floating-label">
     <span class="input-label">Rough Terrain</span>
-    <input type="number" placeholder="Rough Terrain" ng-model="data.roughterrain">
+    <input type="number" min="0" max="2" placeholder="Rough Terrain" ng-model="data.roughterrain">
       </div>
      
 
@@ -221,7 +222,7 @@
       <div class="col-80">
                 <label class="item item-input item-floating-label">
     <span class="input-label">Low Bar</span>
-    <input type="number" placeholder="Low Bar" ng-model="data.lowbar">
+    <input type="number" min="0" max="2" placeholder="Low Bar" ng-model="data.lowbar">
       </div>
      
 

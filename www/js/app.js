@@ -109,6 +109,24 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
         }
       }
     })
+    .state('tab.stats-score', {
+      url: '/stats/score',
+      views: {
+        'tab-stats': {
+          templateUrl: 'templates/ranking-score.html',
+          controller: 'scor'
+        }
+      }
+    })
+    .state('tab.stats-towerrank', {
+      url: '/stats/tower',
+      views: {
+        'tab-stats': {
+          templateUrl: 'templates/ranking-tower.html',
+          controller: 'TowerRanking'
+        }
+      }
+    })
     .state('tab.stats-matchanly', {
       url: '/stats/matchpredict',
       views: {
@@ -117,13 +135,22 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
           controller: 'MatchAnalys'
         }
       }
-    })
-    .state('tab.stats-towerrank', {
-      url: '/stats/towerrank',
+    }) 
+    .state('tab.stats-defensetotal', {
+      url: '/stats/defensetotal',
       views: {
         'tab-stats': {
-          templateUrl: 'templates/tab-options.html',
-          controller: 'towerrankcontrol'
+          templateUrl: 'templates/ranking-defensetotal.html',
+          controller: 'defensetotal'
+        }
+      }
+    })
+    .state('tab.stats-auto', {
+      url: '/stats/auto',
+      views: {
+        'tab-stats': {
+          templateUrl: 'templates/ranking-auto.html',
+          controller: 'auto'
         }
       }
     })

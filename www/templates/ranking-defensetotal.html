@@ -1,0 +1,40 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+ <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+  <ion-content class="padding">
+   <!-- stat card -->
+   <div align="center">
+    <p> Highest Defense Damage Per Match </p>
+
+   </div>
+    
+   <ion-list>
+      <ion-item class="item-remove-animate " ng-repeat="team in list" type="item-text-wrap" >
+        
+         <p> {{team.Index}}.  <b>Team: {{team.Team}} </b> </p>
+       <p><font face="verdana" color="green">  Total Defenses Crossed: {{team.totalD}} </p>
+       <p> RoughTerrain: {{team.fieldRoughterrain}} </p>
+       <p> RockWall: {{team.fieldRockwall}} </p>
+       <p> SallyPort: {{team.fieldSallyPort}} </p>
+       <p> DrawBridge: {{team.fielddrawbridge}} </p>
+       <p> Ramparts: {{team.fieldramparts}} </p>
+       <p> Moat: {{team.fieldMoat}} </p>
+       <p> Portcullis: {{team.fieldPortcullis}} </p>
+       <p> Cheval: {{team.fieldCheva}} </p>
+       <p> Low Bar: {{team.lowbar}} </p>
+       <p> <font face="verdana" color="red">  AVG. Damaged Defense/Match: {{team.matchAVG}} </p>
+
+      
+      </ion-item>
+    </ion-list>
+
+
+  </ion-content>
+</ion-view>

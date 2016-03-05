@@ -21,7 +21,10 @@ function retriever() {
 
           
 
-            var object = { ScaledTower: results[i].get("ScaledTower"), valLowBar: results[i].get("lowbar") != null, valPortcullis: results[i].get("fieldPortcullis") != null ,valRoughterrain: results[i].get("fieldRoughterrain") != null,valRockwall: results[i].get("fieldRockwall") != null, valSallyPort: results[i].get("fieldSallyPort") != null, valramparts: results[i].get("fieldramparts") != null, valCheva: results[i].get("fieldMoat")!= null, valCheva: results[i].get("fieldCheva")!= null,valPortcullis: results[i].get("fieldPortcullis")!= null, Team: results[i].get("Team"),  Match: results[i].get("Match"), Low: results[i].get("LowGoal"), High: results[i].get("HighGoal"),  fieldPortcullis: results[i].get("fieldPortcullis"), fieldCheva: results[i].get("fieldCheva"),fieldMoat: results[i].get("fieldMoat"),fieldLowBar: results[i].get("lowbar"), fieldramparts: results[i].get("fieldramparts"), valmoat: results[i].get("fieldMoat") != null, valdrawbridge: results[i].get("fielddrawbridge") != null, fielddrawbridge: results[i].get("fielddrawbridge"),fieldSallyPort: results[i].get("fieldSallyPort"),fieldRockwall: results[i].get("fieldRockwall"),fieldRoughterrain: results[i].get("fieldRoughterrain"),};
+            var object = { high: results[i].get("A_HighGoal"), 
+     low: results[i].get("fieldRoughterrain") , 
+     reachd: results[i].get("A_ReachDefense") ,
+     crossd: results[i].get("A_CrossDefense") , ScaledTower: results[i].get("ScaledTower"), valLowBar: results[i].get("lowbar") != null, valPortcullis: results[i].get("fieldPortcullis") != null ,valRoughterrain: results[i].get("fieldRoughterrain") != null,valRockwall: results[i].get("fieldRockwall") != null, valSallyPort: results[i].get("fieldSallyPort") != null, valramparts: results[i].get("fieldramparts") != null, valCheva: results[i].get("fieldMoat")!= null, valCheva: results[i].get("fieldCheva")!= null,valPortcullis: results[i].get("fieldPortcullis")!= null, Team: results[i].get("Team"),  Match: results[i].get("Match"), Low: results[i].get("LowGoal"), High: results[i].get("HighGoal"),  fieldPortcullis: results[i].get("fieldPortcullis"), fieldCheva: results[i].get("fieldCheva"),fieldMoat: results[i].get("fieldMoat"),fieldLowBar: results[i].get("lowbar"), fieldramparts: results[i].get("fieldramparts"), valmoat: results[i].get("fieldMoat") != null, valdrawbridge: results[i].get("fielddrawbridge") != null, fielddrawbridge: results[i].get("fielddrawbridge"),fieldSallyPort: results[i].get("fieldSallyPort"),fieldRockwall: results[i].get("fieldRockwall"),fieldRoughterrain: results[i].get("fieldRoughterrain"),};
            // console.log("JOE CHECK THIS OUT!!!!!!");
             //console.log( object );
             $scope.list.push( object );
@@ -124,7 +127,6 @@ function listRetriever() {
         console.log("Should be sorted");
         dupe.sort(sortNumber);
         console.log( dupe );
-          $scope.controller = true;
       $ionicLoading.hide();
 
 
@@ -137,18 +139,17 @@ function listRetriever() {
 
 
    $scope.teams = dupe;
-            //$scope.$apply();
         
- }
+ } // end of the cunction
    listRetriever();
 
- $scope.doRefresh = function() {
-         // here refresh data code
-         listRetriever();
 
-         $scope.$broadcast('scroll.refreshComplete');
-         $scope.$apply()
-      };
+
+function filter() {
+
+}
+
+
 
 })
 
@@ -285,9 +286,43 @@ $scope.originalUser = angular.copy($scope.data);
     }
 
   */
+var falseStopper = true;
+      if( $scope.data.portcullis  < 0  )
+      {
+        console.log("uh oh. value is" + $scope.data.portcullis );
+        falseStopper = false;
+      } else if ( $scope.data.cheval < 0 )
+      {
+                console.log(" chevaluh oh. value is" + $scope.data.portcullis );
 
+                falseStopper = false;
+      } else if ( $scope.data.moat < 0 )
+      {
+        console.log("rip");
+                falseStopper = false;
+      } else if ( $scope.data.rampart < 0 )
+      {
+                console.log("rip");
 
-    if( $scope.data.teamnumber != null && $scope.data.matchnumber != null )
+                falseStopper = false;
+      } else if ( $scope.data.drawbridge < 0 )
+      {
+                console.log("rip");
+
+                falseStopper = false;
+      } else if ( $scope.data.roughterrain < 0 )
+      {
+                console.log("rip");
+
+                falseStopper = false;
+      } else if ( $scope.data.lowbar < 0 )
+      {
+                console.log("rip");
+
+                falseStopper = false;
+      }
+
+    if( falseStopper == true && $scope.data.teamnumber != null && $scope.data.matchnumber != null )
     {
       console.log("====submited data ===");
       
@@ -314,6 +349,8 @@ $scope.originalUser = angular.copy($scope.data);
         highgoal = $scope.data.highgoal;
       }
 
+      
+
 
 
       //save the object
@@ -326,6 +363,13 @@ $scope.originalUser = angular.copy($scope.data);
       gameScore.set("HighGoal", highgoal);
       gameScore.set("ScaledTower", $scope.data.scale);
       //gameScore.set("Alliance", color );
+
+      //Autonomous
+      gameScore.set("A_ReachDefense", $scope.data.reachd);
+      gameScore.set("A_CrossDefense", $scope.data.cdefense);
+      gameScore.set("A_LowGoal", $scope.data.lowgoala);
+      gameScore.set("A_HighGoal", $scope.data.highgaola);
+
       
       gameScore.set("fieldPortcullis",$scope.data.portcullis );
       gameScore.set("fieldCheva",$scope.data.cheval );
@@ -393,7 +437,6 @@ $scope.$apply(function() {
 
 
 
-
 });
 
 
@@ -404,14 +447,14 @@ $scope.$apply(function() {
   error: function(gameScore, error) {
     // Execute any logic that should take place if the save fails.
     // error is a Parse.Error with an error code and message.
-    alert('Failed to submit Data. Make sure you are on Wifi or Cellular Data' + error.message);
+    alert('Failed to submit Data. Make sure you are on Wifi or Cellular Data' );
   }
 });
 
 
 } else
 {
-  alert('Team Number, Match Number and Alliance are REQUIRED!')
+  alert('Team Number, Match Number are REQUIRED! Check Defense values, Cant be negative');
 }
 
  }//end function
@@ -445,6 +488,204 @@ console.log("succesful team list retrieve")    // Do something with the returned
 
 
 
+
+})
+
+
+.controller('scor', function($scope, $ionicLoading) {
+ console.log("Stat Controller is on");
+
+  $scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
+
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
+$ionicLoading.show({
+         template: 'Loading...'
+      });
+towerRank();
+
+function towerRank() {
+
+var teams = [];
+var teamList = [];
+  var GameScore = Parse.Object.extend("GameScore");
+var query = new Parse.Query(GameScore);
+query.find({
+  success: function(results) {
+   for( var i = 0; i < results.length; i++ )
+   {
+    var teamListObject = { Team: results[i].get("Team") , score: 0,
+    lowbar: 0, 
+    fieldRoughterrain: 0 , 
+    fieldRockwall: 0 ,
+    fieldSallyPort: 0, 
+    fielddrawbridge: 0 , 
+    fieldramparts: 0,
+    fieldMoat: 0,
+    fieldPortcullis: 0, 
+    fieldCheva: 0, 
+    match: 0,
+    highgoal: 0,
+    lowgoal: 0,
+    matchAVG: 0, 
+    Index: 0};
+
+    var isOnList = false;
+    for( var j = 0; j < teamList.length; j++ )
+    {
+      if( teamList[j].Team == results[i].get("Team") )
+      {
+        isOnList = true;
+      }
+
+    }
+    if( isOnList == false )
+    {
+          teamList.push(  teamListObject );
+
+    }
+
+
+
+    var object = { 
+     Team: results[i].get("Team") , high: results[i].get("A_HighGoal"), 
+     low: results[i].get("A_LowGoal") , 
+     reachd: results[i].get("A_ReachDefense") ,
+     crossd: results[i].get("A_CrossDefense"), lowbar: results[i].get("lowbar"), 
+     fieldRoughterrain: results[i].get("fieldRoughterrain") , 
+     fieldRockwall: results[i].get("fieldRockwall") ,
+     fieldSallyPort: results[i].get("fieldSallyPort"), 
+     fielddrawbridge: results[i].get("fielddrawbridge") , 
+     fieldramparts: results[i].get("fieldramparts"),
+     fieldMoat: results[i].get("fieldMoat"),
+     fieldPortcullis: results[i].get("fieldPortcullis"), 
+     fieldCheva: results[i].get("fieldCheva"), lowGoal: results[i].get("LowGoal"),
+     highGoal: results[i].get("HighGoal"), scaling: results[i].get("ScaledTower")
+      };
+      console.log("object");
+      console.log( object );
+    teams.push( object );
+   }
+
+//console.log("OKAY HERE ARE RESULTS");
+//console.log("----------------------");
+//console.log( teams );
+//console.log( teamList );
+//console.log("Results");
+for( var k = 0; k < teams.length; k++ )
+{
+
+  for( var q = 0; q < teamList.length; q++ )
+  {
+teams[k].lowbar = teams[k].lowbar || 0;
+teams[k].fieldCheva = teams[k].fieldCheva || 0;
+teams[k].fieldRoughterrain = teams[k].fieldRoughterrain || 0;
+teams[k].fieldRockwall = teams[k].fieldRockwall || 0;
+teams[k].fieldSallyPort = teams[k].fieldSallyPort || 0;
+teams[k].fielddrawbridge = teams[k].fielddrawbridge || 0;
+teams[k].fieldramparts = teams[k].fieldramparts || 0;
+teams[k].fieldMoat = teams[k].fieldMoat || 0;
+teams[k].fieldPortcullis = teams[k].fieldPortcullis || 0;
+
+var defenseScore = teams[k].fieldRoughterrain + teams[k].fieldRockwall + teams[k].fieldSallyPort + teams[k].fielddrawbridge
++ teams[k].fieldramparts + teams[k].fieldMoat + teams[k].fieldPortcullis + teams[k].fieldCheva + teams[k].lowbar;
+console.log( teams[k].Team );
+console.log(" Defense Score ");
+console.log( defenseScore );
+var calculatedD = defenseScore * 5;
+console.log("new Score");
+console.log( calculatedD );
+var highGoals = teams[k].highGoal * 5;
+var lowGoals = teams[k].lowGoal * 2;
+console.log("High Goals " + highGoals);
+console.log("Low Goals " + lowGoals);
+
+    if( teamList[q].Team == teams[k].Team )
+    {
+      var score = 0;
+      if( teams[k].low == true)
+      {
+        score = score + 5;
+
+      }
+
+      if( teams[k].reachd == true )
+      {
+        score = score + 2;
+      }
+       if( teams[k].high == true )
+       {
+        score = score + 10;
+       }  
+
+       if( teams[k].crossd == true )
+       {
+        score = score + 10;
+       }
+
+           var scalePoints = 0;
+if( teams[k].scaling == true )
+{
+  scalePoints = 15;
+
+}
+      
+       teamList[q].score = teamList[q].score + score + scalePoints + highGoals + lowGoals+ calculatedD;
+      teamList[q].match = teamList[q].match + 1;
+    } //end team equal checker
+
+  
+
+
+  }
+
+}
+//calculate values
+for( var jk = 0; jk < teamList.length; jk++ )
+{
+
+//a = a || 0
+
+
+//a = a || 0;
+
+
+console.log("Average calculator");
+
+ 
+
+   teamList[jk].matchAVG = teamList[jk].score / teamList[jk].match;
+}
+        function sortNumber(a,b) {
+    return   b.matchAVG - a.matchAVG;
+}
+teamList.sort( sortNumber );
+
+var index = 1;
+for( var kk = 0; kk < teamList.length; kk++ )
+{
+  teamList[kk].Index = index;
+  index++;
+}
+
+console.log("this the final list");
+console.log( teamList );
+$scope.list = teamList;
+$ionicLoading.hide();
+console.log("yo");
+
+  },
+  error: function(error) {
+    alert("Error: " + error.code + " " + error.message);
+  }
+});
+
+};
 
 })
 
@@ -483,6 +724,118 @@ console.log("tower controller on");
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
+.controller('TowerRanking', function($scope, $stateParams, $ionicLoading ) {
+console.log(" Tower Rank");
+
+$scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
+
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
+$ionicLoading.show({
+         template: 'Loading...'
+      });
+towerRank();
+
+function towerRank() {
+
+var teams = [];
+var teamList = [];
+  var GameScore = Parse.Object.extend("GameScore");
+var query = new Parse.Query(GameScore);
+query.find({
+  success: function(results) {
+   for( var i = 0; i < results.length; i++ )
+   {
+    var teamListObject = { Team: results[i].get("Team") , climbs: 0, total: 0, val: 0, Index: 0};
+
+    var isOnList = false;
+    for( var j = 0; j < teamList.length; j++ )
+    {
+      if( teamList[j].Team == results[i].get("Team") )
+      {
+        isOnList = true;
+      }
+
+    }
+    if( isOnList == false )
+    {
+          teamList.push(  teamListObject );
+
+    }
+
+
+
+    var object = { Team: results[i].get("Team"), Tower: results[i].get("ScaledTower") };
+    teams.push( object );
+   }
+
+//console.log("OKAY HERE ARE RESULTS");
+//console.log("----------------------");
+//console.log( teams );
+//console.log( teamList );
+//console.log("Results");
+for( var k = 0; k < teams.length; k++ )
+{
+
+  for( var q = 0; q < teamList.length; q++ )
+  {
+    if( teamList[q].Team == teams[k].Team )
+    {
+      if( teams[k].Tower == true )
+      {
+        teamList[q].climbs = teamList[q].climbs + 1;
+        teamList[q].total = teamList[q].total + 1;
+
+      } else {
+                teamList[q].total = teamList[q].total + 1;
+
+      }
+      
+    }
+
+  }
+
+}
+//calculate values
+for( var jk = 0; jk < teamList.length; jk++ )
+{
+  
+  teamList[jk].val = teamList[jk].climbs / teamList[jk].total;
+}
+        function sortNumber(a,b) {
+    return   b.val - a.val;
+}
+teamList.sort( sortNumber );
+
+var index = 1;
+for( var kk = 0; kk < teamList.length; kk++ )
+{
+  teamList[kk].Index = index;
+  index++;
+}
+
+//console.log( teamList );
+$scope.list = teamList;
+$ionicLoading.hide();
+
+  },
+  error: function(error) {
+    alert("Error: " + error.code + " " + error.message);
+  }
+});
+
+};
+
+
+
+})
+
+
 
 .controller('ScoreRank', function($scope, $ionicLoading) {
 $scope.showLoading = function() {
@@ -494,11 +847,7 @@ $scope.showLoading = function() {
    $scope.hideLoading = function(){
       $ionicLoading.hide();
    };
-   /*
- $ionicLoading.show({
-         template: 'Loading...'
-      });
-*/
+
 $ionicLoading.show({
          template: 'Loading...'
       });
@@ -621,20 +970,464 @@ function money_round(num) {
 //input 3 bots, show the defenses that they are most likely to be ineffective
 .controller('MatchAnalys', function($scope) {
 
-  //Show most dangerous shooter( team who has scored the most points)
-  //tower climbers
-  //most effective defenses
+$scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
+
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
+
+$ionicLoading.show({
+         template: 'Loading...'
+      });
+
+
+  console.log("team controller is on");
+       var teamNumberList = [];
+
+
+    
+var dupe = [];
+function listRetriever() { 
+  var dupe = [];
+
+       var teamNumberList = [];
+  var GameScore = Parse.Object.extend("GameScore");
+var query = new Parse.Query(GameScore);
+query.find({
+  success: function(results) {
+    console.log( results.length );
+    // Do something with the returned Parse.Object values
+    for (var i = 0; i < results.length; i++) {
+      var object = { Index: 0, AverageGoalScore: 0, AverageHighGoal: 0, AverageLowGoal: 0, HighGoal: results[i].get("HighGoal"), LowGoal: results[i].get("LowGoal") , MatchCount: 1, Team: results[i].get("Team")};
+      teamNumberList.push( object );
+    }
+
+
+    if( dupe.length <= 0 )
+    {
+      dupe.push( teamNumberList[0] );
+    }
+
+    for( var j = 1; j < teamNumberList.length; j++ )
+    {
+       console.log( teamNumberList[j] );
+
+       var adder = true;
+
+       for( var q = 0; q < dupe.length; q++ )
+       {
+
+          if( teamNumberList[j].Team == dupe[q].Team )
+          {
+            
+            dupe[q].MatchCount = dupe[q].MatchCount + 1;
+            dupe[q].HighGoal = dupe[q].HighGoal + teamNumberList[j].HighGoal;
+           dupe[q].LowGoal = dupe[q].LowGoal + teamNumberList[j].LowGoal;
+
+            adder = false;
+
+          }
+       }
+
+       if( adder == true )
+       {
+        dupe.push( teamNumberList[j]);
+       }
+
+    }
+    //lets calculate average low goals and high goals per game
+    //high goal = 5;
+    //low goal 2
+    for( var m = 0; m < dupe.length; m++ )
+    {
+      var highgoals = dupe[m].HighGoal;
+      var lowgoals =  dupe[m].LowGoal;
+      var count = dupe[m].MatchCount;
+      //mouney_round is just a round function defined below
+      dupe[m].AverageHighGoal = money_round(highgoals/count);
+      dupe[m].AverageLowGoal = money_round(lowgoals/count);
+      var avgscore = ( money_round(highgoals/count) * 5 ) + ( money_round(lowgoals/count) * 2 );
+
+      dupe[m].AverageGoalScore = avgscore;
+
+    }
+
+    //calculte aver goal score 
+    //sort
+         function sortNumber(a,b) {
+    return   b.AverageGoalScore - a.AverageGoalScore;
+}
+        console.log("HEY")
+        console.log("Should be sorted");
+        dupe.sort(sortNumber);
+        var index = 1;
+        for( var g = 0; g < dupe.length; g++ )
+        {
+          dupe[g].Index = index;
+          index = index + 1;
+        }
+
+        
+
+        for( var t1 = 0; t1 < dupe.length; t1++ )
+        {
+          
+        }
+
+    $scope.teams = dupe;
+    //done, finish loading
+    $ionicLoading.hide();
+
+
+
+
+  },
+  error: function(error) {
+    alert("Error: " + error.code + " " + error.message);
+  }
+});
+
+
+
+
+//end list retriever function   
+ }
+   listRetriever();
+   console.log("Retrieve List");
+   console.log( teamNumberList );
+
+function money_round(num) {
+    return Math.ceil(num * 100) / 100;
+}
+
+
+
+
+
+
+
+
+})
+
+
+.controller('AccountCtrl', function($scope, $ionicLoading) {
+
+})
+
+.controller('auto', function($scope, $ionicLoading) {
+  console.log("auto");
+
+
+  $scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
+
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
+$ionicLoading.show({
+         template: 'Loading...'
+      });
+towerRank();
+
+function towerRank() {
+
+var teams = [];
+var teamList = [];
+  var GameScore = Parse.Object.extend("GameScore");
+var query = new Parse.Query(GameScore);
+query.find({
+  success: function(results) {
+   for( var i = 0; i < results.length; i++ )
+   {
+    var teamListObject = { Team: results[i].get("Team") , score: 0,
+    match: 0,
+    matchAVG: 0, 
+    Index: 0};
+
+    var isOnList = false;
+    for( var j = 0; j < teamList.length; j++ )
+    {
+      if( teamList[j].Team == results[i].get("Team") )
+      {
+        isOnList = true;
+      }
+
+    }
+    if( isOnList == false )
+    {
+          teamList.push(  teamListObject );
+
+    }
+
+
+
+    var object = { 
+     Team: results[i].get("Team") , high: results[i].get("A_HighGoal"), 
+     low: results[i].get("A_LowGoal") , 
+     reachd: results[i].get("A_ReachDefense") ,
+     crossd: results[i].get("A_CrossDefense")
+      };
+      console.log("object");
+      console.log( object );
+    teams.push( object );
+   }
+
+//console.log("OKAY HERE ARE RESULTS");
+//console.log("----------------------");
+//console.log( teams );
+//console.log( teamList );
+//console.log("Results");
+for( var k = 0; k < teams.length; k++ )
+{
+
+  for( var q = 0; q < teamList.length; q++ )
+  {
+    if( teamList[q].Team == teams[k].Team )
+    {
+      var score = 0;
+      if( teams[k].low == true)
+      {
+        score = score + 5;
+
+      }
+
+      if( teams[k].reachd == true )
+      {
+        score = score + 2;
+      }
+       if( teams[k].high == true )
+       {
+        score = score + 10;
+       }  
+
+       if( teams[k].crossd == true )
+       {
+        score = score + 10;
+       }
+      
+       teamList[q].score = teamList[q].score + score;
+      teamList[q].match = teamList[q].match + 1;
+    } //end team equal checker
+
+  }
+
+}
+//calculate values
+for( var jk = 0; jk < teamList.length; jk++ )
+{
+
+//a = a || 0
+
+
+//a = a || 0;
+
+
+console.log("Average calculator");
+
+ 
+
+   teamList[jk].matchAVG = teamList[jk].score / teamList[jk].match;
+}
+        function sortNumber(a,b) {
+    return   b.matchAVG - a.matchAVG;
+}
+teamList.sort( sortNumber );
+
+var index = 1;
+for( var kk = 0; kk < teamList.length; kk++ )
+{
+  teamList[kk].Index = index;
+  index++;
+}
+
+console.log("this the final list");
+console.log( teamList );
+$scope.list = teamList;
+$ionicLoading.hide();
+console.log("yo");
+
+  },
+  error: function(error) {
+    alert("Error: " + error.code + " " + error.message);
+  }
+});
+
+};
+
   
+})
+
+
+
+
+.controller('defensetotal', function($scope, $ionicLoading) {
+  console.log("Defense Totals");
+
+  $scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
+
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
+$ionicLoading.show({
+         template: 'Loading...'
+      });
+towerRank();
+
+function towerRank() {
+
+var teams = [];
+var teamList = [];
+  var GameScore = Parse.Object.extend("GameScore");
+var query = new Parse.Query(GameScore);
+query.find({
+  success: function(results) {
+   for( var i = 0; i < results.length; i++ )
+   {
+    var teamListObject = { Team: results[i].get("Team") , 
+    lowbar: 0, 
+    fieldRoughterrain: 0 , 
+    fieldRockwall: 0 ,
+    fieldSallyPort: 0, 
+    fielddrawbridge: 0 , 
+    fieldramparts: 0,
+    fieldMoat: 0,
+    fieldPortcullis: 0, 
+    fieldCheva: 0, 
+    totalD: 0,
+    match: 0,
+    matchAVG: 0, 
+    Index: 0};
+
+    var isOnList = false;
+    for( var j = 0; j < teamList.length; j++ )
+    {
+      if( teamList[j].Team == results[i].get("Team") )
+      {
+        isOnList = true;
+      }
+
+    }
+    if( isOnList == false )
+    {
+          teamList.push(  teamListObject );
+
+    }
+
+
+
+    var object = { 
+     Team: results[i].get("Team") , lowbar: results[i].get("lowbar"), 
+     fieldRoughterrain: results[i].get("fieldRoughterrain") , 
+     fieldRockwall: results[i].get("fieldRockwall") ,
+     fieldSallyPort: results[i].get("fieldSallyPort"), 
+     fielddrawbridge: results[i].get("fielddrawbridge") , 
+     fieldramparts: results[i].get("fieldramparts"),
+     fieldMoat: results[i].get("fieldMoat"),
+     fieldPortcullis: results[i].get("fieldPortcullis"), 
+     fieldCheva: results[i].get("fieldCheva")
+      };
+
+    teams.push( object );
+   }
+
+//console.log("OKAY HERE ARE RESULTS");
+//console.log("----------------------");
+//console.log( teams );
+//console.log( teamList );
+//console.log("Results");
+for( var k = 0; k < teams.length; k++ )
+{
+
+  for( var q = 0; q < teamList.length; q++ )
+  {
+    if( teamList[q].Team == teams[k].Team )
+    {
+          teamList[q].fieldRoughterrain = teamList[q].fieldRoughterrain + teams[k].fieldRoughterrain;
+      teamList[q].fieldRockwall = teamList[q].fieldRockwall + teams[k].fieldRockwall;
+      teamList[q].fieldSallyPort = teamList[q].fieldSallyPort + teams[k].fieldSallyPort;
+      teamList[q].fielddrawbridge = teamList[q].fielddrawbridge + teams[k].fielddrawbridge;
+      teamList[q].fieldramparts = teamList[q].fieldramparts + teams[k].fieldramparts;
+      teamList[q].fieldMoat = teamList[q].fieldMoat + teams[k].fieldMoat;
+      teamList[q].fieldPortcullis = teamList[q].fieldPortcullis + teams[k].fieldPortcullis;
+      teamList[q].fieldCheva = teamList[q].fieldCheva + teams[k].fieldCheva;
+
+      teamList[q].lowbar = teamList[q].lowbar + teams[k].lowbar;
+      teamList[q].match = teamList[q].match + 1;
+    } //end team equal checker
+
+  }
+
+}
+//calculate values
+for( var jk = 0; jk < teamList.length; jk++ )
+{
+
+//a = a || 0
+
+teamList[jk].lowbar = teamList[jk].lowbar || 0;
+teamList[jk].fieldCheva = teamList[jk].fieldCheva || 0;
+teamList[jk].fieldRoughterrain = teamList[jk].fieldRoughterrain || 0;
+teamList[jk].fieldRockwall = teamList[jk].fieldRockwall || 0;
+teamList[jk].fieldSallyPort = teamList[jk].fieldSallyPort || 0;
+teamList[jk].fielddrawbridge = teamList[jk].fielddrawbridge || 0;
+teamList[jk].fieldramparts = teamList[jk].fieldramparts || 0;
+teamList[jk].fieldMoat = teamList[jk].fieldMoat || 0;
+teamList[jk].fieldPortcullis = teamList[jk].fieldPortcullis || 0;
+
+//a = a || 0;
+
+
+
+
+ 
+  teamList[jk].totalD = teamList[jk].lowbar + teamList[jk].fieldCheva 
+  + teamList[jk].fieldPortcullis +
+   teamList[jk].fieldRoughterrain + 
+   teamList[jk].fieldRockwall + 
+   teamList[jk].fieldSallyPort + 
+   teamList[jk].fielddrawbridge + teamList[jk].fieldramparts + teamList[jk].fieldMoat ;
+   teamList[jk].matchAVG = teamList[jk].totalD / teamList[jk].match;
+  console.log( "List Total " + teamList[jk].totalD );
+}
+        function sortNumber(a,b) {
+    return   b.matchAVG - a.matchAVG;
+}
+teamList.sort( sortNumber );
+
+var index = 1;
+for( var kk = 0; kk < teamList.length; kk++ )
+{
+  teamList[kk].Index = index;
+  index++;
+}
+
+console.log("this the final list");
+console.log( teamList );
+$scope.list = teamList;
+$ionicLoading.hide();
+
+  },
+  error: function(error) {
+    alert("Error: " + error.code + " " + error.message);
+  }
+});
+
+};
 
 
 })
 
-
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-})
 
 
 
@@ -698,7 +1491,7 @@ function retriever() {
             blue = true;
           }
           */
-            var object = { ScaledTower: results[i].get("ScaledTower"), valLowBar: results[i].get("lowbar") != null, valPortcullis: results[i].get("fieldPortcullis") != null ,valRoughterrain: results[i].get("fieldRoughterrain") != null,valRockwall: results[i].get("fieldRockwall") != null, valSallyPort: results[i].get("fieldSallyPort") != null, valramparts: results[i].get("fieldramparts") != null, valCheva: results[i].get("fieldMoat")!= null, valCheva: results[i].get("fieldCheva")!= null,valPortcullis: results[i].get("fieldPortcullis")!= null, Team: results[i].get("Team"),  Match: results[i].get("Match"), Low: results[i].get("LowGoal"), High: results[i].get("HighGoal"),  fieldPortcullis: results[i].get("fieldPortcullis"), fieldCheva: results[i].get("fieldCheva"),fieldMoat: results[i].get("fieldMoat"),fieldLowBar: results[i].get("lowbar"), fieldramparts: results[i].get("fieldramparts"), valmoat: results[i].get("fieldMoat") != null, valdrawbridge: results[i].get("fielddrawbridge") != null, fielddrawbridge: results[i].get("fielddrawbridge"),fieldSallyPort: results[i].get("fieldSallyPort"),fieldRockwall: results[i].get("fieldRockwall"),fieldRoughterrain: results[i].get("fieldRoughterrain"),};
+            var object = { AHighgoal: results[i].get("A_HighGoal"), ALowgoal: results[i].get("A_LowGoal"), CrossD: results[i].get("A_CrossDefense"), ReachD: results[i].get("A_ReachDefense"), ScaledTower: results[i].get("ScaledTower"), valLowBar: results[i].get("lowbar") != null, valPortcullis: results[i].get("fieldPortcullis") != null ,valRoughterrain: results[i].get("fieldRoughterrain") != null,valRockwall: results[i].get("fieldRockwall") != null, valSallyPort: results[i].get("fieldSallyPort") != null, valramparts: results[i].get("fieldramparts") != null, valCheva: results[i].get("fieldMoat")!= null, valCheva: results[i].get("fieldCheva")!= null,valPortcullis: results[i].get("fieldPortcullis")!= null, Team: results[i].get("Team"),  Match: results[i].get("Match"), Low: results[i].get("LowGoal"), High: results[i].get("HighGoal"),  fieldPortcullis: results[i].get("fieldPortcullis"), fieldCheva: results[i].get("fieldCheva"),fieldMoat: results[i].get("fieldMoat"),fieldLowBar: results[i].get("lowbar"), fieldramparts: results[i].get("fieldramparts"), valmoat: results[i].get("fieldMoat") != null, valdrawbridge: results[i].get("fielddrawbridge") != null, fielddrawbridge: results[i].get("fielddrawbridge"),fieldSallyPort: results[i].get("fieldSallyPort"),fieldRockwall: results[i].get("fieldRockwall"),fieldRoughterrain: results[i].get("fieldRoughterrain"),};
             $scope.list.push( object );
         }
              $ionicLoading.hide();
@@ -792,7 +1585,7 @@ function retriever() {
             blue = true;
           }
           */
-            var object = { ScaledTower: results[i].get("ScaledTower"), valLowBar: results[i].get("lowbar") != null, valPortcullis: results[i].get("fieldPortcullis") != null ,valRoughterrain: results[i].get("fieldRoughterrain") != null,valRockwall: results[i].get("fieldRockwall") != null, valSallyPort: results[i].get("fieldSallyPort") != null, valramparts: results[i].get("fieldramparts") != null, valCheva: results[i].get("fieldMoat")!= null, valCheva: results[i].get("fieldCheva")!= null,valPortcullis: results[i].get("fieldPortcullis")!= null, Team: results[i].get("Team"),  Match: results[i].get("Match"), Low: results[i].get("LowGoal"), High: results[i].get("HighGoal"),  fieldPortcullis: results[i].get("fieldPortcullis"), fieldCheva: results[i].get("fieldCheva"),fieldMoat: results[i].get("fieldMoat"),fieldLowBar: results[i].get("lowbar"), fieldramparts: results[i].get("fieldramparts"), valmoat: results[i].get("fieldMoat") != null, valdrawbridge: results[i].get("fielddrawbridge") != null, fielddrawbridge: results[i].get("fielddrawbridge"),fieldSallyPort: results[i].get("fieldSallyPort"),fieldRockwall: results[i].get("fieldRockwall"),fieldRoughterrain: results[i].get("fieldRoughterrain"),};
+            var object = { AHighgoal: results[i].get("A_HighGoal"), ALowgoal: results[i].get("A_LowGoal"), CrossD: results[i].get("A_CrossDefense"), ReachD: results[i].get("A_ReachDefense"),  ScaledTower: results[i].get("ScaledTower"), valLowBar: results[i].get("lowbar") != null, valPortcullis: results[i].get("fieldPortcullis") != null ,valRoughterrain: results[i].get("fieldRoughterrain") != null,valRockwall: results[i].get("fieldRockwall") != null, valSallyPort: results[i].get("fieldSallyPort") != null, valramparts: results[i].get("fieldramparts") != null, valCheva: results[i].get("fieldMoat")!= null, valCheva: results[i].get("fieldCheva")!= null,valPortcullis: results[i].get("fieldPortcullis")!= null, Team: results[i].get("Team"),  Match: results[i].get("Match"), Low: results[i].get("LowGoal"), High: results[i].get("HighGoal"),  fieldPortcullis: results[i].get("fieldPortcullis"), fieldCheva: results[i].get("fieldCheva"),fieldMoat: results[i].get("fieldMoat"),fieldLowBar: results[i].get("lowbar"), fieldramparts: results[i].get("fieldramparts"), valmoat: results[i].get("fieldMoat") != null, valdrawbridge: results[i].get("fielddrawbridge") != null, fielddrawbridge: results[i].get("fielddrawbridge"),fieldSallyPort: results[i].get("fieldSallyPort"),fieldRockwall: results[i].get("fieldRockwall"),fieldRoughterrain: results[i].get("fieldRoughterrain"),};
             $scope.list.push( object );
         }
              $ionicLoading.hide();

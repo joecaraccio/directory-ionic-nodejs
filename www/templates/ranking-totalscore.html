@@ -13,17 +13,15 @@
    <div align="center">
 
    </div>
-<div align="center">
-   <p> Ranks team based on: </p>
-   <p> Amount of Climbs / Matches Played </p>
-</div>
+
     <ion-list>
-      <ion-item class="item-remove-animate " ng-repeat="team in list" type="item-text-wrap" >
+      <ion-item class="item-remove-animate " ng-repeat="team in teams" type="item-text-wrap" >
         
        <p> {{team.Index}}.  <b>Team: {{team.Team}} </b> </p>
-       <p> Climb Ratio: {{team.climbs}} climbs / {{team.total}} matches</p>
-       <p> <i> {{team.val}}</i> </p>
-     
+       <p> Average # of High Goals: {{team.AverageHighGoal}} </p>
+      <p> Average # of Low Goals: {{team.AverageLowGoal}} </p>
+      <p> <i> Average Goal Score: <b> {{team.AverageGoalScore}} </b></i> </p>
+
         
 
       
