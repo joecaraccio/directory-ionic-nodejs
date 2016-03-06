@@ -82,6 +82,8 @@ function listRetriever() {
 
     var GameScore = Parse.Object.extend("GameScore");
     var query = new Parse.Query(GameScore);
+        query.limit( 1000 );
+
     query.find({
       success: function(results) {
           console.log("We retrieved: " + results.length );
@@ -173,7 +175,6 @@ $scope.$on('$ionicView.afterEnter', function() {
 $scope.loadData();
 console.log('AFTER ENTER FIRED');
 });  
-  console.log("team controller is on");
        var teamNumberList = [];
 
 
@@ -185,11 +186,12 @@ function listRetriever() {
 
     var GameScore = Parse.Object.extend("GameScore");
     var query = new Parse.Query(GameScore);
+    query.limit( 1000 );
     query.find({
       success: function(results) {
           console.log("We retrieved: " + results.length );
         for( var i = 0; i < results.length; i++ ){
-          console.log( results[i].get("Team"))
+          //console.log( results[i].get("Team"))
             teamNumberList.push( results[i].get("Match") );
         }
         teamNumberList.sort();
@@ -482,6 +484,8 @@ function teamnumber() {
 var teamArray = [];
   var GameScore = Parse.Object.extend("GameScore");
 var query = new Parse.Query(GameScore);
+    query.limit( 1000 );
+
 query.find({
   success: function(results) {
 console.log("succesful team list retrieve")    // Do something with the returned Parse.Object values
@@ -530,6 +534,8 @@ var teams = [];
 var teamList = [];
   var GameScore = Parse.Object.extend("GameScore");
 var query = new Parse.Query(GameScore);
+    query.limit( 1000 );
+
 query.find({
   success: function(results) {
    for( var i = 0; i < results.length; i++ )
@@ -829,6 +835,7 @@ var teams = [];
 var teamList = [];
   var GameScore = Parse.Object.extend("GameScore");
 var query = new Parse.Query(GameScore);
+    query.limit( 1000 );
 query.find({
   success: function(results) {
    for( var i = 0; i < results.length; i++ )
@@ -947,6 +954,8 @@ function listRetriever() {
        var teamNumberList = [];
   var GameScore = Parse.Object.extend("GameScore");
 var query = new Parse.Query(GameScore);
+query.limit(1000);
+
 query.find({
   success: function(results) {
     console.log( results.length );
@@ -1079,6 +1088,8 @@ function listRetriever() {
        var teamNumberList = [];
   var GameScore = Parse.Object.extend("GameScore");
 var query = new Parse.Query(GameScore);
+query.limit(1000);
+
 query.find({
   success: function(results) {
     console.log( results.length );
@@ -1224,6 +1235,8 @@ var teams = [];
 var teamList = [];
   var GameScore = Parse.Object.extend("GameScore");
 var query = new Parse.Query(GameScore);
+query.limit(1000);
+
 query.find({
   success: function(results) {
    for( var i = 0; i < results.length; i++ )
@@ -1372,6 +1385,8 @@ var teams = [];
 var teamList = [];
   var GameScore = Parse.Object.extend("GameScore");
 var query = new Parse.Query(GameScore);
+
+query.limit(1000);
 query.find({
   success: function(results) {
    for( var i = 0; i < results.length; i++ )
@@ -1552,6 +1567,8 @@ function retriever() {
  var GameScore = Parse.Object.extend("GameScore");
     var query = new Parse.Query(GameScore);
     query.equalTo("Match", number );
+        query.limit( 1000 );
+
 
     query.ascending("createdAt");
 
@@ -1646,6 +1663,7 @@ function retriever() {
  var GameScore = Parse.Object.extend("GameScore");
     var query = new Parse.Query(GameScore);
     query.equalTo("Team", number );
+    query.limit( 1000 );
 
     query.ascending("createdAt");
 
