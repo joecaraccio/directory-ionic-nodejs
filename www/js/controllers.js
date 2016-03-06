@@ -582,8 +582,7 @@ query.find({
      fieldCheva: results[i].get("fieldCheva"), lowGoal: results[i].get("LowGoal"),
      highGoal: results[i].get("HighGoal"), scaling: results[i].get("ScaledTower")
       };
-      console.log("object");
-      console.log( object );
+   
     teams.push( object );
    }
 
@@ -607,18 +606,89 @@ teams[k].fieldramparts = teams[k].fieldramparts || 0;
 teams[k].fieldMoat = teams[k].fieldMoat || 0;
 teams[k].fieldPortcullis = teams[k].fieldPortcullis || 0;
 
-var defenseScore = teams[k].fieldRoughterrain + teams[k].fieldRockwall + teams[k].fieldSallyPort + teams[k].fielddrawbridge
-+ teams[k].fieldramparts + teams[k].fieldMoat + teams[k].fieldPortcullis + teams[k].fieldCheva + teams[k].lowbar;
-console.log( teams[k].Team );
-console.log(" Defense Score ");
-console.log( defenseScore );
-var calculatedD = defenseScore * 5;
-console.log("new Score");
-console.log( calculatedD );
+var defense = 0;
+
+//var defenseScore = teams[k].fieldRoughterrain + teams[k].fieldRockwall + teams[k].fieldSallyPort + teams[k].fielddrawbridge
+//+ teams[k].fieldramparts + teams[k].fieldMoat + teams[k].fieldPortcullis + teams[k].fieldCheva + teams[k].lowbar;
+//cross undamaged defense is 5
+
+if( teams[k].fieldRoughterrain > 2 )
+{
+  defense = defense + 2;
+
+}else {
+  defense = defense + teams[k].fieldRoughterrain;
+}
+
+if( teams[k].fieldRockwall > 2 )
+{
+  defense = defense + 2;
+
+}else {
+  defense = defense + teams[k].fieldRockwall;
+}
+
+if( teams[k].fieldSallyPort > 2 )
+{
+  defense = defense + 2;
+
+}else {
+  defense = defense + teams[k].fieldSallyPort;
+}
+
+if( teams[k].fielddrawbridge > 2 )
+{
+  defense = defense + 2;
+
+}else {
+  defense = defense + teams[k].fielddrawbridge;
+}
+
+if( teams[k].fieldramparts > 2 )
+{
+  defense = defense + 2;
+
+}else {
+  defense = defense + teams[k].fieldramparts;
+}
+
+if( teams[k].fieldMoat > 2 )
+{
+  defense = defense + 2;
+
+}else {
+  defense = defense + teams[k].fieldMoat;
+}
+if( teams[k].fieldPortcullis > 2 )
+{
+  defense = defense + 2;
+
+}else {
+  defense = defense + teams[k].fieldPortcullis;
+}
+if( teams[k].fieldCheva > 2 )
+{
+  defense = defense + 2;
+
+}else {
+  defense = defense + teams[k].fieldCheva;
+}
+if( teams[k].lowbar > 2 )
+{
+  defense = defense + 2;
+
+}else {
+  defense = defense + teams[k].lowbar;
+}
+
+
+
+
+var calculatedD = defense * 5;
+
 var highGoals = teams[k].highGoal * 5;
 var lowGoals = teams[k].lowGoal * 2;
-console.log("High Goals " + highGoals);
-console.log("Low Goals " + lowGoals);
+
 
     if( teamList[q].Team == teams[k].Team )
     {
@@ -670,7 +740,6 @@ for( var jk = 0; jk < teamList.length; jk++ )
 //a = a || 0;
 
 
-console.log("Average calculator");
 
  
 
@@ -688,15 +757,13 @@ for( var kk = 0; kk < teamList.length; kk++ )
   index++;
 }
 
-console.log("this the final list");
-console.log( teamList );
+
 $scope.list = teamList;
 $ionicLoading.hide();
-console.log("yo");
 
   },
   error: function(error) {
-    alert("Error: " + error.code + " " + error.message);
+    alert("Error try reloading the root page");
   }
 });
 
