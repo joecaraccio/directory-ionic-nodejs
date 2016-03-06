@@ -269,23 +269,33 @@ $scope.data = {};
 
 $scope.originalUser = angular.copy($scope.data);
 
+$scope.delay = false;
+
+
+//wait function 
+function wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
+}
+
+function reset()
+{
+  wait(5000);
+  delay = false;
+  console.log("Done waiting");
+}
+
+
+
   //submit
   $scope.submit = function()
   {
-    
-    //color controls, dont need this for now
-    /*
-    var color = "red";
-
-    if( $scope.data.red == true )
-    {
-      color = "red";
-    } else if( $scope.data.blue == true)
-    {
-      color = "blue";
-    }
-
-  */
+   
+    if( $scope.delay == false ) {
+      $scope.delay = true
 var falseStopper = true;
       if( $scope.data.portcullis  < 0  )
       {
@@ -407,6 +417,8 @@ var falseStopper = true;
     // Execute any logic that should take place after the object is saved.
     console.log("success")
     alert('Submitted! Keep Scouting! ~ Joe ');
+    $scope.delay = false;
+
     
 
 $scope.$apply(function() { 
@@ -459,6 +471,7 @@ $scope.$apply(function() {
   alert('Team Number, Match Number are REQUIRED! Check Defense values, Cant be negative');
 }
 
+}//end if delay
  }//end function
 
 teamnumber();
