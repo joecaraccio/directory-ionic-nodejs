@@ -173,6 +173,15 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
         }
       }
     })
+     .state('tab.stats-matchuppredictor', {
+      url: '/stats/predictormatch',
+      views: {
+        'tab-stats': {
+          templateUrl: 'templates/matchup-predictor.html',
+          controller: 'matchupcontrol'
+        }
+      }
+    })
 
   .state('tab.account', {
     url: '/account',

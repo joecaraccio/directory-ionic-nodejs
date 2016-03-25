@@ -374,6 +374,7 @@ var falseStopper = true;
       gameScore.set("LowGoal", lowgoal);
       gameScore.set("HighGoal", highgoal);
       gameScore.set("ScaledTower", $scope.data.scale);
+      gameScore.set("ChallengedTower", $scope.data.challenge);
       //gameScore.set("Alliance", color );
 
       //Autonomous
@@ -450,6 +451,11 @@ $scope.$apply(function() {
   $scope.data.lowgoal = null;
   $scope.data.highgoal = null;
   $scope.data.lowbar = null;
+  $scope.data.reachd = null;
+  $scope.data.cdefense = null;
+  $scope.data.lowgoala = null;
+  $scope.data.highgaola = null;
+  $scope.data.challenge = null;
 
 
 
@@ -1526,7 +1532,126 @@ $ionicLoading.hide();
 })
 
 
+.controller('matchupcontrol', function($scope, $ionicLoading, $state, $stateParams, $ionicPlatform) {
+//joe come back
+console.log("MATCHUP CONTROL");
+$scope.joe = "joe";
+//TEAM DATA
+//$scope.data.r1
+//$scope.data.r2
+//$scope.data.r3
+  $scope.submit = function()
+  {
+    analyze();
+  
+  }
 
+function analyze(){
+//robots
+
+  var r1 = $scope.r1;
+  var r2 = $scope.r2;
+  var r3 = $scope.r3;
+  if( $scope.r1 == null ) {
+    r1 = 0;
+  } else if( $scope.r2 == null ){
+    r2 = 0;
+  } else if( $scope.r3 == null ){
+    r3 = 0;
+  }
+
+
+    var GameScore = Parse.Object.extend("GameScore");
+    var query = new Parse.Query(GameScore);
+    query.limit( 1000 );
+    query.find({
+      success: function(results) {
+        console.log("Amount of results" + results.length);
+
+        //$ionicLoading.hide();
+        var r1true = false;
+        var r2true = false;
+        var r3true = false;
+        //Team
+        for( var i = 0; i < results.length; i++ )
+        {
+          if( results[i].get("Team") == r1 )
+          {
+            r1true = true;
+
+          } else if( results[i].get("Team") == r2 )
+          {
+            r2true = true;
+
+          } else if( results[i].get("Team") == r3 )
+          {
+            r3true = true;
+            
+          }
+
+
+        } //end for loop
+
+        //COMMON DEFENSE FINDER!
+        //defense capablility
+        //for each that is true lets find all the defenses that they can do
+        /*
+      gameScore.set("fieldPortcullis",$scope.data.portcullis );
+      gameScore.set("fieldCheva",$scope.data.cheval );
+      gameScore.set("fieldMoat",$scope.data.moat );
+      gameScore.set("fieldramparts",$scope.data.rampart );
+      gameScore.set("fielddrawbridge",$scope.data.drawbridge );
+      gameScore.set("fieldSallyPort",$scope.data.sport );
+      gameScore.set("fieldRockwall",$scope.data.rockwall );
+      gameScore.set("fieldRoughterrain",$scope.data.roughterrain );
+      gameScore.set("fieldLowBar",$scope.data.lowbar );
+      */
+      var fieldPortcullis = false;
+      var fieldCheva = false;
+      var fieldMoat = false;
+      var fieldramparts = false;
+      var fielddrawbridge = false;
+      var fieldSallyPort = false;
+      var fieldRockwall = false;
+      var fieldRoughterrain = false;
+      var fieldLowBar = false;
+
+      var capableD = [];
+      var notCapable = [];
+
+        for( var i = 0; i < results.length; i++ )
+        {
+
+          if(r1true) {
+            
+            if( results[i].get("Team") == r1) {
+
+            }
+
+          }
+
+        }
+
+
+        console.log("                       ");
+        console.log("--Are all of these Verified---");
+        console.log( r1true );
+        console.log( r2true );
+        console.log( r3true );
+        console.log("------------");
+       
+      },
+      error: function(error) {
+        alert("Error retrieving Scouted Team List, Make sure you are on Wifi or 3G");
+      }
+    });
+
+
+}
+
+  
+
+})
 
 .controller('MatchDetailCtrl', function($scope, $ionicLoading, $state, $stateParams, $ionicPlatform) {
    /* 

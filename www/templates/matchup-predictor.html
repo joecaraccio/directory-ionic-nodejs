@@ -1,0 +1,63 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+ <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+  <ion-content class="padding">
+
+<div class="row">
+  <div class="col">
+
+  <label class="item item-input item-floating-label">
+    <span class="input-label">R_1</span>
+    <input type="number" min="0" placeholder="R_1" ng-model="r1">
+  </label>
+
+  </div>
+  <div class="col">
+    
+    <label class="item item-input item-floating-label">
+    <span class="input-label">R_2</span>
+    <input type="number" min="0" placeholder="R_2" ng-model="r2">
+  </label>
+
+  </div>
+  <div class="col">
+    
+    <label class="item item-input item-floating-label">
+    <span class="input-label">R_3</span>
+    <input type="number" min="0" placeholder="R_3" ng-model="r3">
+  </label>
+    
+  </div>
+  </div>
+
+<!-- test these values -->
+         <div align="center">
+
+<div class="row">
+      <button class="button button-full button-positive" ng-disabled="delay" ng-click="submit()">
+        Test
+      </button>
+
+</div> 
+         </div><!-- end of row -->
+<p> Hey Joe </p>
+<p> {{joe}}</p>
+
+
+<p> Defense Capabilities </p>
+<div class="row">
+
+
+
+</div>
+
+  </ion-content>
+
+</ion-view>
