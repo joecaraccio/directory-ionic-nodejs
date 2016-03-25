@@ -106,6 +106,8 @@ function retriever() {
 
  var GameScore = Parse.Object.extend("GameScore");
     var query = new Parse.Query(GameScore);
+        query.equalTo( "gse", false ); 
+
     query.descending("createdAt");
     query.limit(25); // limit to at most 10 results
 
@@ -176,7 +178,10 @@ function listRetriever() {
     dupe = [];
 
     var GameScore = Parse.Object.extend("GameScore");
+
     var query = new Parse.Query(GameScore);
+            query.equalTo( "gse", false ); 
+
         query.limit( 1000 );
 
     query.find({
@@ -281,6 +286,8 @@ function listRetriever() {
 
     var GameScore = Parse.Object.extend("GameScore");
     var query = new Parse.Query(GameScore);
+            query.equalTo( "gse", false ); 
+
     query.limit( 1000 );
     query.find({
       success: function(results) {
@@ -470,6 +477,7 @@ var falseStopper = true;
       gameScore.set("HighGoal", highgoal);
       gameScore.set("ScaledTower", $scope.data.scale);
       gameScore.set("ChallengedTower", $scope.data.challenge);
+      gameScore.set("gse", false );
       //gameScore.set("Alliance", color );
 
       //Autonomous
@@ -585,6 +593,8 @@ function teamnumber() {
 var teamArray = [];
   var GameScore = Parse.Object.extend("GameScore");
 var query = new Parse.Query(GameScore);
+        query.equalTo( "gse", false ); 
+
     query.limit( 1000 );
 
 query.find({
@@ -635,6 +645,8 @@ var teams = [];
 var teamList = [];
   var GameScore = Parse.Object.extend("GameScore");
 var query = new Parse.Query(GameScore);
+        query.equalTo( "gse", false ); 
+
     query.limit( 1000 );
 
 query.find({
@@ -936,6 +948,8 @@ var teams = [];
 var teamList = [];
   var GameScore = Parse.Object.extend("GameScore");
 var query = new Parse.Query(GameScore);
+        query.equalTo( "gse", false ); 
+
     query.limit( 1000 );
 query.find({
   success: function(results) {
@@ -1055,6 +1069,8 @@ function listRetriever() {
        var teamNumberList = [];
   var GameScore = Parse.Object.extend("GameScore");
 var query = new Parse.Query(GameScore);
+        query.equalTo( "gse", false ); 
+
 query.limit(1000);
 
 query.find({
@@ -1189,6 +1205,8 @@ function listRetriever() {
        var teamNumberList = [];
   var GameScore = Parse.Object.extend("GameScore");
 var query = new Parse.Query(GameScore);
+        query.equalTo( "gse", false ); 
+
 query.limit(1000);
 
 query.find({
@@ -1336,6 +1354,8 @@ var teams = [];
 var teamList = [];
   var GameScore = Parse.Object.extend("GameScore");
 var query = new Parse.Query(GameScore);
+        query.equalTo( "gse", false ); 
+
 query.limit(1000);
 
 query.find({
@@ -1486,6 +1506,7 @@ var teams = [];
 var teamList = [];
   var GameScore = Parse.Object.extend("GameScore");
 var query = new Parse.Query(GameScore);
+        query.equalTo( "gse", false ); 
 
 query.limit(1000);
 query.find({
@@ -1658,6 +1679,8 @@ function analyze(){
 
     var GameScore = Parse.Object.extend("GameScore");
     var query = new Parse.Query(GameScore);
+            query.equalTo( "gse", false ); 
+
     query.limit( 1000 );
     query.find({
       success: function(results) {
@@ -1787,6 +1810,8 @@ function retriever() {
  var GameScore = Parse.Object.extend("GameScore");
     var query = new Parse.Query(GameScore);
     query.equalTo("Match", number );
+            query.equalTo( "gse", false ); 
+
         query.limit( 1000 );
 
 
@@ -1810,7 +1835,8 @@ function retriever() {
             blue = true;
           }
           */
-            var object = { AHighgoal: results[i].get("A_HighGoal"), ALowgoal: results[i].get("A_LowGoal"), CrossD: results[i].get("A_CrossDefense"), ReachD: results[i].get("A_ReachDefense"), ScaledTower: results[i].get("ScaledTower"), valLowBar: results[i].get("lowbar") != null, valPortcullis: results[i].get("fieldPortcullis") != null ,valRoughterrain: results[i].get("fieldRoughterrain") != null,valRockwall: results[i].get("fieldRockwall") != null, valSallyPort: results[i].get("fieldSallyPort") != null, valramparts: results[i].get("fieldramparts") != null, valCheva: results[i].get("fieldMoat")!= null, valCheva: results[i].get("fieldCheva")!= null,valPortcullis: results[i].get("fieldPortcullis")!= null, Team: results[i].get("Team"),  Match: results[i].get("Match"), Low: results[i].get("LowGoal"), High: results[i].get("HighGoal"),  fieldPortcullis: results[i].get("fieldPortcullis"), fieldCheva: results[i].get("fieldCheva"),fieldMoat: results[i].get("fieldMoat"),fieldLowBar: results[i].get("lowbar"), fieldramparts: results[i].get("fieldramparts"), valmoat: results[i].get("fieldMoat") != null, valdrawbridge: results[i].get("fielddrawbridge") != null, fielddrawbridge: results[i].get("fielddrawbridge"),fieldSallyPort: results[i].get("fieldSallyPort"),fieldRockwall: results[i].get("fieldRockwall"),fieldRoughterrain: results[i].get("fieldRoughterrain"),};
+          //futurejoe ChallengedTower
+            var object = { ReachTower: results[i].get("ChallengedTower"), AHighgoal: results[i].get("A_HighGoal"), ALowgoal: results[i].get("A_LowGoal"), CrossD: results[i].get("A_CrossDefense"), ReachD: results[i].get("A_ReachDefense"), ScaledTower: results[i].get("ScaledTower"), valLowBar: results[i].get("lowbar") != null, valPortcullis: results[i].get("fieldPortcullis") != null ,valRoughterrain: results[i].get("fieldRoughterrain") != null,valRockwall: results[i].get("fieldRockwall") != null, valSallyPort: results[i].get("fieldSallyPort") != null, valramparts: results[i].get("fieldramparts") != null, valCheva: results[i].get("fieldMoat")!= null, valCheva: results[i].get("fieldCheva")!= null,valPortcullis: results[i].get("fieldPortcullis")!= null, Team: results[i].get("Team"),  Match: results[i].get("Match"), Low: results[i].get("LowGoal"), High: results[i].get("HighGoal"),  fieldPortcullis: results[i].get("fieldPortcullis"), fieldCheva: results[i].get("fieldCheva"),fieldMoat: results[i].get("fieldMoat"),fieldLowBar: results[i].get("lowbar"), fieldramparts: results[i].get("fieldramparts"), valmoat: results[i].get("fieldMoat") != null, valdrawbridge: results[i].get("fielddrawbridge") != null, fielddrawbridge: results[i].get("fielddrawbridge"),fieldSallyPort: results[i].get("fieldSallyPort"),fieldRockwall: results[i].get("fieldRockwall"),fieldRoughterrain: results[i].get("fieldRoughterrain"),};
             $scope.list.push( object );
         }
              $ionicLoading.hide();
@@ -1842,7 +1868,222 @@ function retriever() {
 
 
 })
+//joeeeeeeeeeeeeeeeeeeeeee
+.controller('windham', function($scope, $ionicLoading) {
+   $scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
 
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
+ $ionicLoading.show({
+         template: 'Loading...'
+      });
+  $scope.controller = false;
+
+$scope.$on('$ionicView.afterEnter', function() {
+$scope.loadData();
+console.log('AFTER ENTER FIRED');
+});  
+  console.log("team controller is on");
+       var teamNumberList = [];
+
+
+    
+var dupe = [];
+function listRetriever() { 
+    var teamNumberList = [];
+    dupe = [];
+
+    var GameScore = Parse.Object.extend("GameScore");
+    var query = new Parse.Query(GameScore);
+            query.equalTo( "gse", false ); 
+
+        query.limit( 1000 );
+
+    query.find({
+      success: function(results) {
+          console.log("We retrieved: " + results.length );
+        for( var i = 0; i < results.length; i++ ){
+          console.log( results[i].get("Team"))
+            teamNumberList.push( results[i].get("Team") );
+        }
+        teamNumberList.sort();
+
+  
+       // var dupe = []; // new array
+        for(var i = 0; i < teamNumberList.length; i++ )
+        {
+
+          if( dupe.length <= 0 )
+          {
+            dupe.push( teamNumberList[i] )
+          } else {
+
+            console.log("else");
+            var checker = false;
+            for( var j = 0; j < dupe.length; j++ )
+            {
+              if( dupe[j] == teamNumberList[i] )
+              {
+                console.log("Duplicate!");
+                checker = true;
+              }
+            }
+
+            if( checker == false )
+            {
+              dupe.push(teamNumberList[i]);
+            }
+
+          }
+
+        }//end original for loop
+        function sortNumber(a,b) {
+    return a - b;
+}
+        console.log("HEY")
+        console.log("Should be sorted");
+        dupe.sort(sortNumber);
+        console.log( dupe );
+      $ionicLoading.hide();
+
+
+      },
+      error: function(error) {
+        alert("Error retrieving Team List, Make sure you are on Wifi or 3G");
+      }
+    });
+
+
+
+   $scope.teams = dupe;
+        
+ } // end of the cunction
+   listRetriever();
+
+
+
+function filter() {
+
+}
+
+
+
+})
+
+//controller shows off each team # in a list
+.controller('MatchList', function($scope, $ionicLoading) {
+
+  $scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
+
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
+ $ionicLoading.show({
+         template: 'Loading...'
+      });
+
+$scope.$on('$ionicView.afterEnter', function() {
+$scope.loadData();
+console.log('AFTER ENTER FIRED');
+});  
+       var teamNumberList = [];
+
+
+    
+var dupe = [];
+function listRetriever() { 
+    var teamNumberList = [];
+    dupe = [];
+
+    var GameScore = Parse.Object.extend("GameScore");
+    var query = new Parse.Query(GameScore);
+    query.equalTo( "gse", false ); 
+    query.limit( 1000 );
+    query.find({
+      success: function(results) {
+          console.log("We retrieved: " + results.length );
+        for( var i = 0; i < results.length; i++ ){
+          //console.log( results[i].get("Team"))
+            teamNumberList.push( results[i].get("Match") );
+            //hoodieallen
+            /*
+            results[i].set("gse", true );
+            results[i].save();
+            */
+        }
+        teamNumberList.sort();
+
+  
+       // var dupe = []; // new array
+        for(var i = 0; i < teamNumberList.length; i++ )
+        {
+
+          if( dupe.length <= 0 )
+          {
+            dupe.push( teamNumberList[i] )
+          } else {
+
+            console.log("else");
+            var checker = false;
+            for( var j = 0; j < dupe.length; j++ )
+            {
+              if( dupe[j] == teamNumberList[i] )
+              {
+                console.log("Duplicate!");
+                checker = true;
+              }
+            }
+
+            if( checker == false )
+            {
+              dupe.push(teamNumberList[i]);
+            }
+
+          }
+
+        }//end original for loop
+        function sortNumber(a,b) {
+    return a - b;
+}
+        console.log("HEY")
+        console.log("Should be sorted");
+        dupe.sort(sortNumber);
+        console.log( dupe );
+
+      $ionicLoading.hide();
+
+      },
+      error: function(error) {
+        alert("Error retrieving Team List, Make sure you are on Wifi or 3G");
+      }
+    });
+
+
+
+   $scope.teams = dupe;
+            //$scope.$apply();
+        
+ }
+   listRetriever();
+
+ $scope.doRefresh = function() {
+         // here refresh data code
+         listRetriever();
+
+         $scope.$broadcast('scroll.refreshComplete');
+         $scope.$apply()
+      };
+
+})
 .controller('TeamDetailCtrl', function($scope, $state, $ionicLoading, $stateParams, $ionicPlatform) {
    /* 
 $scope.$on('$ionicView.afterEnter', function() {
@@ -1883,6 +2124,9 @@ function retriever() {
  var GameScore = Parse.Object.extend("GameScore");
     var query = new Parse.Query(GameScore);
     query.equalTo("Team", number );
+        query.equalTo( "gse", false ); 
+
+
     query.limit( 1000 );
 
     query.ascending("createdAt");
@@ -1890,6 +2134,14 @@ function retriever() {
     query.find({
       success: function(results) {
         console.log("Amount of results" + results.length);
+          //stats
+          $scope.matches = 0;
+          $scope.challengeTower = 0;
+          $scope.towerClimbed = 0;
+          $scope.lowgoalScored = 0;
+          $scope.highgoalScored = 0;
+          $scope.defensepermatch = 0;
+
 
         for( var i = 0; i < results.length; i++ ){
           /*
@@ -1905,9 +2157,30 @@ function retriever() {
             blue = true;
           }
           */
-            var object = { AHighgoal: results[i].get("A_HighGoal"), ALowgoal: results[i].get("A_LowGoal"), CrossD: results[i].get("A_CrossDefense"), ReachD: results[i].get("A_ReachDefense"),  ScaledTower: results[i].get("ScaledTower"), valLowBar: results[i].get("lowbar") != null, valPortcullis: results[i].get("fieldPortcullis") != null ,valRoughterrain: results[i].get("fieldRoughterrain") != null,valRockwall: results[i].get("fieldRockwall") != null, valSallyPort: results[i].get("fieldSallyPort") != null, valramparts: results[i].get("fieldramparts") != null, valCheva: results[i].get("fieldMoat")!= null, valCheva: results[i].get("fieldCheva")!= null,valPortcullis: results[i].get("fieldPortcullis")!= null, Team: results[i].get("Team"),  Match: results[i].get("Match"), Low: results[i].get("LowGoal"), High: results[i].get("HighGoal"),  fieldPortcullis: results[i].get("fieldPortcullis"), fieldCheva: results[i].get("fieldCheva"),fieldMoat: results[i].get("fieldMoat"),fieldLowBar: results[i].get("lowbar"), fieldramparts: results[i].get("fieldramparts"), valmoat: results[i].get("fieldMoat") != null, valdrawbridge: results[i].get("fielddrawbridge") != null, fielddrawbridge: results[i].get("fielddrawbridge"),fieldSallyPort: results[i].get("fieldSallyPort"),fieldRockwall: results[i].get("fieldRockwall"),fieldRoughterrain: results[i].get("fieldRoughterrain"),};
+          $scope.lowgoalScored = $scope.lowgoalScored + results[i].get("LowGoal");
+          $scope.highgoalScored = $scope.highgoalScored + results[i].get("HighGoal");
+          $scope.matches++;
+          if( results[i].get("ChallengedTower") == true )
+          {
+            $scope.challengeTower++;
+          }
+          if( results[i].get("ScaledTower") == true )
+          {
+            $scope.towerClimbed++
+          }
+
+          //$scope.defensepermatch = $scope.defensepermatch + results[i].get("lowbar") + 
+
+
+
+            var object = {ReachTower: results[i].get("ChallengedTower"), AHighgoal: results[i].get("A_HighGoal"), ALowgoal: results[i].get("A_LowGoal"), CrossD: results[i].get("A_CrossDefense"), ReachD: results[i].get("A_ReachDefense"),  ScaledTower: results[i].get("ScaledTower"), valLowBar: results[i].get("lowbar") != null, valPortcullis: results[i].get("fieldPortcullis") != null ,valRoughterrain: results[i].get("fieldRoughterrain") != null,valRockwall: results[i].get("fieldRockwall") != null, valSallyPort: results[i].get("fieldSallyPort") != null, valramparts: results[i].get("fieldramparts") != null, valCheva: results[i].get("fieldMoat")!= null, valCheva: results[i].get("fieldCheva")!= null,valPortcullis: results[i].get("fieldPortcullis")!= null, Team: results[i].get("Team"),  Match: results[i].get("Match"), Low: results[i].get("LowGoal"), High: results[i].get("HighGoal"),  fieldPortcullis: results[i].get("fieldPortcullis"), fieldCheva: results[i].get("fieldCheva"),fieldMoat: results[i].get("fieldMoat"),fieldLowBar: results[i].get("lowbar"), fieldramparts: results[i].get("fieldramparts"), valmoat: results[i].get("fieldMoat") != null, valdrawbridge: results[i].get("fielddrawbridge") != null, fielddrawbridge: results[i].get("fielddrawbridge"),fieldSallyPort: results[i].get("fieldSallyPort"),fieldRockwall: results[i].get("fieldRockwall"),fieldRoughterrain: results[i].get("fieldRoughterrain"),};
             $scope.list.push( object );
         }
+
+          $scope.lowavg = $scope.lowgoalScored / $scope.matches;
+          $scope.highavg = $scope.highgoalScored / $scope.matches;
+
+
              $ionicLoading.hide();
 
        
@@ -1917,6 +2190,12 @@ function retriever() {
       }
     });
 };
+
+
+
+
+
+
 /*
  $scope.doRefresh = function() {
     console.log("Pulling to refresh");

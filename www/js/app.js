@@ -154,6 +154,27 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
         }
       }
     })
+    .state('tab.stats-windham', {
+      url: '/stats/windham',
+      views: {
+        'tab-stats': {
+          templateUrl: 'templates/tab-matcheswindham.html',
+          controller: 'windham'
+        }
+      }
+    })
+
+   
+     .state('tab.teams-detailwind', {
+      url: '/stats/windham/:teamId',
+      views: {
+        'tab.stats': {
+          templateUrl: 'templates/team-detailwind.html',
+          controller: 'TeamDetailCtrl'
+        }
+      }
+    })
+
    .state('tab.teams-detail', {
       url: '/teams/:teamId',
       views: {
