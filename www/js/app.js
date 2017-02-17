@@ -16,7 +16,9 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
   });
 
 
-  Parse.initialize("DT0d4iIkfiaP5JKmeT6MV6pyWn10kgdryGMr9NDX", "R7OVvGNYbeLFNKSBzWbUWX78XZiXlbdkv6S8vU0I");
+  //Parse.initialize("DT0d4iIkfiaP5JKmeT6MV6pyWn10kgdryGMr9NDX", "R7OVvGNYbeLFNKSBzWbUWX78XZiXlbdkv6S8vU0I");
+  Parse.initialize('myAppId','unused');
+Parse.serverURL = 'https://morning-thicket-64298.herokuapp.com';
   console.log("Parse initilized in run");
 })
 
