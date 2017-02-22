@@ -30,7 +30,7 @@ Parse.serverURL = 'http://server138scouter.herokuapp.com/parse';
     messagingSenderId: "109592766567"
   };
   firebase.initializeApp(config);
-
+})
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
