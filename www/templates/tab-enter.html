@@ -46,6 +46,21 @@
 
 
 <ion-checkbox ng-model="data.ScoredGearAuto">Score Gear</ion-checkbox>
+<div class="row">
+  <div class="col">
+      <label class="item item-input item-floating-label">
+    <span class="input-label">Fuel High Goal(Auto)</span>
+    <input type="number"  min="0" placeholder="Low Goal" ng-model="data.lowgoal">
+  </label>
+  </div>
+  <div class="col">
+      <label class="item item-input item-floating-label">
+    <span class="input-label">Fuel Low Goal(Auto)</span>
+    <input type="number"  min="0" placeholder="Fuel Low" ng-model="data.autolowgoal">
+  </label>
+  </div>
+  
+</div>
 
 
 <!-- Team Color Checkbox -->
@@ -82,7 +97,7 @@
 <ion-checkbox ng-model="data.challenge">Challenge the Tower?</ion-checkbox>
 
 <ion-checkbox ng-model="data.attemptClimb">Attempt Climb?</ion-checkbox>
-<ion-checkbox ng-model="data.challenge">Succesful Climb</ion-checkbox>
+<ion-checkbox ng-model="data.SuccesfulClimb">Succesful Climb</ion-checkbox>
 
 
   <h4>Defenses Information</h4>
