@@ -365,7 +365,8 @@ function listRetriever() {
 
 //controls data entry view
 .controller('EnterCtrl', function($scope) {
-  console.log("Test")
+  console.log("Data Entry Page!")
+  $scope.testpls = 69;
   var val = 1;
 $scope.data = {};
 //$scope.data.teamnumber = 1;
