@@ -15,13 +15,13 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
     }
   });
 
-/*
+
   //Parse.initialize("DT0d4iIkfiaP5JKmeT6MV6pyWn10kgdryGMr9NDX", "R7OVvGNYbeLFNKSBzWbUWX78XZiXlbdkv6S8vU0I");
   Parse.initialize('myAppId','myMasterKey');
 Parse.serverURL = 'http://server138scouter.herokuapp.com/parse';
   console.log("Parse initilized in run");
-})
-*/
+
+
  var config = {
     apiKey: "AIzaSyA2QKow1qcCc_QmvzWLj_D1d3r9-ydk2uU",
     authDomain: "scout-25793.firebaseapp.com",
