@@ -370,7 +370,10 @@ function listRetriever() {
   var val = 1;
 $scope.data = {};
 //$scope.data.teamnumber = 1;
-
+ $scope.calculateQuantity = function() {
+     $scope.testpls++;
+     console.log("BUTTON PRES!");
+  };
 
 $scope.originalUser = angular.copy($scope.data);
 
