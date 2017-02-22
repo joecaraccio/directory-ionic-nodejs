@@ -365,7 +365,7 @@ function listRetriever() {
 
 //controls data entry view
 .controller('EnterCtrl', function($scope) {
-  console.log("enterctrl is on")
+  console.log("Test")
   var val = 1;
 $scope.data = {};
 //$scope.data.teamnumber = 1;
