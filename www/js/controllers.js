@@ -387,6 +387,11 @@ $scope.data = {};
      $scope.highgoalAutoCount = $scope.highgoalAutoCount - incriment;
    }
   
+      $scope.setIncri = function(val) {
+        console.log(" ")
+        console.log(val)
+        console.log(" ")
+      }
   
   
   
