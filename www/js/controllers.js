@@ -407,9 +407,16 @@ $scope.data = {};
    
   
       $scope.setIncri = function(val) {
-        console.log(" ")
-        console.log(val)
-        console.log(" ")
+     
+            if(val == 'one'){
+              incriment = 1;
+            }else if(val == 'five'){
+              incriment = 5;
+            }else if(val == 'ten'){
+              incriment = 10;
+            }else{
+              incriment = 1;              
+            }        
       }
   
   
