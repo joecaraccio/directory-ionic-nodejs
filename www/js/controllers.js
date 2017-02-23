@@ -380,12 +380,31 @@ $scope.data = {};
   var incriment = 1;
   $scope.lowgoalAutoCount = 0;
   $scope.highgoalAutoCount = 0;
+  
    $scope.upHighA = function() {
      $scope.highgoalAutoCount = $scope.highgoalAutoCount + incriment; 
    }
-    $scope.downHighA = function() {
+   
+   $scope.downHighA = function() {
      $scope.highgoalAutoCount = $scope.highgoalAutoCount - incriment;
+     if($scope.highgoalAutoCount < 0){
+            $scope.highgoalAutoCount = 0;
+     }
+     
    }
+   
+   $scope.upLowA = function() {
+     $scope.lowgoalAutoCount = $scope.lowgoalAutoCount + incriment; 
+   }
+    $scope.downLowA = function() {
+     $scope.lowgoalAutoCount = $scope.lowgoalAutoCount - incriment;
+     if($scope.lowgoalAutoCount < 0){
+            $scope.lowgoalAutoCount = 0;
+     }
+     
+   }
+   
+   
   
       $scope.setIncri = function(val) {
         console.log(" ")

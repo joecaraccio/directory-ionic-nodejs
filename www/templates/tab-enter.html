@@ -76,8 +76,8 @@
 
         <div id="multipliers" style="float:right;margin-top: 8px;">
             <button id="first-multiplier" class="btn btn-sm btn-primary multiplier" ng-click="setIncri(one)" rel="1"><small>&plusmn; 1</small></button>
-            <button class="btn btn-sm btn-outline-primary multiplier" ng-click="setIncri(five)" rel="5"><small>&plusmn; 5</small></button>
-            <button class="btn btn-sm btn-outline-primary multiplier" ng-click="setIncri(ten)"  rel="10"><small>&plusmn; 10</small></button>
+            <button class="btn btn-sm btn-outline-primary multiplier" ng-click="setIncri('five')" rel="5"><small>&plusmn; 5</small></button>
+            <button class="btn btn-sm btn-outline-primary multiplier" ng-click="setIncri('ten')"  rel="10"><small>&plusmn; 10</small></button>
         </div>
 </div> 
 <div class="row">
@@ -87,7 +87,6 @@
                 <div class="input-group-addon">Fuel High Goal(A)</div>
                 <input id="auto-high-goal-counter" ng-value="highgoalAutoCount" type="number" class="form-control counters" placeholder="0">
                 <button id="auto-high-goal-plus" ng-click="upHighA()" class="btn btn-outline-success up multiplier-tag notransition">+</button>
-                &nbsp;
                 <button id="auto-high-goal-minus" ng-click="downHighA()" class="btn btn-outline-danger down multiplier-tag notransition">-</button>
             </div>
         </div>
@@ -96,13 +95,15 @@
          <div class="form-inline">
             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                 <div class="input-group-addon">Fuel Low Goal(A)</div>
-                <input id="auto-high-goal-counter" type="text" class="form-control counters" placeholder="0">
-                &nbsp;
-                <button id="auto-high-goal-plus" ng-click="calculateQuantity()" class="btn btn-outline-success up multiplier-tag notransition">+</button>
-                &nbsp;
-                <button id="auto-high-goal-minus" class="btn btn-outline-danger down multiplier-tag notransition">-</button>
+                <input id="auto-high-goal-counter"  ng-value="lowgoalAutoCount" type="text" class="form-control counters" placeholder="0">
+                <button id="auto-high-goal-plus" ng-click="upLowA()" class="btn btn-outline-success up multiplier-tag notransition">+</button>
+                <button id="auto-high-goal-minus" ng-click="downLowA()" class="btn btn-outline-danger down multiplier-tag notransition">-</button>
             </div>
         </div>
+</div>
+<div class="row">
+  <ion-checkbox ng-model="data.AutoMove">Move in Auto</ion-checkbox>
+   <ion-checkbox ng-model="data.ScoreGear">Place Gear in Auto</ion-checkbox>
 </div>
 
 <!-- Team Color Checkbox -->
