@@ -374,6 +374,22 @@ $scope.data = {};
      $scope.testpls++;
      console.log("BUTTON PRES!");
   };
+  
+  
+  
+  var incriment = 1;
+  $scope.lowgoalAutoCount = 0;
+  $scope.highgoalAutoCount = 0;
+   $scope.upHighA = function() {
+     $scope.highgoalAutoCount = $scope.highgoalAutoCount + incriment; 
+   }
+    $scope.downHighA = function() {
+     $scope.highgoalAutoCount = $scope.highgoalAutoCount - incriment;
+   }
+  
+  
+  
+  
 
 $scope.originalUser = angular.copy($scope.data);
 
