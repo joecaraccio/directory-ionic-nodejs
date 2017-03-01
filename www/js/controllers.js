@@ -493,8 +493,10 @@ function wait(ms){
 
 function reset()
 {
-  wait(5000);
+  wait(10);
   delay = false;
+             $scope.delay = false
+
   console.log("Done waiting");
 }
 
@@ -570,35 +572,42 @@ if($scope.data.SuccesfulClimb == true){
     console.log("GAME SCORE OBJECT")
     console.log(returnValues)
     console.log(" ");
-    $scope.delay = true
+    //$scope.delay = true
 
     if( $scope.data.teamnumber == undefined ||  $scope.data.teamnumber == 0
     &&  $scope.data.matchnumber == undefined ||  $scope.data.matchnumber == 0
     ){
       alert('Team Number and Match Number is required');
-     $scope.delay = false
+     //$scope.delay = false
 
     }else{
      
         var database = firebase.database();
         database.ref('/eventData/' + returnValues.eventID).push(returnValues).then(function(snap){
           console.log("SUCCESFUL SUBMIT!");
-           $scope.delay = false
+        $scope.delay = true
+            reset();
+
            $scope.$apply(function() { 
-            alert("Completed!")
+            alert("Succesfully Submilled!")
               // every changes goes here
               console.log("apply function")
             $scope.lowgoalAutoCount = null;
-             scope.highgoalTeleCount = null;
-             scope.lowgoalTeleCount = null;
-             scope.highgoalTeleCount = null;
-             scope.data.AutoMove = null;
+            $scope.highgoalAutoCount = null;
+            $scope.highgoalTeleCount = null;
+            $scope.lowgoalTeleCount = null;
+            $scope.highgoalTeleCount = null;
+            $scope.data.AutoMove = null;
             $scope.data.teamnumber = null;
             $scope.data.matchnumber = null;
             $scope.lowgoalAutoCount = null;
             $scope.highgoalAutoCount = null;
             $scope.data.attemptClimb = null;
             $scope.data.SuccesfulClimb = null;
+            $scope.data.ScoreGear = null;
+            $scope.incriTeli2 = null;
+            $scope.incriTeli = null;
+            $scope.gearCountTele = null;
            });
 
           //Succesful Supbut
@@ -606,12 +615,15 @@ if($scope.data.SuccesfulClimb == true){
           // The callback failed.
               alert('Failed to submit Data. Make sure you are on Wifi or Cellular Data' );
               console.error(error);
-            $scope.delay = false
+            $scope.delay = true
+            reset();
+           // reset();
+
 
         });
     }
 
-   
+  /* 
     if( $scope.delay == false ) {
       $scope.delay = true
 var falseStopper = true;
@@ -681,29 +693,7 @@ var falseStopper = true;
 
 
 
-  gameScore.save(null, {
-  success: function(gameScore) {
-    // Execute any logic that should take place after the object is saved.
-    console.log("success")
-    alert('Submitted! Keep Scouting! ~ Joe ');
-    $scope.delay = false;
-
-    
-
-
-
-
-
-
-
-  },
-  error: function(gameScore, error) {
-    // Execute any logic that should take place if the save fails.
-    // error is a Parse.Error with an error code and message.
-    alert('Failed to submit Data. Make sure you are on Wifi or Cellular Data' );
-  }
-});
-
+ 
 
 } else
 {
@@ -711,6 +701,7 @@ var falseStopper = true;
 }
 
 }//end if delay
+*/
  }//end function
 
 teamnumber();
@@ -1942,7 +1933,8 @@ var teamListObject = { Team: childSnapshot.val().teamNumber ,
        highGoalAutoCount: childSnapshot.val().highGoalAutoCount,
        highgoalCount: childSnapshot.val().highgoalCount,
        lowgoalAutoCount: childSnapshot.val().lowgoalAutoCount,
-       lowgoalCount: childSnapshot.val().lowgoalCount
+       lowgoalCount: childSnapshot.val().lowgoalCount,
+       gear: childSnapshot.val().gearCountTele
 
        };
 
