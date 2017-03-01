@@ -176,24 +176,20 @@ var dupe = [];
 function listRetriever() { 
     var teamNumberList = [];
     dupe = [];
+    
+    
 
-    var GameScore = Parse.Object.extend("GameScore");
-
-    var query = new Parse.Query(GameScore);
-            query.equalTo( "gse", false ); 
-
-        query.limit( 1000 );
-
-    query.find({
-      success: function(results) {
-          console.log("We retrieved: " + results.length );
-        for( var i = 0; i < results.length; i++ ){
-          console.log( results[i].get("Team"))
-            teamNumberList.push( results[i].get("Team") );
-        }
-        teamNumberList.sort();
-
+      firebase.database().ref('/eventData/gran1/').once('value').then(function(snapshot) {
   
+   snapshot.forEach(function(childSnapshot) {
+         teamNumberList.push(childSnapshot.val().teamNumber );
+
+   })
+      
+      
+  
+    }).then(function(done){
+      teamNumberList.sort();
        // var dupe = []; // new array
         for(var i = 0; i < teamNumberList.length; i++ )
         {
@@ -223,25 +219,18 @@ function listRetriever() {
 
         }//end original for loop
         function sortNumber(a,b) {
-    return a - b;
-}
+          return a - b;
+        }
         console.log("HEY")
         console.log("Should be sorted");
         dupe.sort(sortNumber);
         console.log( dupe );
-      $ionicLoading.hide();
+        $ionicLoading.hide();
+                $scope.teams = dupe;
 
-
-      },
-      error: function(error) {
-        alert("Error retrieving Team List, Make sure you are on Wifi or 3G");
-      }
-    });
-
-
-
-   $scope.teams = dupe;
-        
+   });
+   
+           
  } // end of the cunction
    listRetriever();
 
@@ -284,22 +273,20 @@ function listRetriever() {
     var teamNumberList = [];
     dupe = [];
 
-    var GameScore = Parse.Object.extend("GameScore");
-    var query = new Parse.Query(GameScore);
-            query.equalTo( "gse", false ); 
 
-    query.limit( 1000 );
-    query.find({
-      success: function(results) {
-          console.log("We retrieved: " + results.length );
-        for( var i = 0; i < results.length; i++ ){
-          //console.log( results[i].get("Team"))
-            teamNumberList.push( results[i].get("Match") );
-        }
-        teamNumberList.sort();
 
+  firebase.database().ref('/eventData/gran1/').once('value').then(function(snapshot) {
   
-       // var dupe = []; // new array
+   snapshot.forEach(function(childSnapshot) {
+     console.log(childSnapshot.val().teamNumber)
+     teamNumberList.push(childSnapshot.val().matchNumber);
+
+   })
+      
+      
+  
+    }).then(function(done){
+        teamNumberList.sort();
         for(var i = 0; i < teamNumberList.length; i++ )
         {
 
@@ -328,21 +315,17 @@ function listRetriever() {
 
         }//end original for loop
         function sortNumber(a,b) {
-    return a - b;
-}
+           return a - b;
+        }
         console.log("HEY")
         console.log("Should be sorted");
         dupe.sort(sortNumber);
         console.log( dupe );
 
-      $ionicLoading.hide();
+        $ionicLoading.hide();
 
-      },
-      error: function(error) {
-        alert("Error retrieving Team List, Make sure you are on Wifi or 3G");
-      }
+
     });
-
 
 
    $scope.teams = dupe;
@@ -405,22 +388,94 @@ $scope.data = {};
    }
    
    
-  
+     $scope.incriTeli2 = 1;
+
       $scope.setIncri = function(val) {
-     
+            console.log("\n \n \n HEY HEY HEY HEY HEY HEY \n \n")
             if(val == 'one'){
               incriment = 1;
+              $scope.incriTeli2 = 1;
             }else if(val == 'five'){
               incriment = 5;
+              $scope.incriTeli2 = 5;
+
             }else if(val == 'ten'){
               incriment = 10;
+              $scope.incriTeli2 = 10;
+
+            }else if(val == 'twenty'){
+              incriment = 20;
+              $scope.incriTeli2 = 20;
+
             }else{
-              incriment = 1;              
+              incriment = 1;
+              $scope.incriTeli2 = 1;
+              
             }        
       }
   
+  //telop control... same as above
+   var incrimentTELE = 1;
+   $scope.incriTeli = 1;
+  $scope.setIncriTele = function(val) {
+      if(val == 'one'){
+        incrimentTELE = 1;
+        $scope.incriTeli = 1;
+      }else if(val == 'five'){
+        incrimentTELE = 5;
+        $scope.incriTeli = 5;
+      }else if(val == 'ten'){
+        incrimentTELE = 10;
+        $scope.incriTeli = 10;
+      }else if(val == 'twenty'){
+        incrimentTELE = 20;
+        $scope.incriTeli = 20;
+      }else{
+        incrimentTELE = 1;
+        $scope.incriTeli = 1;
+              
+      }        
+   }
+
+  $scope.lowgoalTeleCount = 0;
+  $scope.highgoalTeleCount = 0;
   
-  
+   $scope.upHighT = function() {
+     console.log("upHIghT");
+     $scope.highgoalTeleCount = $scope.highgoalTeleCount + incrimentTELE; 
+   }
+   
+   $scope.downHighT = function() {
+     $scope.highgoalTeleCount = $scope.highgoalTeleCount - incrimentTELE;
+     if($scope.highgoalTeleCount < 0){
+            $scope.highgoalTeleCount = 0;
+     }
+     
+   }
+   
+   $scope.upLowT = function() {
+     $scope.lowgoalTeleCount = $scope.lowgoalTeleCount + incrimentTELE; 
+   }
+    $scope.downLowT = function() {
+     $scope.lowgoalTeleCount = $scope.lowgoalTeleCount - incrimentTELE;
+     if($scope.lowgoalTeleCount < 0){
+            $scope.lowgoalTeleCount = 0;
+     }
+     
+   }
+   
+   $scope.gearCountTele = 0;
+   $scope.upGearCount = function() {
+     console.log('yo')
+     $scope.gearCountTele = $scope.gearCountTele + 1; 
+   }
+    $scope.downGearCount = function() {
+     $scope.gearCountTele = $scope.gearCountTele - 1;
+     if($scope.gearCountTele < 0){
+            $scope.gearCountTele = 0;
+     }
+     
+   }
 
 $scope.originalUser = angular.copy($scope.data);
 
@@ -443,11 +498,119 @@ function reset()
   console.log("Done waiting");
 }
 
+$scope.updateAttempClimb = function() {
+  console.log("ON CLICK!")
+if($scope.data.SuccesfulClimb == true){
+  $scope.data.attemptClimb = true;
+}
+}
+
 
 
   //submit
   $scope.submit = function()
   {
+    //data sanitation
+    if($scope.data.SuccesfulClimb == true){
+      $scope.data.attemptClimb = true;
+    }
+    //keep all neg values above zero
+    //should never happen but just in case
+    if($scope.lowgoalAutoCount < 0){
+      $scope.lowgoalAutoCount = 0;
+    }
+    if($scope.highgoalAutoCount < 0){
+      $scope.highgoalAutoCount = 0;
+    }
+    if($scope.lowgoalTeleCount < 0){
+      $scope.lowgoalTeleCount = 0;
+    }
+    if($scope.highgoalTeleCount < 0){
+      $scope.highgoalTeleCount = 0;
+    }
+    if($scope.gearCountTele < 0){
+      $scope.gearCountTele = 0;
+    }
+    
+    
+    if($scope.data.AutoMove == false || $scope.data.AutoMove == undefined){
+      $scope.data.AutoMove = false;
+    }
+    
+    if($scope.data.ScoreGear == false || $scope.data.ScoreGear == undefined){
+      $scope.data.ScoreGear = false;
+    }
+    
+    if($scope.data.attemptClimb == false || $scope.data.attemptClimb == undefined){
+      $scope.data.attemptClimb = false;
+    }
+    
+    if($scope.data.SuccesfulClimb == false || $scope.data.SuccesfulClimb == undefined){
+      $scope.data.SuccesfulClimb = false;
+    }
+    
+    //Create REtrning object
+    //gran1 updated statically by joe
+    var returnValues = {
+      eventID: 'gran1',
+      teamNumber: $scope.data.teamnumber,
+      matchNumber: $scope.data.matchnumber,
+      lowgoalAutoCount: $scope.lowgoalAutoCount,
+      highGoalAutoCount: $scope.highgoalAutoCount,
+      AutoMove: $scope.data.AutoMove,
+      AutoScoreGear: $scope.data.ScoreGear,
+      gearCountTele: $scope.gearCountTele,
+      lowgoalCount: $scope.lowgoalTeleCount,
+      highgoalCount: $scope.highgoalTeleCount,
+      climbAttempt: $scope.data.attemptClimb,
+      successClimb: $scope.data.SuccesfulClimb
+      
+    }
+    console.log(" ");
+    console.log("GAME SCORE OBJECT")
+    console.log(returnValues)
+    console.log(" ");
+    $scope.delay = true
+
+    if( $scope.data.teamnumber == undefined ||  $scope.data.teamnumber == 0
+    &&  $scope.data.matchnumber == undefined ||  $scope.data.matchnumber == 0
+    ){
+      alert('Team Number and Match Number is required');
+     $scope.delay = false
+
+    }else{
+     
+        var database = firebase.database();
+        database.ref('/eventData/' + returnValues.eventID).push(returnValues).then(function(snap){
+          console.log("SUCCESFUL SUBMIT!");
+           $scope.delay = false
+           $scope.$apply(function() { 
+            alert("Completed!")
+              // every changes goes here
+              console.log("apply function")
+            $scope.lowgoalAutoCount = null;
+             scope.highgoalTeleCount = null;
+             scope.lowgoalTeleCount = null;
+             scope.highgoalTeleCount = null;
+             scope.data.AutoMove = null;
+            $scope.data.teamnumber = null;
+            $scope.data.matchnumber = null;
+            $scope.lowgoalAutoCount = null;
+            $scope.highgoalAutoCount = null;
+            $scope.data.attemptClimb = null;
+            $scope.data.SuccesfulClimb = null;
+           });
+
+          //Succesful Supbut
+        }, function(error) {
+          // The callback failed.
+              alert('Failed to submit Data. Make sure you are on Wifi or Cellular Data' );
+              console.error(error);
+            $scope.delay = false
+
+        });
+    }
+
    
     if( $scope.delay == false ) {
       $scope.delay = true
@@ -518,57 +681,6 @@ var falseStopper = true;
 
 
 
-      //save the object
-      var GameScore = Parse.Object.extend("GameScore");
-      var gameScore = new GameScore();
-
-      gameScore.set("Team", $scope.data.teamnumber );
-      gameScore.set("Match", $scope.data.matchnumber);
-      gameScore.set("LowGoal", lowgoal);
-      gameScore.set("HighGoal", highgoal);
-      gameScore.set("ScaledTower", $scope.data.scale);
-      gameScore.set("ChallengedTower", $scope.data.challenge);
-      gameScore.set("gse", false );
-      //gameScore.set("Alliance", color );
-
-      //Autonomous
-      gameScore.set("A_ReachDefense", $scope.data.reachd);
-      gameScore.set("A_CrossDefense", $scope.data.cdefense);
-      gameScore.set("A_LowGoal", $scope.data.lowgoala);
-      gameScore.set("A_HighGoal", $scope.data.highgaola);
-
-      
-      gameScore.set("fieldPortcullis",$scope.data.portcullis );
-      gameScore.set("fieldCheva",$scope.data.cheval );
-      gameScore.set("fieldMoat",$scope.data.moat );
-      gameScore.set("fieldramparts",$scope.data.rampart );
-      gameScore.set("fielddrawbridge",$scope.data.drawbridge );
-      gameScore.set("fieldSallyPort",$scope.data.sport );
-      gameScore.set("fieldRockwall",$scope.data.rockwall );
-      gameScore.set("fieldRoughterrain",$scope.data.roughterrain );
-      gameScore.set("lowbar",$scope.data.lowbar );
-      gameScore.set("fieldLowBar",$scope.data.lowbar );
-
-
-
-      //now how many times they were succesful
-
-      //UPDATE VERSION 2
-      //no conger need this
-      /*
-      gameScore.set("valPortcullis",$scope.data.sportcullis );
-      gameScore.set("valCheva",$scope.data.scheval );
-      gameScore.set("valMoat",$scope.data.smoat );
-      gameScore.set("valramparts",$scope.data.sramparts );
-      gameScore.set("valdrawbridge",$scope.data.sdrawbridge );
-      gameScore.set("valSallyPort",$scope.data.ssallyport );
-      gameScore.set("valRockwall",$scope.data.srockwall );
-      gameScore.set("valRoughterrain",$scope.data.srough );
-      gameScore.set("valLowBar",$scope.data.slowbar );
-    */
-
-
-
   gameScore.save(null, {
   success: function(gameScore) {
     // Execute any logic that should take place after the object is saved.
@@ -578,42 +690,7 @@ var falseStopper = true;
 
     
 
-$scope.$apply(function() { 
-   // every changes goes here
-   console.log("apply function")
-  $scope.data.teamnumber = null;
-  $scope.data.matchnumber = null;
-  //$scope.data.alliance = null;
-  $scope.data.portcullis = null;
-  $scope.data.cheval = null;
-  $scope.data.moat = null;
-  $scope.data.rampart = null;
-  $scope.data.drawbridge = null;
-  $scope.data.sport = null;
-  $scope.data.rockwall = null;
-  $scope.data.roughterrain = null;
-  $scope.data.sportcullis = null;
-  $scope.data.scheval = null;
-  $scope.data.smoat = null;
-  $scope.data.sramparts = null;
-  $scope.data.sdrawbridge = null;
-  $scope.data.ssallyport = null;
-  $scope.data.srockwall = null;
-  $scope.data.srough = null;
-  $scope.data.slowbar = null;
-  $scope.data.scale = null; //tower
-  $scope.data.lowgoal = null;
-  $scope.data.highgoal = null;
-  $scope.data.lowbar = null;
-  $scope.data.reachd = null;
-  $scope.data.cdefense = null;
-  $scope.data.lowgoala = null;
-  $scope.data.highgaola = null;
-  $scope.data.challenge = null;
 
-
-
-});
 
 
 
@@ -640,32 +717,26 @@ teamnumber();
 
 //team number list retrieve
 function teamnumber() {
-
+  
+$scope.data.teamlist = [];
 var teamArray = [];
-  var GameScore = Parse.Object.extend("GameScore");
-var query = new Parse.Query(GameScore);
-        query.equalTo( "gse", false ); 
+firebase.database().ref('/eventData/gran1/').once('value').then(function(snapshot) {
+  
+   snapshot.forEach(function(childSnapshot) {
+     console.log(childSnapshot.val().teamNumber)
+     $scope.data.teamlist.push(childSnapshot.val().teamNumber);
 
-    query.limit( 1000 );
-
-query.find({
-  success: function(results) {
-console.log("succesful team list retrieve")    // Do something with the returned Parse.Object values
-    for (var i = 0; i < results.length; i++) {
-      teamArray.push(results[i].get("Team"));
-
-    }
-    console.log("Fin Team List");
-    console.log(teamArray);
-    $scope.data.teamlist = teamArray;
-
-  },
-  error: function(error) {
-    console.log("Error Retrieving Team List")
-  }
+   })
+      
+      
+  
+}).then(function(done){
+  
 });
 
-};
+  
+  
+}; //end teamnumber
 
 
 
@@ -976,8 +1047,39 @@ console.log("tower controller on");
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('TowerRanking', function($scope, $stateParams, $ionicLoading ) {
+
+.controller('ClimbRanking', function($scope, $stateParams, $ionicLoading ) {
 console.log(" Tower Rank");
+
+
+var contains = function(needle) {
+    // Per spec, the way to identify NaN is that it is not equal to itself
+    var findNaN = needle !== needle;
+    var indexOf;
+
+    if(!findNaN && typeof Array.prototype.indexOf === 'function') {
+        indexOf = Array.prototype.indexOf;
+    } else {
+        indexOf = function(needle) {
+            var i = -1, index = -1;
+
+            for(i = 0; i < this.length; i++) {
+                var item = this[i];
+
+                if((findNaN && item !== item) || item === needle) {
+                    index = i;
+                    break;
+                }
+            }
+
+            return index;
+        };
+    }
+
+    return indexOf.call(this, needle) > -1;
+};
+
+
 
 $scope.showLoading = function() {
       $ionicLoading.show({
@@ -997,94 +1099,109 @@ function towerRank() {
 
 var teams = [];
 var teamList = [];
-  var GameScore = Parse.Object.extend("GameScore");
-var query = new Parse.Query(GameScore);
-        query.equalTo( "gse", false ); 
+var countUp = [];
+var teamNumbers = [];
 
-    query.limit( 1000 );
-query.find({
-  success: function(results) {
-   for( var i = 0; i < results.length; i++ )
-   {
-    var teamListObject = { Team: results[i].get("Team") , climbs: 0, total: 0, val: 0, Index: 0};
+var ref123 = firebase.database().ref('/eventData/gran1/');
+ref123.once('value').then(function(snapshot) {
 
-    var isOnList = false;
-    for( var j = 0; j < teamList.length; j++ )
-    {
-      if( teamList[j].Team == results[i].get("Team") )
-      {
-        isOnList = true;
+   snapshot.forEach(function(childSnapshot) {
+var teamListObject = { Team: childSnapshot.val().teamNumber , 
+        climbAttempt: childSnapshot.val().climbAttempt,
+       successClimb: childSnapshot.val().successClimb };
+      teams.push(teamListObject);
+
+   var trufa = contains.call(teamNumbers, childSnapshot.val().teamNumber ); // true
+      if(trufa == true){
+        //already on dont add
+      }else{
+        teamNumbers.push(childSnapshot.val().teamNumber);
       }
 
-    }
-    if( isOnList == false )
-    {
-          teamList.push(  teamListObject );
+})
 
-    }
-
-
-
-    var object = { Team: results[i].get("Team"), Tower: results[i].get("ScaledTower") };
-    teams.push( object );
-   }
-
-//console.log("OKAY HERE ARE RESULTS");
-//console.log("----------------------");
-//console.log( teams );
-//console.log( teamList );
-//console.log("Results");
-for( var k = 0; k < teams.length; k++ )
-{
-
-  for( var q = 0; q < teamList.length; q++ )
-  {
-    if( teamList[q].Team == teams[k].Team )
-    {
-      if( teams[k].Tower == true )
-      {
-        teamList[q].climbs = teamList[q].climbs + 1;
-        teamList[q].total = teamList[q].total + 1;
-
-      } else {
-                teamList[q].total = teamList[q].total + 1;
-
-      }
+  
       
-    }
+  
+}).then(function(done){
 
+  //setup count up
+  for(var ii = 0; ii < teamNumbers.length; ii++ ){
+    var ob23 = {
+      Team: teamNumbers[ii],
+      attempt: 0,
+      success: 0
+     }
+     countUp.push(ob23)
   }
 
-}
-//calculate values
-for( var jk = 0; jk < teamList.length; jk++ )
-{
-  
-  teamList[jk].val = teamList[jk].climbs / teamList[jk].total;
-}
-        function sortNumber(a,b) {
-    return   b.val - a.val;
-}
-teamList.sort( sortNumber );
 
-var index = 1;
-for( var kk = 0; kk < teamList.length; kk++ )
-{
-  teamList[kk].Index = index;
-  index++;
-}
 
-//console.log( teamList );
-$scope.list = teamList;
+
+  for(var i = 0; i < teams.length; i++){
+    var found = false;
+    for(var j = 0; j < countUp.length; j++ ){
+
+      if(countUp[j].Team == teams[i].Team){
+
+        if(teams[i].climbAttempt == true){
+          countUp[j].attempt++;
+        }
+
+        if(teams[i].successClimb == true){
+          countUp[j].success++;
+        }
+
+
+
+
+      }
+
+
+    } //end inner for loop
+
+
+  } //end first for loop
+
+  console.log(" \n \n \n")
+  console.log("LOOK HERE: ")
+  console.log(countUp)
+  console.log(" \n \n \n")
+
+
+  for(var i = 0; i < countUp.length; i++){
+    console.log("\n")
+    console.log(countUp)
+    if(countUp[i].success == NaN || countUp[i].success == null){
+      countUp[i].success = 0;
+    }
+    if(countUp[i].attempt == NaN || countUp[i].attempt == null){
+      countUp[i].attempt = 0;
+    }
+
+    countUp[i].val = countUp[i].attempt / countUp[i].success
+    if(countUp[i].val == NaN){
+      countUp[i].val = 0;
+    }
+  }
+
+
+function sortNumber(a,b) {
+    return   b.success - a.success;
+}
+countUp.sort( sortNumber );
+
+
+  $scope.list = countUp;
 $ionicLoading.hide();
 
-  },
-  error: function(error) {
-    alert("Error: " + error.code + " " + error.message);
-  }
-});
 
-};
+}) //end then function
+
+
+}
+
+
 
 
 
@@ -1092,6 +1209,164 @@ $ionicLoading.hide();
 
 
 
+
+.controller('TowerRanking', function($scope, $stateParams, $ionicLoading ) {
+console.log(" Tower Rank");
+
+
+var contains = function(needle) {
+    // Per spec, the way to identify NaN is that it is not equal to itself
+    var findNaN = needle !== needle;
+    var indexOf;
+
+    if(!findNaN && typeof Array.prototype.indexOf === 'function') {
+        indexOf = Array.prototype.indexOf;
+    } else {
+        indexOf = function(needle) {
+            var i = -1, index = -1;
+
+            for(i = 0; i < this.length; i++) {
+                var item = this[i];
+
+                if((findNaN && item !== item) || item === needle) {
+                    index = i;
+                    break;
+                }
+            }
+
+            return index;
+        };
+    }
+
+    return indexOf.call(this, needle) > -1;
+};
+
+
+
+$scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
+
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
+$ionicLoading.show({
+         template: 'Loading...'
+      });
+towerRank();
+
+function towerRank() {
+
+var teams = [];
+var teamList = [];
+var countUp = [];
+var teamNumbers = [];
+
+var ref123 = firebase.database().ref('/eventData/gran1/');
+ref123.once('value').then(function(snapshot) {
+
+   snapshot.forEach(function(childSnapshot) {
+var teamListObject = { Team: childSnapshot.val().teamNumber , 
+        climbAttempt: childSnapshot.val().climbAttempt,
+       successClimb: childSnapshot.val().successClimb };
+      teams.push(teamListObject);
+
+   var trufa = contains.call(teamNumbers, childSnapshot.val().teamNumber ); // true
+      if(trufa == true){
+        //already on dont add
+      }else{
+        teamNumbers.push(childSnapshot.val().teamNumber);
+      }
+
+})
+
+      
+  
+}).then(function(done){
+
+  //setup count up
+  for(var ii = 0; ii < teamNumbers.length; ii++ ){
+    var ob23 = {
+      Team: teamNumbers[ii],
+      attempt: 0,
+      success: 0
+     }
+     countUp.push(ob23)
+  }
+
+
+
+
+  for(var i = 0; i < teams.length; i++){
+    var found = false;
+    for(var j = 0; j < countUp.length; j++ ){
+
+      if(countUp[j].Team == teams[i].Team){
+
+        if(teams[i].climbAttempt == true){
+          countUp[j].attempt++;
+        }
+
+        if(teams[i].successClimb == true){
+          countUp[j].success++;
+        }
+
+      if(countUp[i].val == NaN){
+          countUp[i].val = 0;
+        }
+
+
+      }
+
+
+    } //end inner for loop
+
+
+  } //end first for loop
+
+  console.log(" \n \n \n")
+  console.log("LOOK HERE: ")
+  console.log(countUp)
+  console.log(" \n \n \n")
+
+
+  for(var i = 0; i < countUp.length; i++){
+    if(countUp[i].success == NaN || countUp[i].success == null){
+      countUp[i].success = 0;
+    }
+    if(countUp[i].attempt == NaN || countUp[i].attempt == null){
+      countUp[i].attempt = 0;
+    }
+
+    countUp[i].val = countUp[i].attempt / countUp[i].success
+  }
+
+
+function sortNumber(a,b) {
+    return   b.val - a.val;
+}
+countUp.sort( sortNumber );
+
+
+  $scope.list = countUp;
+$ionicLoading.hide();
+
+
+}) //end then function
+
+
+}
+
+
+
+
+
+})
+
+
+/*
 .controller('ScoreRank', function($scope, $ionicLoading) {
 $scope.showLoading = function() {
       $ionicLoading.show({
@@ -1225,7 +1500,7 @@ function money_round(num) {
 }
 
 })
-
+*/
 //input 3 bots, show the defenses that they are most likely to be ineffective
 .controller('MatchAnalys', function($scope) {
 
@@ -1375,7 +1650,460 @@ function money_round(num) {
 
 
 })
+.controller('ScoreRank', function($scope, $stateParams, $ionicLoading ) {
+console.log(" ScoreRank");
 
+
+var contains = function(needle) {
+    // Per spec, the way to identify NaN is that it is not equal to itself
+    var findNaN = needle !== needle;
+    var indexOf;
+
+    if(!findNaN && typeof Array.prototype.indexOf === 'function') {
+        indexOf = Array.prototype.indexOf;
+    } else {
+        indexOf = function(needle) {
+            var i = -1, index = -1;
+
+            for(i = 0; i < this.length; i++) {
+                var item = this[i];
+
+                if((findNaN && item !== item) || item === needle) {
+                    index = i;
+                    break;
+                }
+            }
+
+            return index;
+        };
+    }
+
+    return indexOf.call(this, needle) > -1;
+};
+
+
+
+$scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
+
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
+$ionicLoading.show({
+         template: 'Loading...'
+      });
+towerRank();
+
+function towerRank() {
+
+var teams = [];
+var teamList = [];
+var countUp = [];
+var teamNumbers = [];
+
+var ref123 = firebase.database().ref('/eventData/gran1/');
+ref123.once('value').then(function(snapshot) {
+
+   snapshot.forEach(function(childSnapshot) {
+var teamListObject = { Team: childSnapshot.val().teamNumber , 
+        climbAttempt: childSnapshot.val().climbAttempt,
+       successClimb: childSnapshot.val().successClimb, 
+       highGoalAutoCount: childSnapshot.val().highGoalAutoCount,
+       highgoalCount: childSnapshot.val().highgoalCount,
+       lowgoalAutoCount: childSnapshot.val().lowgoalAutoCount,
+       lowgoalCount: childSnapshot.val().lowgoalCount
+
+       };
+
+      teams.push(teamListObject);
+
+   var trufa = contains.call(teamNumbers, childSnapshot.val().teamNumber ); // true
+      if(trufa == true){
+        //already on dont add
+      }else{
+        teamNumbers.push(childSnapshot.val().teamNumber);
+      }
+
+})
+
+      
+  
+}).then(function(done){
+
+  //setup count up
+  for(var ii = 0; ii < teamNumbers.length; ii++ ){
+    var ob23 = {
+      Team: teamNumbers[ii],
+      matchCount: 0,
+      high: 0,
+      highA: 0,
+      low: 0,
+      lowA: 0
+     }
+     countUp.push(ob23)
+  }
+
+
+
+
+  for(var i = 0; i < teams.length; i++){
+    var found = false;
+    for(var j = 0; j < countUp.length; j++ ){
+
+      if(countUp[j].Team == teams[i].Team){
+        countUp[j].matchCount++;
+
+        countUp[j].high = countUp[j].high + teams[i].highgoalCount
+        countUp[j].highA = countUp[j].highA + teams[i].highGoalAutoCount
+        countUp[j].low = countUp[j].low + teams[i].lowgoalCount
+        countUp[j].lowA = countUp[j].lowA + teams[i].lowgoalAutoCount
+
+        if(countUp[j].lowA == NaN || countUp[j].lowA == null ){
+          countUp[j].lowA = 0;
+        }
+
+        if(countUp[j].highA == NaN || countUp[j].highA == null ){
+          countUp[j].highA = 0;
+        }
+
+        if(countUp[j].high == NaN || countUp[j].high == null ){
+          countUp[j].high = 0;
+        }
+
+        if(countUp[j].highA == NaN || countUp[j].highA == null ){
+          countUp[j].highA = 0;
+        }
+
+
+
+
+
+      } //end big if loop
+
+
+    } //end inner for loop
+
+
+  } //end first for loop
+
+  //do calculations
+  for(var i = 0; i < countUp.length; i++ ){
+    var matchCount = countUp[i].matchCount;
+    countUp[i].AverageHighGoal = countUp[i].high / matchCount;
+    countUp[i].AverageLowGoal = countUp[i].low / matchCount;
+    countUp[i].AverageLowGoalA = countUp[i].lowA / matchCount;
+    countUp[i].AverageHighGoalA = countUp[i].highA / matchCount;
+
+    if(countUp[i].AverageHighGoal == NaN){
+      countUp[i].AverageHighGoal = 0;
+    }
+
+    if(countUp[i].AverageLowGoal == NaN){
+      countUp[i].AverageLowGoal = 0;
+    }
+
+    if(countUp[i].AverageLowGoalA == NaN){
+      countUp[i].AverageLowGoalA = 0;
+    }
+
+    if(countUp[i].AverageHighGoalA == NaN){
+      countUp[i].AverageHighGoalA = 0;
+    }
+
+
+    countUp[i].AutoGoalPoints = countUp[i].AverageHighGoalA + countUp[i].AverageLowGoalA/3;
+    if(countUp[i].AutoGoalPoints == NaN){
+      countUp[i].AutoGoalPoints = 0;
+    }
+
+
+    countUp[i].AverageTeleGoalPoints = countUp[i].AverageHighGoal/3 + countUp[i].AverageLowGoal/9;
+    if(countUp[i].AverageTeleGoalPoints == NaN){
+      countUp[i].AverageTeleGoalPoints = 0;
+    }
+    countUp[i].TotalPoints = countUp[i].AutoGoalPoints + countUp[i].AverageTeleGoalPoints;
+     if(countUp[i].TotalPoints == NaN){
+      countUp[i].TotalPoints = 0;
+    }
+
+    //high goal auto = 1
+    //low goal auto for every 3 = 1
+
+    //high goal 3 = 1
+    //low goal 9 = 1
+
+
+
+  }
+
+   function sortNumber(a,b) {
+    return   b.TotalPoints - a.TotalPoints;
+    }
+        console.log("HEY")
+        console.log("Should be sorted");
+        countUp.sort(sortNumber);
+
+        var indexCount = 0;
+
+  for(var i = 0; i < countUp.length; i++ ){
+    indexCount++;
+    countUp[i].Index = indexCount;
+  }
+
+
+
+/*
+function sortNumber(a,b) {
+    return   b.val - a.val;
+}
+countUp.sort( sortNumber );
+*/
+
+  $scope.teams = countUp;
+$ionicLoading.hide();
+
+
+}) //end then function
+
+
+}
+
+
+
+
+
+})
+
+
+.controller('defensetotal', function($scope, $stateParams, $ionicLoading ) {
+console.log(" defensetotal");
+
+
+var contains = function(needle) {
+    // Per spec, the way to identify NaN is that it is not equal to itself
+    var findNaN = needle !== needle;
+    var indexOf;
+
+    if(!findNaN && typeof Array.prototype.indexOf === 'function') {
+        indexOf = Array.prototype.indexOf;
+    } else {
+        indexOf = function(needle) {
+            var i = -1, index = -1;
+
+            for(i = 0; i < this.length; i++) {
+                var item = this[i];
+
+                if((findNaN && item !== item) || item === needle) {
+                    index = i;
+                    break;
+                }
+            }
+
+            return index;
+        };
+    }
+
+    return indexOf.call(this, needle) > -1;
+};
+
+
+
+$scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
+
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
+$ionicLoading.show({
+         template: 'Loading...'
+      });
+towerRank();
+
+function towerRank() {
+
+var teams = [];
+var teamList = [];
+var countUp = [];
+var teamNumbers = [];
+
+var ref123 = firebase.database().ref('/eventData/gran1/');
+ref123.once('value').then(function(snapshot) {
+
+   snapshot.forEach(function(childSnapshot) {
+var teamListObject = { Team: childSnapshot.val().teamNumber , 
+        climbAttempt: childSnapshot.val().climbAttempt,
+       successClimb: childSnapshot.val().successClimb, 
+       highGoalAutoCount: childSnapshot.val().highGoalAutoCount,
+       highgoalCount: childSnapshot.val().highgoalCount,
+       lowgoalAutoCount: childSnapshot.val().lowgoalAutoCount,
+       lowgoalCount: childSnapshot.val().lowgoalCount
+
+       };
+
+      teams.push(teamListObject);
+
+   var trufa = contains.call(teamNumbers, childSnapshot.val().teamNumber ); // true
+      if(trufa == true){
+        //already on dont add
+      }else{
+        teamNumbers.push(childSnapshot.val().teamNumber);
+      }
+
+})
+
+      
+  
+}).then(function(done){
+
+  //setup count up
+  for(var ii = 0; ii < teamNumbers.length; ii++ ){
+    var ob23 = {
+      Team: teamNumbers[ii],
+      matchCount: 0,
+      high: 0,
+      highA: 0,
+      low: 0,
+      lowA: 0
+     }
+     countUp.push(ob23)
+  }
+
+
+
+
+  for(var i = 0; i < teams.length; i++){
+    var found = false;
+    for(var j = 0; j < countUp.length; j++ ){
+
+      if(countUp[j].Team == teams[i].Team){
+        countUp[j].matchCount++;
+
+        countUp[j].high = countUp[j].high + teams[i].highgoalCount
+        countUp[j].highA = countUp[j].highA + teams[i].highGoalAutoCount
+        countUp[j].low = countUp[j].low + teams[i].lowgoalCount
+        countUp[j].lowA = countUp[j].lowA + teams[i].lowgoalAutoCount
+
+        if(countUp[j].lowA == NaN || countUp[j].lowA == null ){
+          countUp[j].lowA = 0;
+        }
+
+        if(countUp[j].highA == NaN || countUp[j].highA == null ){
+          countUp[j].highA = 0;
+        }
+
+        if(countUp[j].high == NaN || countUp[j].high == null ){
+          countUp[j].high = 0;
+        }
+
+        if(countUp[j].highA == NaN || countUp[j].highA == null ){
+          countUp[j].highA = 0;
+        }
+
+
+
+
+
+      } //end big if loop
+
+
+    } //end inner for loop
+
+
+  } //end first for loop
+
+  //do calculations
+  for(var i = 0; i < countUp.length; i++ ){
+    var matchCount = countUp[i].matchCount;
+    countUp[i].AverageHighGoal = countUp[i].high / matchCount;
+    countUp[i].AverageLowGoal = countUp[i].low / matchCount;
+    countUp[i].AverageLowGoalA = countUp[i].lowA / matchCount;
+    countUp[i].AverageHighGoalA = countUp[i].highA / matchCount;
+
+    if(countUp[i].AverageHighGoal == NaN){
+      countUp[i].AverageHighGoal = 0;
+    }
+
+    if(countUp[i].AverageLowGoal == NaN){
+      countUp[i].AverageLowGoal = 0;
+    }
+
+    if(countUp[i].AverageLowGoalA == NaN){
+      countUp[i].AverageLowGoalA = 0;
+    }
+
+    if(countUp[i].AverageHighGoalA == NaN){
+      countUp[i].AverageHighGoalA = 0;
+    }
+
+
+    countUp[i].AutoGoalPoints = countUp[i].AverageHighGoalA + countUp[i].AverageLowGoalA/3;
+    if(countUp[i].AutoGoalPoints == NaN){
+      countUp[i].AutoGoalPoints = 0;
+    }
+
+
+    countUp[i].AverageTeleGoalPoints = countUp[i].AverageHighGoal/3 + countUp[i].AverageLowGoal/9;
+    if(countUp[i].AverageTeleGoalPoints == NaN){
+      countUp[i].AverageTeleGoalPoints = 0;
+    }
+    countUp[i].TotalPoints = countUp[i].AutoGoalPoints + countUp[i].AverageTeleGoalPoints;
+     if(countUp[i].TotalPoints == NaN){
+      countUp[i].TotalPoints = 0;
+    }
+
+    //high goal auto = 1
+    //low goal auto for every 3 = 1
+
+    //high goal 3 = 1
+    //low goal 9 = 1
+
+
+
+  }
+
+   function sortNumber(a,b) {
+    return   b.TotalPoints - a.TotalPoints;
+    }
+        console.log("HEY")
+        console.log("Should be sorted");
+        countUp.sort(sortNumber);
+
+        var indexCount = 0;
+
+  for(var i = 0; i < countUp.length; i++ ){
+    indexCount++;
+    countUp[i].Index = indexCount;
+  }
+
+
+
+/*
+function sortNumber(a,b) {
+    return   b.val - a.val;
+}
+countUp.sort( sortNumber );
+*/
+
+  $scope.teams = countUp;
+$ionicLoading.hide();
+
+
+}) //end then function
+
+
+}
+
+
+
+
+
+})
 
 .controller('AccountCtrl', function($scope, $ionicLoading) {
 
@@ -1533,7 +2261,7 @@ console.log("yo");
 
 
 
-
+/*
 .controller('defensetotal', function($scope, $ionicLoading) {
   console.log("Defense Totals");
 
@@ -1698,7 +2426,7 @@ $ionicLoading.hide();
 
 })
 
-
+*/
 .controller('matchupcontrol', function($scope, $ionicLoading, $state, $stateParams, $ionicPlatform) {
 //joe come back
 console.log("MATCHUP CONTROL");
@@ -1823,12 +2551,7 @@ function analyze(){
 })
 
 .controller('MatchDetailCtrl', function($scope, $ionicLoading, $state, $stateParams, $ionicPlatform) {
-   /* 
-$scope.$on('$ionicView.afterEnter', function() {
-$scope.loadData();
-console.log('AFTER ENTER FIRED');
-});
-*/
+
 
   $scope.showLoading = function() {
       $ionicLoading.show({
@@ -1840,11 +2563,17 @@ console.log('AFTER ENTER FIRED');
       $ionicLoading.hide();
    };
 
-  console.log("match detailCONTROLLER")
-  console.log("LA STORRRRRRY");
   $scope.team = $stateParams.matchID;
   console.log( $scope.team );
   var number = parseInt($scope.team);
+  
+
+
+  /*
+  firebase.database().ref('/eventData/gran1/').once('value').then(function(snapshot) {
+  
+   snapshot.forEach(function(childSnapshot) {
+     */
 
   //stats--
   //matches played
@@ -1857,20 +2586,23 @@ console.log('AFTER ENTER FIRED');
 retriever();
 function retriever() {
   $scope.list = [];
+var results = [];
 
- var GameScore = Parse.Object.extend("GameScore");
-    var query = new Parse.Query(GameScore);
-    query.equalTo("Match", number );
-            query.equalTo( "gse", false ); 
-
-        query.limit( 1000 );
-
-
-    query.ascending("createdAt");
-
-    query.find({
-      success: function(results) {
-        console.log("Amount of results" + results.length);
+var ref12 = firebase.database().ref('/eventData/gran1/');
+console.log(" GO GO GO GO GO ")
+ref12.orderByChild("matchNumber").equalTo(number).once('value').then(function(snapshot) {
+  
+   snapshot.forEach(function(childSnapshot) {
+     //console.log(childSnapshot.val().teamNumber)
+     //$scope.data.teamlist.push(childSnapshot.val().teamNumber);
+     results.push(childSnapshot.val());
+   })
+      
+      
+  
+}).then(function(done){
+  console.log("^^^^^^^^^^^^^^^^^^^^^")
+   console.log("Amount of results" + results.length);
 
         for( var i = 0; i < results.length; i++ ){
           /*
@@ -1886,18 +2618,32 @@ function retriever() {
             blue = true;
           }
           */
+          var autoGear = 0;
+          if(results[i].AutoScoreGear == true){
+            autoGear = 1;
+          }
+
+
           //futurejoe ChallengedTower
-            var object = { ReachTower: results[i].get("ChallengedTower"), AHighgoal: results[i].get("A_HighGoal"), ALowgoal: results[i].get("A_LowGoal"), CrossD: results[i].get("A_CrossDefense"), ReachD: results[i].get("A_ReachDefense"), ScaledTower: results[i].get("ScaledTower"), valLowBar: results[i].get("lowbar") != null, valPortcullis: results[i].get("fieldPortcullis") != null ,valRoughterrain: results[i].get("fieldRoughterrain") != null,valRockwall: results[i].get("fieldRockwall") != null, valSallyPort: results[i].get("fieldSallyPort") != null, valramparts: results[i].get("fieldramparts") != null, valCheva: results[i].get("fieldMoat")!= null, valCheva: results[i].get("fieldCheva")!= null,valPortcullis: results[i].get("fieldPortcullis")!= null, Team: results[i].get("Team"),  Match: results[i].get("Match"), Low: results[i].get("LowGoal"), High: results[i].get("HighGoal"),  fieldPortcullis: results[i].get("fieldPortcullis"), fieldCheva: results[i].get("fieldCheva"),fieldMoat: results[i].get("fieldMoat"),fieldLowBar: results[i].get("lowbar"), fieldramparts: results[i].get("fieldramparts"), valmoat: results[i].get("fieldMoat") != null, valdrawbridge: results[i].get("fielddrawbridge") != null, fielddrawbridge: results[i].get("fielddrawbridge"),fieldSallyPort: results[i].get("fieldSallyPort"),fieldRockwall: results[i].get("fieldRockwall"),fieldRoughterrain: results[i].get("fieldRoughterrain"),};
+            var object = { Team: results[i].teamNumber, 
+              Match: results[i].matchNumber,
+              Low: results[i].lowgoalCount,
+              High: results[i].highgoalCount,
+              HighAuto: results[i].highGoalAutoCount,
+              LowAuto: results[i].lowgoalAutoCount,
+              AutoMove: results[i].AutoMove,
+              AutoScoreGear: autoGear,
+              climbAttempt: results[i].climbAttempt,
+              successClimb: results[i].successClimb,
+              gearCountTele: results[i].gearCountTele
+
+            };
             $scope.list.push( object );
         }
              $ionicLoading.hide();
+});
 
-       
-      },
-      error: function(error) {
-        alert("Error retrieving Scouted Team List, Make sure you are on Wifi or 3G");
-      }
-    });
+  
 };
 /*
  $scope.doRefresh = function() {
@@ -2054,27 +2800,15 @@ var dupe = [];
 function listRetriever() { 
     var teamNumberList = [];
     dupe = [];
-
-    var GameScore = Parse.Object.extend("GameScore");
-    var query = new Parse.Query(GameScore);
-    query.equalTo( "gse", false ); 
-    query.limit( 1000 );
-    query.find({
-      success: function(results) {
-          console.log("We retrieved: " + results.length );
-        for( var i = 0; i < results.length; i++ ){
-          //console.log( results[i].get("Team"))
-            teamNumberList.push( results[i].get("Match") );
-            //hoodieallen
-            /*
-            results[i].set("gse", true );
-            results[i].save();
-            */
-        }
-        teamNumberList.sort();
-
+    
+    
+    firebase.database().ref('/eventData/gran1/').once('value').then(function(snapshot) {
   
-       // var dupe = []; // new array
+   snapshot.forEach(function(childSnapshot) {
+     console.log(childSnapshot.val().teamNumber)
+     teamNumberList.push(childSnapshot.val().matchNumber);
+     teamNumberList.sort();
+     // var dupe = []; // new array
         for(var i = 0; i < teamNumberList.length; i++ )
         {
 
@@ -2103,26 +2837,20 @@ function listRetriever() {
 
         }//end original for loop
         function sortNumber(a,b) {
-    return a - b;
-}
-        console.log("HEY")
-        console.log("Should be sorted");
+          return a - b;
+        }
         dupe.sort(sortNumber);
         console.log( dupe );
 
       $ionicLoading.hide();
 
-      },
-      error: function(error) {
-        alert("Error retrieving Team List, Make sure you are on Wifi or 3G");
-      }
-    });
+   })
+       
+}).then(function(done){
+      $scope.teams = dupe;
+});
 
-
-
-   $scope.teams = dupe;
-            //$scope.$apply();
-        
+           
  }
    listRetriever();
 
@@ -2167,32 +2895,27 @@ console.log('AFTER ENTER FIRED');
   //matches played
   //high goal per match
   //low goal per match
-  
-retriever();
-function retriever() {
+
+
+  function retriever() {
   $scope.list = [];
+var results = [];
 
- var GameScore = Parse.Object.extend("GameScore");
-    var query = new Parse.Query(GameScore);
-    query.equalTo("Team", number );
-        query.equalTo( "gse", false ); 
-
-
-    query.limit( 1000 );
-
-    query.ascending("createdAt");
-
-    query.find({
-      success: function(results) {
-        console.log("Amount of results" + results.length);
-          //stats
-          $scope.matches = 0;
-          $scope.challengeTower = 0;
-          $scope.towerClimbed = 0;
-          $scope.lowgoalScored = 0;
-          $scope.highgoalScored = 0;
-          $scope.defensepermatch = 0;
-
+var ref12 = firebase.database().ref('/eventData/gran1/');
+console.log(" GO GO GO GO GO ")
+ref12.orderByChild("teamNumber").equalTo(number).once('value').then(function(snapshot) {
+  
+   snapshot.forEach(function(childSnapshot) {
+     //console.log(childSnapshot.val().teamNumber)
+     //$scope.data.teamlist.push(childSnapshot.val().teamNumber);
+     results.push(childSnapshot.val());
+   })
+      
+      
+  
+}).then(function(done){
+  console.log("^^^^^^^^^^^^^^^^^^^^^")
+   console.log("Amount of results" + results.length);
 
         for( var i = 0; i < results.length; i++ ){
           /*
@@ -2208,39 +2931,36 @@ function retriever() {
             blue = true;
           }
           */
-          $scope.lowgoalScored = $scope.lowgoalScored + results[i].get("LowGoal");
-          $scope.highgoalScored = $scope.highgoalScored + results[i].get("HighGoal");
-          $scope.matches++;
-          if( results[i].get("ChallengedTower") == true )
-          {
-            $scope.challengeTower++;
-          }
-          if( results[i].get("ScaledTower") == true )
-          {
-            $scope.towerClimbed++
+          var autoGear = 0;
+          if(results[i].AutoScoreGear == true){
+            autoGear = 1;
           }
 
-          //$scope.defensepermatch = $scope.defensepermatch + results[i].get("lowbar") + 
 
+          //futurejoe ChallengedTower
+            var object = { Team: results[i].teamNumber, 
+              Match: results[i].matchNumber,
+              Low: results[i].lowgoalCount,
+              High: results[i].highgoalCount,
+              HighAuto: results[i].highGoalAutoCount,
+              LowAuto: results[i].lowgoalAutoCount,
+              AutoMove: results[i].AutoMove,
+              AutoScoreGear: autoGear,
+              climbAttempt: results[i].climbAttempt,
+              successClimb: results[i].successClimb,
+              gearCountTele: results[i].gearCountTele
 
-
-            var object = {ReachTower: results[i].get("ChallengedTower"), AHighgoal: results[i].get("A_HighGoal"), ALowgoal: results[i].get("A_LowGoal"), CrossD: results[i].get("A_CrossDefense"), ReachD: results[i].get("A_ReachDefense"),  ScaledTower: results[i].get("ScaledTower"), valLowBar: results[i].get("lowbar") != null, valPortcullis: results[i].get("fieldPortcullis") != null ,valRoughterrain: results[i].get("fieldRoughterrain") != null,valRockwall: results[i].get("fieldRockwall") != null, valSallyPort: results[i].get("fieldSallyPort") != null, valramparts: results[i].get("fieldramparts") != null, valCheva: results[i].get("fieldMoat")!= null, valCheva: results[i].get("fieldCheva")!= null,valPortcullis: results[i].get("fieldPortcullis")!= null, Team: results[i].get("Team"),  Match: results[i].get("Match"), Low: results[i].get("LowGoal"), High: results[i].get("HighGoal"),  fieldPortcullis: results[i].get("fieldPortcullis"), fieldCheva: results[i].get("fieldCheva"),fieldMoat: results[i].get("fieldMoat"),fieldLowBar: results[i].get("lowbar"), fieldramparts: results[i].get("fieldramparts"), valmoat: results[i].get("fieldMoat") != null, valdrawbridge: results[i].get("fielddrawbridge") != null, fielddrawbridge: results[i].get("fielddrawbridge"),fieldSallyPort: results[i].get("fieldSallyPort"),fieldRockwall: results[i].get("fieldRockwall"),fieldRoughterrain: results[i].get("fieldRoughterrain"),};
+            };
             $scope.list.push( object );
         }
-
-          $scope.lowavg = $scope.lowgoalScored / $scope.matches;
-          $scope.highavg = $scope.highgoalScored / $scope.matches;
-
-
              $ionicLoading.hide();
+});
 
-       
-      },
-      error: function(error) {
-        alert("Error retrieving Scouted Team List, Make sure you are on Wifi or 3G");
-      }
-    });
+  
 };
+  
+retriever();
+
 
 
 

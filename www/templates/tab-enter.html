@@ -1,4 +1,4 @@
-<ion-view title="Entropy Scout">
+<ion-view title="Entropy Scout 2017">
 
 <!--
   <ion-nav-buttons side="left">
@@ -38,54 +38,36 @@
 
   
 <h5> Autonomous </h5>
-<h6> Check all that Apply </h6>
-<ion-checkbox ng-model="data.reachd">Reach Defense</ion-checkbox>
-<ion-checkbox ng-model="data.cdefense">Cross Defense</ion-checkbox>
-<ion-checkbox ng-model="data.lowgoala">Low Goal</ion-checkbox>
-<ion-checkbox ng-model="data.highgaola">High Goal</ion-checkbox>
-
-
-<ion-checkbox ng-model="data.ScoredGearAuto">Score Gear</ion-checkbox>
-<div class="row">
-  <div class="col">
-      <label class="item item-input item-floating-label">
-    <span class="input-label">Fuel High Goal(Auto)</span>
-    <input type="number"  min="0" placeholder="Low Goal" ng-model="data.lowgoal">
-  </label>
-  </div>
-  <div class="col">
-      <label class="item item-input item-floating-label">
-    <span class="input-label">Fuel Low Goal(Auto)</span>
-    <input type="number"  min="0" placeholder="Fuel Low" ng-model="data.autolowgoal">
-  </label>
-  </div>
-  
-</div>
-<!--
-<div class="form-inline">
-            <div class="input-group">
-                <button id="qualifications" class="btn btn-success" style="width:40%">Qualifications</button>
-                &nbsp;
-                <button id="eliminations" class="btn btn-outline-success" style="width:35%">Eliminations</button>
-                &nbsp;
-                <button id="reset" class="btn btn-outline-danger" style="width:25%">Reset</button>
-            </div>
-        </div>
-        -->
-<div class="row">
-
-        <div id="multipliers" style="float:right;margin-top: 8px;">
-            <button id="first-multiplier" class="btn btn-sm btn-primary multiplier" ng-click="setIncri(one)" rel="1"><small>&plusmn; 1</small></button>
+       
+        
+<ul class="list">
+<li class="item">
+        <div class="row">
+          <div class="col">
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <button id="first-multiplier" class="btn btn-sm btn-outline-primary multiplier" ng-click="setIncri('one')" rel="1"><small>&plusmn; 1</small></button>
             <button class="btn btn-sm btn-outline-primary multiplier" ng-click="setIncri('five')" rel="5"><small>&plusmn; 5</small></button>
             <button class="btn btn-sm btn-outline-primary multiplier" ng-click="setIncri('ten')"  rel="10"><small>&plusmn; 10</small></button>
+            <button class="btn btn-sm btn-outline-primary multiplier" ng-click="setIncri('twenty')"  rel="20"><small>&plusmn; 20</small></button>
+
+            </div>
+          </div>
+          <div class="col">
+                <div class="col">
+                Incriment:
+                </div>
+               <div class="col">
+                <input type="number"  min="1" placeholder="1" ng-model="incriTeli2" disabled>
+               </div>
+          </div>
         </div>
-</div> 
+ 
 <div class="row">
   
        <div class="form-inline">
             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                 <div class="input-group-addon">Fuel High Goal(A)</div>
-                <input id="auto-high-goal-counter" ng-value="highgoalAutoCount" type="number" class="form-control counters" placeholder="0">
+                <input id="auto-high-goal-counter" ng-value="highgoalAutoCount" type="number" class="form-control counters" placeholder="0"  disabled>
                 <button id="auto-high-goal-plus" ng-click="upHighA()" class="btn btn-outline-success up multiplier-tag notransition">+</button>
                 <button id="auto-high-goal-minus" ng-click="downHighA()" class="btn btn-outline-danger down multiplier-tag notransition">-</button>
             </div>
@@ -95,58 +77,100 @@
          <div class="form-inline">
             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                 <div class="input-group-addon">Fuel Low Goal(A)</div>
-                <input id="auto-high-goal-counter"  ng-value="lowgoalAutoCount" type="text" class="form-control counters" placeholder="0">
+                <input id="auto-high-goal-counter"  ng-value="lowgoalAutoCount" type="text" class="form-control counters" placeholder="0"  disabled>
                 <button id="auto-high-goal-plus" ng-click="upLowA()" class="btn btn-outline-success up multiplier-tag notransition">+</button>
                 <button id="auto-high-goal-minus" ng-click="downLowA()" class="btn btn-outline-danger down multiplier-tag notransition">-</button>
             </div>
         </div>
 </div>
+</li>
+<li class="item">
 <div class="row">
-    <div class="col">
   <ion-checkbox ng-model="data.AutoMove">Move in Auto</ion-checkbox>
   </div>
-    <div class="col">
+    <div class="row">
    <ion-checkbox ng-model="data.ScoreGear">Place Gear in Auto</ion-checkbox>
    </div>
-</div>
 
-<!-- Team Color Checkbox -->
+</li>
+
+
+
+</ul>
+
+
+<h5>Tele Op</h5>
+<ul class="list">   
+      
+      <li class="item">
+        <div class="row">
+          <div class="col">
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <button id="first-multiplier" class="btn btn-sm btn-outline-primary multiplier" ng-click="setIncriTele('one')" rel="1"><small>&plusmn; 1</small></button>
+            <button class="btn btn-sm btn-outline-primary multiplier" ng-click="setIncriTele('five')" rel="5"><small>&plusmn; 5</small></button>
+            <button class="btn btn-sm btn-outline-primary multiplier" ng-click="setIncriTele('ten')"  rel="10"><small>&plusmn; 10</small></button>
+            <button class="btn btn-sm btn-outline-primary multiplier" ng-click="setIncriTele('twenty')"  rel="20"><small>&plusmn; 20</small></button>
+
+            </div>
+          </div>
+          <div class="col">
+                <div class="col">
+                Incriment:
+                </div>
+               <div class="col">
+                <input type="number"  min="1" placeholder="1" ng-model="incriTeli" disabled>
+               </div>
+          </div>
+        </div>
+
+        </div>
+        <div class="row">
+           <div class="form-inline">
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <div class="input-group-addon">Fuel High Goal</div>
+                <input id="auto-high-goal-counter" ng-value="highgoalTeleCount" type="number" class="form-control counters" placeholder="0"  disabled>
+                <button id="auto-high-goal-plus" ng-click="upHighT()" class="btn btn-outline-success up multiplier-tag notransition">+</button>
+                <button id="auto-high-goal-minus" ng-click="downHighT()" class="btn btn-outline-danger down multiplier-tag notransition">-</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+           <div class="form-inline">
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <div class="input-group-addon">Fuel Low Goal</div>
+                <input id="auto-high-goal-counter" ng-value="lowgoalTeleCount" type="number" class="form-control counters" placeholder="0" disabled>
+                <button id="auto-high-goal-plus" ng-click="upLowT()" class="btn btn-outline-success up multiplier-tag notransition">+</button>
+                <button id="auto-high-goal-minus" ng-click="downLowT()" class="btn btn-outline-danger down multiplier-tag notransition">-</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+           <div class="form-inline">
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <div class="input-group-addon">Gears Scored</div>
+                <input id="gearcount" ng-value="gearCountTele" type="number" class="form-control counters" placeholder="0"  disabled>
+                <button id="auto-high-goal-plus" ng-click="upGearCount()" class="btn btn-outline-success up multiplier-tag notransition">+</button>
+                <button id="auto-high-goal-minus" ng-click="downGearCount()" class="btn btn-outline-danger down multiplier-tag notransition">-</button>
+            </div>
+          </div>
+        </div>
+
+      </li>
+      
+      
+        <li class="item">
+        <div class="row">
+          <ion-checkbox ng-model="data.attemptClimb">Attempt Climb?</ion-checkbox>
+         </div>
+         <div class="row">
+           <ion-checkbox ng-click="updateAttempClimb()" ng-model="data.SuccesfulClimb">Succesful Climb</ion-checkbox>
+         </div>
+      </li>
+
+</ul>   
+
+
 <!--
-<ion-list>
- 
-<ion-checkbox ng-model="data.red"><img src="red.png" alt="Mountain View" style="width:50px;height:28px;"> Red
-</ion-checkbox>
-<ion-checkbox ng-model="data.blue"><img src="blue.png" alt="Mountain View" style="width:50px;height:28px;"> Blue
-</ion-checkbox>
-</ion-list>
--->
- <!-- <h5>Scoring</h5> -->
-  <p> How many boulders were scored? </p>
-
-<div class="row">
-  <div class="col">
-      <label class="item item-input item-floating-label">
-    <span class="input-label">Low Goal</span>
-    <input type="number"  min="0" placeholder="Low Goal" ng-model="data.lowgoal">
-  </label>
-  </div>
-  <div class="col">
-      <label class="item item-input item-floating-label">
-    <span class="input-label">High Goal</span>
-    <input type="number"  min="0" placeholder="High Goal" ng-model="data.highgoal">
-  </label>
-  </div>
-  
-</div>
-
-
-<ion-checkbox ng-model="data.scale">Scaled the Tower?</ion-checkbox>
-<ion-checkbox ng-model="data.challenge">Challenge the Tower?</ion-checkbox>
-
-<ion-checkbox ng-model="data.attemptClimb">Attempt Climb?</ion-checkbox>
-<ion-checkbox ng-model="data.SuccesfulClimb">Succesful Climb</ion-checkbox>
-
-
   <h4>Defenses Information</h4>
         <p> Cross Undamaged Defenses?</p>
 
@@ -300,7 +324,7 @@
      </li>
 
 </ul>   
-
+-->
 
 
   <!--

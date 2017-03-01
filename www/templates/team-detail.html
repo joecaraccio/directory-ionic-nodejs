@@ -13,42 +13,11 @@
     pulling-text="Pull to refresh..."
     on-refresh="doRefresh()">
   </ion-refresher>
-
   <ion-content class="padding">
    <!-- stat card --> 
-   <div align="center">
-<h3> Team {{team}} </h3>
+      <div align="center">
+<h3> Match {{team}} </h3>
 </div>
-
-
-<div class="list list-inset">
-
-    <div class="item">
-    <div align="center">
-      <b> Statistics </b>
-      </div>
-    </div>
-
-    
-    <div class="item">
-    <b> Matches Played: </b> {{matches}}
-    </div>
-    <div class="item">
-    <b> Tower Challenged: </b> {{challengeTower}} time(s) / {{matches}} Matches
-    </div>
-    <div class="item">
-    <b> Tower Climbed: </b> {{towerClimbed}} time(s) / {{matches}} Matches
-    </div>
-    <div class="item">
-    <b> Average # Low Goals Scored per Match: </b> {{lowavg}}
-    </div>
-      <div class="item">
-    <b> Average # High Goals Scored per Match: </b> {{highavg}}
-    </div>
-
-</div>
-
-
 
     <div class="card" ng-repeat="item in list"> <!-- Start Card -->
   <div class="item item-divider">
@@ -74,19 +43,10 @@
   </div>
   </div>
   <div class="item item-text-wrap">
-  <!-- Content Area -->
-   <div class="row">
-      <div class="col">
-    Low Goal: {{item.Low}}
-  </div>
-   <div class="col">
-    High Goal: {{item.High}}
-  </div>
-  </div>
 
-<div class="row">
-  Defenses Faced:
-</div>
+
+
+
 
 <div class="row">
 
@@ -104,8 +64,65 @@
  </div>
 
 
+<div align="center">
+<p> <b>Teleoperated</b> </p>
+</div>
+
+<div class="row">
 
 
+<div class="col" >
+  <div style="    border: 1px solid black;">
+  <figure>
+  <img src="gear.jpg" alt="Ramparts" style="width:28px;height:28px;">T Gear
+   <div align="center">
+   <figcaption>{{item.gearCountTele}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+ <div class="col" >
+  <div style="    border: 1px solid black;">
+  <figure>
+  <img src="fuel.jpg" alt="Ramparts" style="width:28px;height:28px;">L Goal
+   <div align="center">
+   <figcaption>{{item.Low}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+ <div class="col" >
+  <div style="    border: 1px solid black;">
+  <figure>
+  <img src="fuel.jpg" alt="Ramparts" style="width:28px;height:28px;">H Goal
+   <div align="center">
+   <figcaption>{{item.High}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+</div>
+
+<div class="row">
+<div ng-show="{{item.AutoMove}}">
+  <p>   --Reached Auto Zone </p>
+</div>
+</div>
+
+<div class="row">
+<div ng-show="{{item.climbAttempt}}">
+  <p>   --Attempted Climb </p>
+</div>
+</div>
+
+<div class="row">
+<div ng-show="{{item.successClimb}}">
+  <p>   --Succesful Climb </p>
+</div>
+</div>
 
 <div class="col" ng-show="{{item.valmoat}}">
   <div style="    border: 1px solid black;">
@@ -195,6 +212,11 @@
 </div>
 </div>
 
+
+ 
+
+</div>
+
 <div ng-show="{{item.ReachTower}}">
   <div class="row">
 <div align="center">
@@ -202,9 +224,8 @@
 </div>
 </div>
 </div>
- 
 
-</div>
+
 <div ng-show="{{item.ScaledTower}}">
   <div class="row">
 <div align="center">
@@ -214,8 +235,64 @@
 </div>
 
 <div align="center">
-<p> <b> AUTO </b> </p>
+<p> <b> AUTONOMOUS </b> </p>
 
+</div>
+
+
+<div class="row">
+
+
+<div class="col" >
+  <div style="    border: 1px solid black;">
+  <figure>
+  <img src="gear.jpg" alt="Ramparts" style="width:28px;height:28px;">A Gear
+   <div align="center">
+   <figcaption>{{item.AutoScoreGear}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+ <div class="col" >
+  <div style="    border: 1px solid black;">
+  <figure>
+  <img src="fuel.jpg" alt="Ramparts" style="width:28px;height:28px;">L Goal
+   <div align="center">
+   <figcaption>{{item.LowAuto}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+ <div class="col" >
+  <div style="    border: 1px solid black;">
+  <figure>
+  <img src="fuel.jpg" alt="Ramparts" style="width:28px;height:28px;">H Goal
+   <div align="center">
+   <figcaption>{{item.HighAuto}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+</div>
+
+
+<div ng-show="{{item.AutoMove}}">
+  <div class="row">
+<div align="center">
+  <p> --Reached Auto Zone </p>
+</div>
+</div>
+</div>
+
+<div ng-show="{{item.AutoScoreGear}}">
+  <div class="row">
+<div align="center">
+  <p> --Scored Gear </p>
+</div>
+</div>
 </div>
 
 

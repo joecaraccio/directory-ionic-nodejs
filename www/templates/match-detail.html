@@ -43,19 +43,10 @@
   </div>
   </div>
   <div class="item item-text-wrap">
-  <!-- Content Area -->
-   <div class="row">
-      <div class="col">
-    Low Goal: {{item.Low}}
-  </div>
-   <div class="col">
-    High Goal: {{item.High}}
-  </div>
-  </div>
 
-<div class="row">
-  Defenses Faced:
-</div>
+
+
+
 
 <div class="row">
 
@@ -73,8 +64,65 @@
  </div>
 
 
+<div align="center">
+<p> <b>Teleoperated</b> </p>
+</div>
+
+<div class="row">
 
 
+<div class="col" >
+  <div style="    border: 1px solid black;">
+  <figure>
+  <img src="gear.jpg" alt="Ramparts" style="width:28px;height:28px;">T Gear
+   <div align="center">
+   <figcaption>{{item.gearCountTele}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+ <div class="col" >
+  <div style="    border: 1px solid black;">
+  <figure>
+  <img src="fuel.jpg" alt="Ramparts" style="width:28px;height:28px;">L Goal
+   <div align="center">
+   <figcaption>{{item.Low}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+ <div class="col" >
+  <div style="    border: 1px solid black;">
+  <figure>
+  <img src="fuel.jpg" alt="Ramparts" style="width:28px;height:28px;">H Goal
+   <div align="center">
+   <figcaption>{{item.High}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+</div>
+
+<div class="row">
+<div ng-show="{{item.AutoMove}}">
+  <p>   --Reached Auto Zone </p>
+</div>
+</div>
+
+<div class="row">
+<div ng-show="{{item.climbAttempt}}">
+  <p>   --Attempted Climb </p>
+</div>
+</div>
+
+<div class="row">
+<div ng-show="{{item.successClimb}}">
+  <p>   --Succesful Climb </p>
+</div>
+</div>
 
 <div class="col" ng-show="{{item.valmoat}}">
   <div style="    border: 1px solid black;">
@@ -187,8 +235,64 @@
 </div>
 
 <div align="center">
-<p> <b> AUTO </b> </p>
+<p> <b> AUTONOMOUS </b> </p>
 
+</div>
+
+
+<div class="row">
+
+
+<div class="col" >
+  <div style="    border: 1px solid black;">
+  <figure>
+  <img src="gear.jpg" alt="Ramparts" style="width:28px;height:28px;">A Gear
+   <div align="center">
+   <figcaption>{{item.AutoScoreGear}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+ <div class="col" >
+  <div style="    border: 1px solid black;">
+  <figure>
+  <img src="fuel.jpg" alt="Ramparts" style="width:28px;height:28px;">L Goal
+   <div align="center">
+   <figcaption>{{item.LowAuto}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+ <div class="col" >
+  <div style="    border: 1px solid black;">
+  <figure>
+  <img src="fuel.jpg" alt="Ramparts" style="width:28px;height:28px;">H Goal
+   <div align="center">
+   <figcaption>{{item.HighAuto}}</figcaption>
+ </div>
+</figure>
+</div>
+ </div>
+
+</div>
+
+
+<div ng-show="{{item.AutoMove}}">
+  <div class="row">
+<div align="center">
+  <p> --Reached Auto Zone </p>
+</div>
+</div>
+</div>
+
+<div ng-show="{{item.AutoScoreGear}}">
+  <div class="row">
+<div align="center">
+  <p> --Scored Gear </p>
+</div>
+</div>
 </div>
 
 

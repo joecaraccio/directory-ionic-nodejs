@@ -138,6 +138,16 @@ Parse.serverURL = 'http://server138scouter.herokuapp.com/parse';
         }
       }
     })
+   .state('tab.stats-climbrank', {
+      url: '/stats/climb',
+      views: {
+        'tab-stats': {
+          templateUrl: 'templates/ranking-climb.html',
+          controller: 'ClimbRanking'
+        }
+      }
+    })
+
     .state('tab.stats-matchanly', {
       url: '/stats/matchpredict',
       views: {

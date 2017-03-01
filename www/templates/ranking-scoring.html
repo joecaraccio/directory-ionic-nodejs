@@ -11,16 +11,27 @@
   <ion-content class="padding">
    <!-- stat card -->
    <div align="center">
-
-   </div>
-
+   <p>Ranks Team on most Fuel POINTS(A + T)</p>
+   <p> Goals/Match is how many goals they score</p>
+   <p> Points is how many points those goals equal</p>
     <ion-list>
       <ion-item class="item-remove-animate " ng-repeat="team in teams" type="item-text-wrap" >
         
        <p> {{team.Index}}.  <b>Team: {{team.Team}} </b> </p>
-       <p> Average # of High Goals/Match: {{team.AverageHighGoal}} </p>
-      <p> Average # of Low Goals/Match: {{team.AverageLowGoal}} </p>
-      <p> <i> Average Goal Score/Match: <b> {{team.AverageGoalScore}} </b></i> </p>
+       <p><b>Teleoperated</b></p>
+       <p>Average # of Tele High Goals/Match: {{team.AverageHighGoal}} </p>
+      <p> Average # of Tele Low Goals/Match: {{team.AverageLowGoal}} </p>
+      <p> Average # of Tele Points/Match: {{team.AverageTeleGoalPoints}} </p>
+
+
+      <p><b>Autonoumous</b></p>
+       <p>Average # of Auto High Goals/Match: {{team.AverageHighGoalA}} </p>
+      <p> Average # of Auto Low Goals/Match: {{team.AverageLowGoalA}} </p>
+      <p> Average # of Auto Points/Match: {{team.AutoGoalPoints}} </p>
+
+
+      <p><b>Calculated Score Per Match</b><p>
+      <p> <i> Average Points Score/Match: <b> {{team.TotalPoints}} </b></i> </p>
 
         
 
