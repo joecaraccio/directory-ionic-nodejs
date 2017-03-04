@@ -175,6 +175,15 @@ Parse.serverURL = 'http://server138scouter.herokuapp.com/parse';
         }
       }
     })
+     .state('tab.stats-auto2', {
+      url: '/stats/auto2',
+      views: {
+        'tab-stats': {
+          templateUrl: 'templates/ranking-auto2.html',
+          controller: 'auto22'
+        }
+      }
+    })
     .state('tab.stats-windham', {
       url: '/stats/windham',
       views: {

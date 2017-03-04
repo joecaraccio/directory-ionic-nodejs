@@ -589,7 +589,7 @@ if($scope.data.SuccesfulClimb == true){
             reset();
 
            $scope.$apply(function() { 
-            alert("Succesfully Submilled!")
+            alert("Succesfully Submitted!")
               // every changes goes here
               console.log("apply function")
             $scope.lowgoalAutoCount = null;
@@ -1121,7 +1121,8 @@ var teamListObject = { Team: childSnapshot.val().teamNumber ,
     var ob23 = {
       Team: teamNumbers[ii],
       attempt: 0,
-      success: 0
+      success: 0,
+      matches: 0
      }
      countUp.push(ob23)
   }
@@ -1134,6 +1135,7 @@ var teamListObject = { Team: childSnapshot.val().teamNumber ,
     for(var j = 0; j < countUp.length; j++ ){
 
       if(countUp[j].Team == teams[i].Team){
+          countUp[j].matches++;
 
         if(teams[i].climbAttempt == true){
           countUp[j].attempt++;
@@ -1163,15 +1165,15 @@ var teamListObject = { Team: childSnapshot.val().teamNumber ,
   for(var i = 0; i < countUp.length; i++){
     console.log("\n")
     console.log(countUp)
-    if(countUp[i].success == NaN || countUp[i].success == null){
+    if(isNaN(countUp[i].success) || countUp[i].success == null || countUp[i].success == Infinity  ){
       countUp[i].success = 0;
     }
-    if(countUp[i].attempt == NaN || countUp[i].attempt == null){
+    if(isNaN(countUp[i].attempt) || countUp[i].attempt == null || countUp[i].attempt == Infinity ){
       countUp[i].attempt = 0;
     }
 
     countUp[i].val = countUp[i].attempt / countUp[i].success
-    if(countUp[i].val == NaN){
+    if(isNaN(countUp[i].val) || countUp[i].val == null || countUp[i].val == Infinity){
       countUp[i].val = 0;
     }
   }
@@ -1282,7 +1284,8 @@ var teamListObject = { Team: childSnapshot.val().teamNumber ,
     var ob23 = {
       Team: teamNumbers[ii],
       attempt: 0,
-      success: 0
+      success: 0,
+      matches: 0
      }
      countUp.push(ob23)
   }
@@ -1295,7 +1298,7 @@ var teamListObject = { Team: childSnapshot.val().teamNumber ,
     for(var j = 0; j < countUp.length; j++ ){
 
       if(countUp[j].Team == teams[i].Team){
-
+        countUp[j].matches++;
         if(teams[i].climbAttempt == true){
           countUp[j].attempt++;
         }
@@ -1324,14 +1327,17 @@ var teamListObject = { Team: childSnapshot.val().teamNumber ,
 
 
   for(var i = 0; i < countUp.length; i++){
-    if(countUp[i].success == NaN || countUp[i].success == null){
+    if(isNaN(countUp[i].success) || countUp[i].success == null || countUp[i].success == Infinity){
       countUp[i].success = 0;
     }
-    if(countUp[i].attempt == NaN || countUp[i].attempt == null){
+    if(isNaN(countUp[i].attempt) || countUp[i].attempt == null || countUp[i].attempt == Infinity){
       countUp[i].attempt = 0;
     }
 
     countUp[i].val = countUp[i].attempt / countUp[i].success
+    if(isNaN(countUp[i].val) || countUp[i].val == null || countUp[i].val == Infinity){
+      countUp[i].val = 0;
+    }
   }
 
 
@@ -1355,6 +1361,476 @@ $ionicLoading.hide();
 
 
 })
+
+
+
+
+.controller('defensetotal', function($scope, $stateParams, $ionicLoading ) {
+console.log(" Tower Rank");
+
+
+var contains = function(needle) {
+    // Per spec, the way to identify NaN is that it is not equal to itself
+    var findNaN = needle !== needle;
+    var indexOf;
+
+    if(!findNaN && typeof Array.prototype.indexOf === 'function') {
+        indexOf = Array.prototype.indexOf;
+    } else {
+        indexOf = function(needle) {
+            var i = -1, index = -1;
+
+            for(i = 0; i < this.length; i++) {
+                var item = this[i];
+
+                if((findNaN && item !== item) || item === needle) {
+                    index = i;
+                    break;
+                }
+            }
+
+            return index;
+        };
+    }
+
+    return indexOf.call(this, needle) > -1;
+};
+
+
+
+$scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
+
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
+$ionicLoading.show({
+         template: 'Loading...'
+      });
+towerRank();
+
+function towerRank() {
+
+var teams = [];
+var teamList = [];
+var countUp = [];
+var teamNumbers = [];
+
+var ref123 = firebase.database().ref('/eventData/gran1/');
+ref123.once('value').then(function(snapshot) {
+
+   snapshot.forEach(function(childSnapshot) {
+var teamListObject = { Team: childSnapshot.val().teamNumber , 
+        gearCount: childSnapshot.val().gearCountTele,
+       };
+      teams.push(teamListObject);
+
+   var trufa = contains.call(teamNumbers, childSnapshot.val().teamNumber ); // true
+      if(trufa == true){
+        //already on dont add
+      }else{
+        teamNumbers.push(childSnapshot.val().teamNumber);
+      }
+
+})
+
+      
+  
+}).then(function(done){
+
+  //setup count up
+  for(var ii = 0; ii < teamNumbers.length; ii++ ){
+    var ob23 = {
+      Team: teamNumbers[ii],
+      Gears: 0,
+      matches: 0,
+      perMatch:0
+     }
+     countUp.push(ob23)
+  }
+
+
+
+
+  for(var i = 0; i < teams.length; i++){
+    var found = false;
+    for(var j = 0; j < countUp.length; j++ ){
+
+      if(countUp[j].Team == teams[i].Team){
+        countUp[j].matches++;
+        var count = teams[i].gearCount;
+        console.log(" gear count is " + count)
+        if(isNaN(count) || count == Infinity || count == null || count == undefined){
+          count = 0;
+        }
+
+        countUp[j].Gears = countUp[j].Gears + count;
+
+        
+
+
+
+      }
+
+
+    } //end inner for loop
+
+
+  } //end first for loop
+
+  console.log(" \n \n \n")
+  console.log("LOOK HERE: ")
+  console.log(countUp)
+  console.log(" \n \n \n")
+
+
+  for(var i = 0; i < countUp.length; i++){
+    countUp[i].perMatch = countUp[i].Gears / countUp[i].matches;
+    
+    if(isNaN(countUp[i].perMatch) || countUp[i].perMatch == Infinity || countUp[i].perMatch == null ){
+          countUp[i].perMatch = 0;
+    }
+    
+  }
+
+
+function sortNumber(a,b) {
+    return   b.perMatch - a.perMatch;
+}
+countUp.sort( sortNumber );
+var index = 1;
+for(var i = 0; i < countUp.length; i++){
+  countUp[i].Index = index;
+  index++;
+}
+
+  $scope.list = countUp;
+$ionicLoading.hide();
+
+
+}) //end then function
+
+
+}
+
+
+
+
+
+})
+
+
+.controller('auto22', function($scope, $stateParams, $ionicLoading ) {
+console.log(" Tower Rank");
+
+
+var contains = function(needle) {
+    // Per spec, the way to identify NaN is that it is not equal to itself
+    var findNaN = needle !== needle;
+    var indexOf;
+
+    if(!findNaN && typeof Array.prototype.indexOf === 'function') {
+        indexOf = Array.prototype.indexOf;
+    } else {
+        indexOf = function(needle) {
+            var i = -1, index = -1;
+
+            for(i = 0; i < this.length; i++) {
+                var item = this[i];
+
+                if((findNaN && item !== item) || item === needle) {
+                    index = i;
+                    break;
+                }
+            }
+
+            return index;
+        };
+    }
+
+    return indexOf.call(this, needle) > -1;
+};
+
+
+
+$scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
+
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
+$ionicLoading.show({
+         template: 'Loading...'
+      });
+towerRank();
+
+function towerRank() {
+
+var teams = [];
+var teamList = [];
+var countUp = [];
+var teamNumbers = [];
+
+var ref123 = firebase.database().ref('/eventData/gran1/');
+ref123.once('value').then(function(snapshot) {
+
+   snapshot.forEach(function(childSnapshot) {
+var teamListObject = { Team: childSnapshot.val().teamNumber , 
+        gearCount: childSnapshot.val().gearCountTele,
+       };
+      teams.push(teamListObject);
+
+   var trufa = contains.call(teamNumbers, childSnapshot.val().teamNumber ); // true
+      if(trufa == true){
+        //already on dont add
+      }else{
+        teamNumbers.push(childSnapshot.val().teamNumber);
+      }
+
+})
+
+      
+  
+}).then(function(done){
+
+  //setup count up
+  for(var ii = 0; ii < teamNumbers.length; ii++ ){
+    var ob23 = {
+      Team: teamNumbers[ii],
+      Gears: 0,
+      matches: 0,
+      perMatch:0
+     }
+     countUp.push(ob23)
+  }
+
+
+
+
+  for(var i = 0; i < teams.length; i++){
+    var found = false;
+    for(var j = 0; j < countUp.length; j++ ){
+
+      if(countUp[j].Team == teams[i].Team){
+        countUp[j].matches++;
+        var count = teams[i].gearCount;
+        console.log(" gear count is " + count)
+        if(isNaN(count) || count == Infinity || count == null || count == undefined){
+          count = 0;
+        }
+
+        countUp[j].Gears = countUp[j].Gears + count;
+
+        
+
+
+
+      }
+
+
+    } //end inner for loop
+
+
+  } //end first for loop
+
+  console.log(" \n \n \n")
+  console.log("LOOK HERE: ")
+  console.log(countUp)
+  console.log(" \n \n \n")
+
+
+  for(var i = 0; i < countUp.length; i++){
+    countUp[i].perMatch = countUp[i].Gears / countUp[i].matches;
+    
+    if(isNaN(countUp[i].perMatch) || countUp[i].perMatch == Infinity || countUp[i].perMatch == null ){
+          countUp[i].perMatch = 0;
+    }
+    
+  }
+
+
+function sortNumber(a,b) {
+    return   b.Gears - a.Gears;
+}
+countUp.sort( sortNumber );
+var index = 1;
+for(var i = 0; i < countUp.length; i++){
+  countUp[i].Index = index;
+  index++;
+}
+
+  $scope.list = countUp;
+$ionicLoading.hide();
+
+
+}) //end then function
+
+
+}
+
+
+
+
+
+})
+
+
+.controller('auto', function($scope, $stateParams, $ionicLoading ) {
+console.log(" Tower Rank");
+
+
+var contains = function(needle) {
+    // Per spec, the way to identify NaN is that it is not equal to itself
+    var findNaN = needle !== needle;
+    var indexOf;
+
+    if(!findNaN && typeof Array.prototype.indexOf === 'function') {
+        indexOf = Array.prototype.indexOf;
+    } else {
+        indexOf = function(needle) {
+            var i = -1, index = -1;
+
+            for(i = 0; i < this.length; i++) {
+                var item = this[i];
+
+                if((findNaN && item !== item) || item === needle) {
+                    index = i;
+                    break;
+                }
+            }
+
+            return index;
+        };
+    }
+
+    return indexOf.call(this, needle) > -1;
+};
+
+
+
+$scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
+
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
+$ionicLoading.show({
+         template: 'Loading...'
+      });
+towerRank();
+
+function towerRank() {
+
+var teams = [];
+var teamList = [];
+var countUp = [];
+var teamNumbers = [];
+
+var ref123 = firebase.database().ref('/eventData/gran1/');
+ref123.once('value').then(function(snapshot) {
+
+   snapshot.forEach(function(childSnapshot) {
+var teamListObject = { Team: childSnapshot.val().teamNumber , 
+        AutoScoreGear: childSnapshot.val().AutoScoreGear,
+       };
+      teams.push(teamListObject);
+
+   var trufa = contains.call(teamNumbers, childSnapshot.val().teamNumber ); // true
+      if(trufa == true){
+        //already on dont add
+      }else{
+        teamNumbers.push(childSnapshot.val().teamNumber);
+      }
+
+})
+
+      
+  
+}).then(function(done){
+
+  //setup count up
+  for(var ii = 0; ii < teamNumbers.length; ii++ ){
+    var ob23 = {
+      Team: teamNumbers[ii],
+      GearsAuto: 0,
+      matches: 0
+     }
+     countUp.push(ob23)
+  }
+
+
+
+
+  for(var i = 0; i < teams.length; i++){
+    var found = false;
+    for(var j = 0; j < countUp.length; j++ ){
+
+      if(countUp[j].Team == teams[i].Team){
+        countUp[j].matches++;
+        if(teams[i].AutoScoreGear == true){
+          countUp[j].GearsAuto++;
+        }
+
+
+
+      }
+
+
+    } //end inner for loop
+
+
+  } //end first for loop
+
+  console.log(" \n \n \n")
+  console.log("LOOK HERE: ")
+  console.log(countUp)
+  console.log(" \n \n \n")
+
+
+  for(var i = 0; i < countUp.length; i++){
+    if(isNaN(countUp[i].GearsAuto) || countUp[i].GearsAuto == null || countUp[i].GearsAuto == Infinity){
+      countUp[i].GearsAuto = 0;
+    }
+    
+
+    
+  }
+
+
+function sortNumber(a,b) {
+    return   b.GearsAuto - a.GearsAuto;
+}
+countUp.sort( sortNumber );
+var index = 1;
+for(var i = 0; i < countUp.length; i++){
+  countUp[i].Index = index;
+  index++;
+}
+
+  $scope.list = countUp;
+$ionicLoading.hide();
+
+
+}) //end then function
+
+
+}
+
+
+
+
+
+})
+
 
 
 /*
@@ -1788,38 +2264,37 @@ var teamListObject = { Team: childSnapshot.val().teamNumber ,
     countUp[i].AverageLowGoalA = countUp[i].lowA / matchCount;
     countUp[i].AverageHighGoalA = countUp[i].highA / matchCount;
 
-    if(countUp[i].AverageHighGoal == NaN){
+    if(isNaN(countUp[i].AverageHighGoal) || countUp[i].AverageHighGoal == null || countUp[i].AverageHighGoal == Infinity){
       countUp[i].AverageHighGoal = 0;
     }
 
-    if(countUp[i].AverageLowGoal == NaN){
+    if(isNaN(countUp[i].AverageLowGoal) || countUp[i].AverageLowGoal == null || countUp[i].AverageLowGoal == Infinity){
       countUp[i].AverageLowGoal = 0;
     }
 
-    if(countUp[i].AverageLowGoalA == NaN){
+    if(isNaN(countUp[i].AverageLowGoalA) || countUp[i].AverageLowGoalA == null || countUp[i].AverageLowGoalA == Infinity){
       countUp[i].AverageLowGoalA = 0;
     }
 
-    if(countUp[i].AverageHighGoalA == NaN){
+    if(isNaN(countUp[i].AverageHighGoalA) || countUp[i].AverageHighGoalA == null || countUp[i].AverageHighGoalA == Infinity){
       countUp[i].AverageHighGoalA = 0;
     }
 
 
     countUp[i].AutoGoalPoints = countUp[i].AverageHighGoalA + countUp[i].AverageLowGoalA/3;
-    if(countUp[i].AutoGoalPoints == NaN){
+    if(isNaN(countUp[i].AutoGoalPoints) || countUp[i].AutoGoalPoints == null || countUp[i].AutoGoalPoints == Infinity){
       countUp[i].AutoGoalPoints = 0;
     }
 
 
     countUp[i].AverageTeleGoalPoints = countUp[i].AverageHighGoal/3 + countUp[i].AverageLowGoal/9;
-    if(countUp[i].AverageTeleGoalPoints == NaN){
+    if(isNaN(countUp[i].AverageTeleGoalPoints) || countUp[i].AverageTeleGoalPoints == null || countUp[i].AverageTeleGoalPoints == Infinity){
       countUp[i].AverageTeleGoalPoints = 0;
     }
     countUp[i].TotalPoints = countUp[i].AutoGoalPoints + countUp[i].AverageTeleGoalPoints;
-     if(countUp[i].TotalPoints == NaN){
+     if(isNaN(countUp[i].TotalPoints) || countUp[i].TotalPoints == null || countUp[i].TotalPoints == Infinity){
       countUp[i].TotalPoints = 0;
     }
-
     //high goal auto = 1
     //low goal auto for every 3 = 1
 
@@ -1842,7 +2317,8 @@ var teamListObject = { Team: childSnapshot.val().teamNumber ,
   for(var i = 0; i < countUp.length; i++ ){
     indexCount++;
     countUp[i].Index = indexCount;
-  }
+
+}
 
 
 
@@ -1868,10 +2344,10 @@ $ionicLoading.hide();
 
 })
 
-
-.controller('defensetotal', function($scope, $stateParams, $ionicLoading ) {
+/*
+controller('defensetotal', function($scope, $stateParams, $ionicLoading ) {
 console.log(" defensetotal");
-
+.
 
 var contains = function(needle) {
     // Per spec, the way to identify NaN is that it is not equal to itself
@@ -1890,7 +2366,8 @@ var contains = function(needle) {
                 if((findNaN && item !== item) || item === needle) {
                     index = i;
                     break;
-                }
+             });
+   }
             }
 
             return index;
@@ -1906,15 +2383,11 @@ $scope.showLoading = function() {
       $ionicLoading.show({
          template: 'Loading...'
       });
-   };
-
-   $scope.hideLoading = function(){
-      $ionicLoading.hide();
+   };      $ionicLoading.hide();
    };
 $ionicLoading.show({
          template: 'Loading...'
-      });
-towerRank();
+      towerRank();
 
 function towerRank() {
 
@@ -1980,16 +2453,7 @@ var teamListObject = { Team: childSnapshot.val().teamNumber ,
         countUp[j].highA = countUp[j].highA + teams[i].highGoalAutoCount
         countUp[j].low = countUp[j].low + teams[i].lowgoalCount
         countUp[j].lowA = countUp[j].lowA + teams[i].lowgoalAutoCount
-
-        if(countUp[j].lowA == NaN || countUp[j].lowA == null ){
-          countUp[j].lowA = 0;
-        }
-
-        if(countUp[j].highA == NaN || countUp[j].highA == null ){
-          countUp[j].highA = 0;
-        }
-
-        if(countUp[j].high == NaN || countUp[j].high == null ){
+      if(countUp[j].high == NaN || countUp[j].high == null ){
           countUp[j].high = 0;
         }
 
@@ -1997,31 +2461,7 @@ var teamListObject = { Team: childSnapshot.val().teamNumber ,
           countUp[j].highA = 0;
         }
 
-
-
-
-
-      } //end big if loop
-
-
-    } //end inner for loop
-
-
-  } //end first for loop
-
-  //do calculations
-  for(var i = 0; i < countUp.length; i++ ){
-    var matchCount = countUp[i].matchCount;
-    countUp[i].AverageHighGoal = countUp[i].high / matchCount;
-    countUp[i].AverageLowGoal = countUp[i].low / matchCount;
-    countUp[i].AverageLowGoalA = countUp[i].lowA / matchCount;
-    countUp[i].AverageHighGoalA = countUp[i].highA / matchCount;
-
-    if(countUp[i].AverageHighGoal == NaN){
-      countUp[i].AverageHighGoal = 0;
-    }
-
-    if(countUp[i].AverageLowGoal == NaN){
+        if(countUp[j].highA == NaNaN){
       countUp[i].AverageLowGoal = 0;
     }
 
@@ -2057,19 +2497,6 @@ var teamListObject = { Team: childSnapshot.val().teamNumber ,
 
 
 
-  }
-
-   function sortNumber(a,b) {
-    return   b.TotalPoints - a.TotalPoints;
-    }
-        console.log("HEY")
-        console.log("Should be sorted");
-        countUp.sort(sortNumber);
-
-        var indexCount = 0;
-
-  for(var i = 0; i < countUp.length; i++ ){
-    indexCount++;
     countUp[i].Index = indexCount;
   }
 
@@ -2082,25 +2509,23 @@ function sortNumber(a,b) {
 countUp.sort( sortNumber );
 */
 
-  $scope.teams = countUp;
-$ionicLoading.hide();
-
-
-}) //end then function
-
-
-}
 
 
 
 
 
-})
+
+
+
+
+
+
+
 
 .controller('AccountCtrl', function($scope, $ionicLoading) {
 
 })
-
+/*
 .controller('auto', function($scope, $ionicLoading) {
   console.log("auto");
 
@@ -2250,7 +2675,7 @@ console.log("yo");
 
   
 })
-
+*/
 
 
 /*
