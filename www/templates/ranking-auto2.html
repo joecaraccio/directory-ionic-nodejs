@@ -12,14 +12,14 @@
    <!-- stat card -->
    <div align="center">
     <p> Gear Rate Rankings </p>
-    <p> Total Gears/ Match </p>
-    <p> Estimate a robots gears per match </p>
+    <p> Total Gears </p>
+    <p> Ranks which robot score the most gears overall </p>
    </div>
     
    <ion-list>
       <ion-item class="item-remove-animate " ng-repeat="team in list" type="item-text-wrap" >
         <p>  {{team.Index}}. <b> Team {{team.Team}} </b> </p>
-        <p> Total Gears Scored in Auto: <i> {{team.GearsAuto}} </i> </p>
+        <p> Total Gears Scored: <i> {{team.Gears}} </i> </p>
         <p> Total Matches Played: <i> {{team.perMatch}} </i> </p>
 
       
