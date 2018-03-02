@@ -14,7 +14,7 @@
     on-refresh="doRefresh()">
   </ion-refresher>
   <ion-content class="padding">
-   <!-- stat card --> 
+   <!-- stat card -->
       <div align="center">
 <h3> Match {{team}} </h3>
 </div>
@@ -24,11 +24,11 @@
     <div class="row">
       <div class="col col-10">
         <!--
-        <div ng-show="{{item.Red}}">  
-      <img  src="red.png" alt="Mountain View" style="width:10px;height:10px;" 
+        <div ng-show="{{item.Red}}">
+      <img  src="red.png" alt="Mountain View" style="width:10px;height:10px;"
       </div>
         <div ng-show="{{item.Blue}}">
-         <img  src="blue.png" alt="Mountain View" style="width:10px;height:10px;"> 
+         <img  src="blue.png" alt="Mountain View" style="width:10px;height:10px;">
        </div>
      -->
 
@@ -48,244 +48,39 @@
 
 
 
-<div class="row">
-
-  <div class="col" ng-show="{{item.valCheva}}">
-  <div style="    border: 1px solid black;">
-  <figure>
-
-  <img src="ChevaldeFrise.png" alt="ChevaldeFrise" style="width:30px;height:30px;">
-   <div align="center">
-
-   <figcaption>{{item.fieldCheva}}</figcaption>
- </div>
-</figure>
-</div>
- </div>
 
 
-<div align="center">
-<p> <b>Teleoperated</b> </p>
+
+<div style="background-color: #FFCDD2;">
+<div >
+<p> <b><u>TELE OP</u> </b> </p>
 </div>
 
 <div class="row">
-
-
-<div class="col" >
-  <div style="    border: 1px solid black;">
-  <figure>
-  <img src="gear.jpg" alt="Ramparts" style="width:28px;height:28px;">T Gear
-   <div align="center">
-   <figcaption>{{item.gearCountTele}}</figcaption>
- </div>
-</figure>
-</div>
- </div>
-
- <div class="col" >
-  <div style="    border: 1px solid black;">
-  <figure>
-  <img src="fuel.jpg" alt="Ramparts" style="width:28px;height:28px;">L Goal
-   <div align="center">
-   <figcaption>{{item.Low}}</figcaption>
- </div>
-</figure>
-</div>
- </div>
-
- <div class="col" >
-  <div style="    border: 1px solid black;">
-  <figure>
-  <img src="fuel.jpg" alt="Ramparts" style="width:28px;height:28px;">H Goal
-   <div align="center">
-   <figcaption>{{item.High}}</figcaption>
- </div>
-</figure>
-</div>
- </div>
-
-</div>
-
-<div class="row">
-<div ng-show="{{item.AutoMove}}">
-  <p>   --Reached Auto Zone </p>
-</div>
-</div>
-
-<div class="row">
-<div ng-show="{{item.climbAttempt}}">
-  <p>   --Attempted Climb </p>
-</div>
-</div>
-
-<div class="row">
-<div ng-show="{{item.successClimb}}">
-  <p>   --Succesful Climb </p>
-</div>
-</div>
-
-<div class="col" ng-show="{{item.valmoat}}">
-  <div style="    border: 1px solid black;">
-  <figure>
-  <img src="moat.png" alt="Moat" style="width:30px;height:30x;">
-    <div align="center">
-   <figcaption>{{item.fieldMoat}}</figcaption>
- </div>
-</figure>
-</div>
- </div>
-
-<div class="col" ng-show="{{item.valramparts}}">
-  <div style="    border: 1px solid black;">
-  <figure>
-  <img src="ramparts.png" alt="Ramparts" style="width:30px;height:30px;">
-   <div align="center">
-   <figcaption>{{item.fieldramparts}}</figcaption>
- </div>
-</figure>
-</div>
- </div>
-
-<div class="col" ng-show="{{item.valdrawbridge}}">
-  <div style="    border: 1px solid black;">
-  <figure>
-  <img src="drawbridge.png" alt="Drawbridge" style="width:30px;height:30px;">
-   <div align="center">
-   <figcaption>{{item.fielddrawbridge}}</figcaption>
- </div>
-</figure>
-</div>
- </div>
-
-<div class="col" ng-show="{{item.valSallyPort}}">
-   <div style="    border: 1px solid black;">
-  <figure>
-  <img src="sallyport.png" alt="SallyPort" style="width:30px;height:30px;">
-   <div align="center">
-   <figcaption>{{item.fieldSallyPort}}</figcaption>
- </div>
-</figure>
-</div>
- </div>
-
-<div class="col" ng-show="{{item.valRockwall}}">
-    <div style="    border: 1px solid black;">
-  <figure>
-  <img src="rockwall.png" alt="ChevaldeFrise" style="width:30px;height:30px;">
-   <div align="center">
-   <figcaption>{{item.fieldRockwall}}</figcaption>
- </div>
-</figure>
-</div>
- </div>
-
-<div class="col" ng-show="{{item.valRoughterrain}}">
-   <div style="    border: 1px solid black;">
-  <figure>
-  <img src="roughterrain.png" alt="ChevaldeFrise" style="width:30px;height:30px;">
-    <div align="center">
-   <figcaption>{{item.fieldRoughterrain}}</figcaption>
- </div>
-</figure>
-</div>
- </div>
- 
-<div class="col" ng-show="{{item.valLowBar}}">
-    <div style="    border: 1px solid black;">
-  <figure>
-  <img src="lowbar.png" alt="ChevaldeFrise" style="width:30px;height:30px;">
-   <div align="center">
-   <figcaption>{{item.fieldLowBar}}</figcaption>
- </div>
-</figure>
-</div>
- </div>
-
-<div class="col" ng-show="{{item.valPortcullis}}">
-  <div style="    border: 1px solid black;">
-  <figure>
-  <img src="Portcullis.png" alt="ChevaldeFrise" style="width:30px;height:30px;">
-   <div align="center">
-   <figcaption>{{item.fieldPortcullis}}</figcaption>
- </div>
-</figure>
-</div>
-</div>
-
-
- 
-
-</div>
-
-<div ng-show="{{item.ReachTower}}">
   <div class="row">
-<div align="center">
-  <p> Reached Tower </p>
-</div>
-</div>
-</div>
-
-
-<div ng-show="{{item.ScaledTower}}">
+    <p style="padding-left: 2em;"><b>Alliance Switch Cubes:   </b>  {{item.AliSwitchCube}}</p>
+  </div>
   <div class="row">
-<div align="center">
-  <p> Succesfully Scaled Tower </p>
-</div>
-</div>
-</div>
-
-<div align="center">
-<p> <b> AUTONOMOUS </b> </p>
-
-</div>
-
-
-<div class="row">
-
-
-<div class="col" >
-  <div style="    border: 1px solid black;">
-  <figure>
-  <img src="gear.jpg" alt="Ramparts" style="width:28px;height:28px;">A Gear
-   <div align="center">
-   <figcaption>{{item.AutoScoreGear}}</figcaption>
- </div>
-</figure>
-</div>
- </div>
-
- <div class="col" >
-  <div style="    border: 1px solid black;">
-  <figure>
-  <img src="fuel.jpg" alt="Ramparts" style="width:28px;height:28px;">L Goal
-   <div align="center">
-   <figcaption>{{item.LowAuto}}</figcaption>
- </div>
-</figure>
-</div>
- </div>
-
- <div class="col" >
-  <div style="    border: 1px solid black;">
-  <figure>
-  <img src="fuel.jpg" alt="Ramparts" style="width:28px;height:28px;">H Goal
-   <div align="center">
-   <figcaption>{{item.HighAuto}}</figcaption>
- </div>
-</figure>
-</div>
- </div>
-
-</div>
-
-
-<div ng-show="{{item.AutoMove}}">
+    <p style="padding-left: 2em;"><b>Opponent Switch Cubes:   </b>  {{item.OppSwitchcube}}</p>
+  </div>
   <div class="row">
-<div align="center">
-  <p> --Reached Auto Zone </p>
+    <p style="padding-left: 2em;"><b>Scale Cubes:   </b> {{item.ScaleCube}} </p>
+  </div>
+  <div class="row">
+    <p style="padding-left: 2em;"><b>Exchange Cubes:   </b> {{item.exc}} </p>
+  </div>
+  <div class="row" ng-show="{{item.aidClimb}}"
+    <p style="padding-left: 2em;"><b>Aided Climb</b></p>
+
+  </div>
+  <div class="row" ng-show="{{item.succClimb}}"
+    <p style="padding-left: 2em;"><b>Succesful Self Climb</b></p>
+
+  </div>
 </div>
-</div>
-</div>
+
+
+
 
 <div ng-show="{{item.AutoScoreGear}}">
   <div class="row">
@@ -329,7 +124,72 @@
 </div>
 
 
+</div>
 
+<div style="background-color: #BBDEFB;">
+<div >
+<p> <b><u>AUTONOMOUS</u> </b> </p>
+</div>
+
+<div class="row">
+  <div class="row">
+    <p style="padding-left: 2em;"><b>Alliance Switch Cubes: </b>  {{item.autoswitch}}</p>
+  </div>
+  <div class="row">
+    <p style="padding-left: 2em;"><b>Scale Cubes: </b> {{item.autoscale}} </p>
+  </div>
+  <div class="row" ng-show="{{item.CrossAutoLine}}"
+    <p style="padding-left: 2em;"><b>Crossed AutoLine</b></p>
+
+  </div>
+</div>
+
+
+
+
+<div ng-show="{{item.AutoScoreGear}}">
+  <div class="row">
+<div align="center">
+  <p> --Scored Gear </p>
+</div>
+</div>
+</div>
+
+
+<div ng-show="{{item.AHighgoal}}">
+  <div class="row">
+<div align="center">
+  <p> Scored High Goal </p>
+</div>
+</div>
+</div>
+
+<div ng-show="{{item.ALowgoal}}">
+  <div class="row">
+<div align="center">
+  <p> Scored Low Goal </p>
+</div>
+</div>
+</div>
+
+<div ng-show="{{item.CrossD}}">
+  <div class="row">
+<div align="center">
+  <p> Crossed Defense </p>
+</div>
+</div>
+</div>
+
+<div ng-show="{{item.ReachD}}">
+  <div class="row">
+<div align="center">
+  <p> Reached Defense </p>
+</div>
+</div>
+</div>
+
+
+</div>
   </div>
 </div>
 <!-- End Card -->
