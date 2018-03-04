@@ -156,7 +156,7 @@ Parse.serverURL = 'http://server138scouter.herokuapp.com/parse';
           controller: 'MatchAnalys'
         }
       }
-    }) 
+    })
     .state('tab.stats-defensetotal', {
       url: '/stats/defensetotal',
       views: {
@@ -180,7 +180,7 @@ Parse.serverURL = 'http://server138scouter.herokuapp.com/parse';
       views: {
         'tab-stats': {
           templateUrl: 'templates/ranking-auto2.html',
-          controller: 'auto22'
+          controller: 'TeleSwitch'
         }
       }
     })
@@ -194,7 +194,7 @@ Parse.serverURL = 'http://server138scouter.herokuapp.com/parse';
       }
     })
 
-   
+
      .state('tab.teams-detailwind', {
       url: '/stats/windham/:teamId',
       views: {
@@ -268,16 +268,16 @@ Parse.serverURL = 'http://server138scouter.herokuapp.com/parse';
         //set an array of game cards to the same length as the results array
         gamecard[results.length];
 
-        
+
 
         for( var i = 0; i < results.length; i++ ){
 
-          
+
 
         }
 
-       
-       
+
+
       },
       error: function(error) {
         alert("Error retrieving Scouted Team List, Make sure you are on Wifi or 3G");
@@ -296,7 +296,7 @@ Parse.serverURL = 'http://server138scouter.herokuapp.com/parse';
 
 //Estimated Match Contribution
 
-//Highest Robot success rate 
+//Highest Robot success rate
 //Which Robot is likey to do the most Damage.. highest contribution per match
 
 //of the 3 robots calculate who scores the highest amount = (low goal * 2) + (high goal * 5)

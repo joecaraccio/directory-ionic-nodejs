@@ -2143,6 +2143,242 @@ function money_round(num) {
 
 
 })
+
+.controller('TeleSwitch', function($scope, $stateParams, $ionicLoading ) {
+console.log(" ScoreRank");
+
+
+var contains = function(needle) {
+    // Per spec, the way to identify NaN is that it is not equal to itself
+    var findNaN = needle !== needle;
+    var indexOf;
+
+    if(!findNaN && typeof Array.prototype.indexOf === 'function') {
+        indexOf = Array.prototype.indexOf;
+    } else {
+        indexOf = function(needle) {
+            var i = -1, index = -1;
+
+            for(i = 0; i < this.length; i++) {
+                var item = this[i];
+
+                if((findNaN && item !== item) || item === needle) {
+                    index = i;
+                    break;
+                }
+            }
+
+            return index;
+        };
+    }
+
+    return indexOf.call(this, needle) > -1;
+};
+
+
+
+$scope.showLoading = function() {
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+   };
+
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
+$ionicLoading.show({
+         template: 'Loading...'
+      });
+towerRank();
+
+function towerRank() {
+
+var teams = [];
+var teamList = [];
+var countUp = [];
+var teamNumbers = [];
+
+var ref123 = firebase.database().ref('/eventData/gran1/');
+ref123.once('value').then(function(snapshot) {
+
+   snapshot.forEach(function(childSnapshot) {
+     var temp = childSnapshot.val().AliSwitch;
+     if(temp == undefined){
+       temp = 0
+     }
+     if(temp == NaN){
+       temp = 0
+     }
+var teamListObject = { Team: childSnapshot.val().teamNumber ,
+       scaleTELEOP: temp,
+
+
+       };
+
+      teams.push(teamListObject);
+
+   var trufa = contains.call(teamNumbers, childSnapshot.val().teamNumber ); // true
+      if(trufa == true){
+        //already on dont add
+      }else{
+        teamNumbers.push(childSnapshot.val().teamNumber);
+      }
+
+})
+
+
+
+}).then(function(done){
+
+  //setup count up
+  for(var ii = 0; ii < teamNumbers.length; ii++ ){
+    var ob23 = {
+      Team: teamNumbers[ii],
+      matchCount: 0,
+      scaleTELEOP: 0,
+     }
+     countUp.push(ob23)
+  }
+
+
+
+
+  for(var i = 0; i < teams.length; i++){
+    var found = false;
+    for(var j = 0; j < countUp.length; j++ ){
+
+      if(countUp[j].Team == teams[i].Team){
+        countUp[j].matchCount++;
+
+        countUp[j].scaleTELEOP = countUp[j].scaleTELEOP + teams[i].scaleTELEOP
+        /*
+        countUp[j].highA = countUp[j].highA + teams[i].highGoalAutoCount
+        countUp[j].low = countUp[j].low + teams[i].lowgoalCount
+        countUp[j].lowA = countUp[j].lowA + teams[i].lowgoalAutoCount
+
+        if(countUp[j].lowA == NaN || countUp[j].lowA == null ){
+          countUp[j].lowA = 0;
+        }
+
+        if(countUp[j].highA == NaN || countUp[j].highA == null ){
+          countUp[j].highA = 0;
+        }
+
+        if(countUp[j].high == NaN || countUp[j].high == null ){
+          countUp[j].high = 0;
+        }
+
+        if(countUp[j].highA == NaN || countUp[j].highA == null ){
+          countUp[j].highA = 0;
+        }
+        */
+
+
+
+
+
+      } //end big if loop
+
+
+    } //end inner for loop
+
+
+  } //end first for loop
+
+  //do calculations
+  for(var i = 0; i < countUp.length; i++ ){
+    var matchCount = countUp[i].matchCount;
+    countUp[i].AverageHighGoal = countUp[i].scaleTELEOP / matchCount;
+    console.log("JOE LOOK")
+    console.log(countUp[i].scaleTELEOP)
+    console.log(countUp[i].matchCount)
+    /*
+    countUp[i].AverageLowGoal = countUp[i].low / matchCount;
+    countUp[i].AverageLowGoalA = countUp[i].lowA / matchCount;
+    countUp[i].AverageHighGoalA = countUp[i].highA / matchCount;
+    */
+    if(isNaN(countUp[i].AverageHighGoal) || countUp[i].AverageHighGoal == null || countUp[i].AverageHighGoal == Infinity){
+      countUp[i].AverageHighGoal = 0;
+    }
+    /*
+    if(isNaN(countUp[i].AverageLowGoal) || countUp[i].AverageLowGoal == null || countUp[i].AverageLowGoal == Infinity){
+      countUp[i].AverageLowGoal = 0;
+    }
+
+    if(isNaN(countUp[i].AverageLowGoalA) || countUp[i].AverageLowGoalA == null || countUp[i].AverageLowGoalA == Infinity){
+      countUp[i].AverageLowGoalA = 0;
+    }
+
+    if(isNaN(countUp[i].AverageHighGoalA) || countUp[i].AverageHighGoalA == null || countUp[i].AverageHighGoalA == Infinity){
+      countUp[i].AverageHighGoalA = 0;
+    }
+
+
+    countUp[i].AutoGoalPoints = countUp[i].AverageHighGoalA + countUp[i].AverageLowGoalA/3;
+    if(isNaN(countUp[i].AutoGoalPoints) || countUp[i].AutoGoalPoints == null || countUp[i].AutoGoalPoints == Infinity){
+      countUp[i].AutoGoalPoints = 0;
+    }
+
+
+    countUp[i].AverageTeleGoalPoints = countUp[i].AverageHighGoal/3 + countUp[i].AverageLowGoal/9;
+    if(isNaN(countUp[i].AverageTeleGoalPoints) || countUp[i].AverageTeleGoalPoints == null || countUp[i].AverageTeleGoalPoints == Infinity){
+      countUp[i].AverageTeleGoalPoints = 0;
+    }
+    countUp[i].TotalPoints = countUp[i].AutoGoalPoints + countUp[i].AverageTeleGoalPoints;
+     if(isNaN(countUp[i].TotalPoints) || countUp[i].TotalPoints == null || countUp[i].TotalPoints == Infinity){
+      countUp[i].TotalPoints = 0;
+    }
+    */
+    //high goal auto = 1
+    //low goal auto for every 3 = 1
+
+    //high goal 3 = 1
+    //low goal 9 = 1
+
+
+
+  }
+
+   function sortNumber(a,b) {
+    return   b.AverageHighGoal - a.AverageHighGoal;
+    }
+        console.log("HEY")
+        console.log("Should be sorted");
+        countUp.sort(sortNumber);
+
+        var indexCount = 0;
+
+  for(var i = 0; i < countUp.length; i++ ){
+    indexCount++;
+    countUp[i].Index = indexCount;
+
+}
+
+
+
+/*
+function sortNumber(a,b) {
+    return   b.val - a.val;
+}
+countUp.sort( sortNumber );
+*/
+
+  $scope.teams = countUp;
+$ionicLoading.hide();
+
+
+}) //end then function
+
+
+}
+
+
+
+
+
+})
+
+
 .controller('ScoreRank', function($scope, $stateParams, $ionicLoading ) {
 console.log(" ScoreRank");
 
@@ -2201,13 +2437,17 @@ var ref123 = firebase.database().ref('/eventData/gran1/');
 ref123.once('value').then(function(snapshot) {
 
    snapshot.forEach(function(childSnapshot) {
+     console.log("onScap ", childSnapshot.val().Scale)
+     var temp = childSnapshot.val().Scale;
+     if(temp == undefined){
+       temp = 0
+     }
+     if(temp == NaN){
+       temp = 0
+     }
 var teamListObject = { Team: childSnapshot.val().teamNumber ,
-        climbAttempt: childSnapshot.val().climbAttempt,
-       successClimb: childSnapshot.val().successClimb,
-       highGoalAutoCount: childSnapshot.val().highGoalAutoCount,
-       highgoalCount: childSnapshot.val().highgoalCount,
-       lowgoalAutoCount: childSnapshot.val().lowgoalAutoCount,
-       lowgoalCount: childSnapshot.val().lowgoalCount
+       scaleTELEOP: temp,
+
 
        };
 
@@ -2231,10 +2471,7 @@ var teamListObject = { Team: childSnapshot.val().teamNumber ,
     var ob23 = {
       Team: teamNumbers[ii],
       matchCount: 0,
-      high: 0,
-      highA: 0,
-      low: 0,
-      lowA: 0
+      scaleTELEOP: 0,
      }
      countUp.push(ob23)
   }
@@ -2249,7 +2486,8 @@ var teamListObject = { Team: childSnapshot.val().teamNumber ,
       if(countUp[j].Team == teams[i].Team){
         countUp[j].matchCount++;
 
-        countUp[j].high = countUp[j].high + teams[i].highgoalCount
+        countUp[j].scaleTELEOP = countUp[j].scaleTELEOP + teams[i].scaleTELEOP
+        /*
         countUp[j].highA = countUp[j].highA + teams[i].highGoalAutoCount
         countUp[j].low = countUp[j].low + teams[i].lowgoalCount
         countUp[j].lowA = countUp[j].lowA + teams[i].lowgoalAutoCount
@@ -2269,6 +2507,7 @@ var teamListObject = { Team: childSnapshot.val().teamNumber ,
         if(countUp[j].highA == NaN || countUp[j].highA == null ){
           countUp[j].highA = 0;
         }
+        */
 
 
 
@@ -2285,15 +2524,19 @@ var teamListObject = { Team: childSnapshot.val().teamNumber ,
   //do calculations
   for(var i = 0; i < countUp.length; i++ ){
     var matchCount = countUp[i].matchCount;
-    countUp[i].AverageHighGoal = countUp[i].high / matchCount;
+    countUp[i].AverageHighGoal = countUp[i].scaleTELEOP / matchCount;
+    console.log("JOE LOOK")
+    console.log(countUp[i].scaleTELEOP)
+    console.log(countUp[i].matchCount)
+    /*
     countUp[i].AverageLowGoal = countUp[i].low / matchCount;
     countUp[i].AverageLowGoalA = countUp[i].lowA / matchCount;
     countUp[i].AverageHighGoalA = countUp[i].highA / matchCount;
-
+    */
     if(isNaN(countUp[i].AverageHighGoal) || countUp[i].AverageHighGoal == null || countUp[i].AverageHighGoal == Infinity){
       countUp[i].AverageHighGoal = 0;
     }
-
+    /*
     if(isNaN(countUp[i].AverageLowGoal) || countUp[i].AverageLowGoal == null || countUp[i].AverageLowGoal == Infinity){
       countUp[i].AverageLowGoal = 0;
     }
@@ -2321,6 +2564,7 @@ var teamListObject = { Team: childSnapshot.val().teamNumber ,
      if(isNaN(countUp[i].TotalPoints) || countUp[i].TotalPoints == null || countUp[i].TotalPoints == Infinity){
       countUp[i].TotalPoints = 0;
     }
+    */
     //high goal auto = 1
     //low goal auto for every 3 = 1
 
@@ -2332,7 +2576,7 @@ var teamListObject = { Team: childSnapshot.val().teamNumber ,
   }
 
    function sortNumber(a,b) {
-    return   b.TotalPoints - a.TotalPoints;
+    return   b.AverageHighGoal - a.AverageHighGoal;
     }
         console.log("HEY")
         console.log("Should be sorted");
@@ -3023,7 +3267,7 @@ function analyze(){
   //high goal per match
   //low goal per match
   $ionicLoading.show({
-         template: 'Loading...'
+             template: 'Loading...'
       });
 
 retriever();
